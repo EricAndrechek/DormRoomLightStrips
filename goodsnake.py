@@ -33,4 +33,4 @@ rgb = (0, 0, 255)
     lights.set_pixel(start, (0, 0, 0))
     count = count + 1 """
 
-lights.loop_region_fill(0, 30, rgb)
+lights.loop_region_fill(0, 10, rgb)
