@@ -121,12 +121,12 @@ class light_strip:
         if (direction == "r"):
             start = 104 + start % 87
             end = 104 + end % 87
-            print(start)
-            print(end)
             if (start > 117):
                 start = start - 87
             if (end > 118):
                 end = end - 87
+            print(start)
+            print(end)
             if (end >= start):
                 if (end < 118):
                     self.region_fill(start, end, rgb)
