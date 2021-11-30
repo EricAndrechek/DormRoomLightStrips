@@ -139,7 +139,11 @@ class light_strip:
                 self.region_fill(31, end, rgb)
             return start
         if (direction == "l"):
-            return self.loop_region_fill(-end, -start, rgb, "r")
+            self.loop_region_fill(-end, -start, rgb, "r")
+            start = 103 - start % 87
+            if (start < 31):
+                start = start + 87
+            return start
 
     def status(self):
         return self.state
