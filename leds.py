@@ -109,12 +109,21 @@ class light_strip:
         rgb = self.correct_color(rgb)
         if (start > end):
             return None
-        for i in range(start, end):
-            try:
-                self.pixels[i] = (0, 0, 0)
-                self.pixels[i] = rgb
-            except IndexError:
-                print("Skipped pixel at index " + str(i))
+        if (end != 118):
+            for i in range(start, end):
+                try:
+                    self.pixels[i] = (0, 0, 0)
+                    self.pixels[i] = rgb
+                except IndexError:
+                    print("Skipped pixel at index " + str(i))
+        else:
+            for i in range(start, 117):
+                try:
+                    self.pixels[i] = (0, 0, 0)
+                    self.pixels[i] = rgb
+                except IndexError:
+                    print("Skipped pixel at index " + str(i))
+            self.set_pixel(117, rgb)
         self.pixels.show()
 
     def loop_region_fill(self, start, end, rgb, direction):
@@ -128,14 +137,9 @@ class light_strip:
             print(start)
             print(end)
             if (end >= start):
-                if (end < 118):
-                    self.region_fill(start, end, rgb)
-                if (end == 118):
-                    self.region_fill(start, 116, rgb)
-                    self.set_pixel(117, rgb)
+                self.region_fill(start, end, rgb)
             else:
-                self.region_fill(start, 116, rgb)
-                self.set_pixel(117, rgb)
+                self.region_fill(start, 118, rgb)
                 self.region_fill(31, end, rgb)
             return start
         if (direction == "l"):
