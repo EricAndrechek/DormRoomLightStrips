@@ -229,3 +229,6 @@ class light_strip:
     def region_color(self, region, color):
         hsv = self.hex_to_hsv(color)
         self.fill_region_by_name(region, hsv)
+
+    def region_on(self, region):
+        self.fill_region_by_name(region, self.states[region].hsv)
