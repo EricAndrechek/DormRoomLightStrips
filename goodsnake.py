@@ -8,10 +8,10 @@ while True:
     start = 31 + count % 86
     end = start + 5
     if (end > 117):
-        end = end - 86\
+        end = end - 86
     if (end > start and end != 117):
         lights.region_fill(start, end, rgb)
-    if (end > start and end == 117):
+    elif (end > start and end == 117):
         lights.region_fill(start, 116, rgb)
         lights.set_pixel(117, rgb)
     else:
