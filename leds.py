@@ -82,9 +82,9 @@ class light_strip:
         self.jayden_desk_hex = "000000"
 
     def correct_color(self, rgb):
-        hsv = colorsys.rgb_to_hsv(rgb)
+        hsv = colorsys.rgb_to_hsv(rgb[0], rgb[1], rgb[2])
         hsv = hsv ** 0.05
-        rgb = colorsys.hsv_to_rgb(hsv)
+        rgb = colorsys.hsv_to_rgb(hsv[0], hsv[1], hsv[2])
         return rgb
 
     def all_pixels(self, rgb):
