@@ -96,6 +96,8 @@ class light_strip:
         self.all_pixels(self.rgb)
 
     def region_fill(self, start, end, rgb):
+        if (start > end):
+            return None
         for i in range(start, end):
             try:
                 self.pixels[i] = (0, 0, 0)
