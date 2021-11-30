@@ -86,6 +86,7 @@ class light_strip:
         magenta = 0.96
 
         hue = hsv[0]
+        print(hue)
         if (hue < 1/6):
             hue = hue * 6 * (yellow - red) + red
         elif (hue >= 1/6 and hue < 1/3):
@@ -98,7 +99,7 @@ class light_strip:
             hue = (hue - 2/3) * 6 * (magenta - blue) + blue
         else:
             hue = (hue - 5/6) * 6 * (1 - magenta) + magenta
-
+        print(hue)
         return (hue, hsv[1] ** 0.2, hsv[2])
 
     def hsv_to_gbr(self, hsv):
