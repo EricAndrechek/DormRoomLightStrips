@@ -9,5 +9,5 @@ while(True):
     rgb = colorsys.hsv_to_rgb(hsv[0], hsv[1], hsv[2])
     rgb = (50 * rgb[0], 50 * rgb[1], 50 * rgb[2])
     lights.loop_region_fill(0, 86, rgb, "r")
-    time.sleep(0.01)
+    time.sleep(0.1)
     hsv = (hsv[0] + 0.001, hsv[1], hsv[2])
