@@ -83,7 +83,7 @@ class light_strip:
 
     def correct_color(self, rgb):
         hsv = colorsys.rgb_to_hsv(rgb[0], rgb[1], rgb[2])
-        hsv[1] = hsv[1] ** 0.05
+        hsv = (hsv[0], hsv[1] ** 0.05, hsv[2])
         rgb = colorsys.hsv_to_rgb(hsv[0], hsv[1], hsv[2])
         return rgb
 
