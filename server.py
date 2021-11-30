@@ -10,40 +10,41 @@ lights = leds.light_strip()
 @app.route('/status')
 def status():
     region = request.args.get('r')
-    return str(lights.status())
+    return str(lights.status(region))
 
 @app.route('/on')
 def on():
-    lights.on()
+    region = request.args.get('r')
+    lights.on(region)
     return 'on'
 
 @app.route('/off')
 def off():
-    lights.off()
+    region = request.args.get('r')
+    lights.region_off(region)
     return 'off'
 
 @app.route('/color')
 def color():
-    return lights.get_hex()
+    region = request.args.get('r')
+    return lights.get_hex(region)
 
 @app.route('/cset/<s>')
 def cset(s):
-    print("\"" + s + "\"")
-    lights.set_hex(s)
+    region = request.args.get('r')
+    lights.region_color(region, s)
     return 'set'
 
 @app.route('/bset/<s>')
 def bset(s):
-    return 'sorry this does nothing' 
-    # jayden figure out if this is possible if you want to help
+    region = request.args.get('r')
+    lights.set_brightness(region, s)
+    return 'set'
 
 @app.route('/bright')
 def brightness():
-    return "100" if lights.status() == 1 else "0"
-
-'''
-Everything below is for 
-'''
+    region = request.args.get('r')
+    return lights.get_brightness(region)
 
 if __name__ == '__main__':
     lights.off()
