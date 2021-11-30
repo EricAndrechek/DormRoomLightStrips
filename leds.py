@@ -85,7 +85,7 @@ class light_strip:
         blue = 2/3
         magenta = 0.96
 
-        hue = hsv[0]
+        hue = hsv[0] % 1
         print(hue)
         if (hue < 1/6):
             hue = hue * 6 * (yellow - red) + red
