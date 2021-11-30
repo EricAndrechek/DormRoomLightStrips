@@ -2,7 +2,7 @@ import leds
 import time
 
 lights = leds.light_strip()
-count = 0
+count = 1000
 rgb = (0,0,255)
 while True:
     start = 104 + count % 87
@@ -20,7 +20,7 @@ while True:
         lights.region_fill(start, 116, rgb)
         lights.set_pixel(117, rgb)
         lights.region_fill(104, end)
-    time.sleep(0.1)
+    time.sleep(0.05)
     lights.set_pixel(end, (0,0,0))
     count = count - 1
     
