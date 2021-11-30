@@ -232,3 +232,6 @@ class light_strip:
 
     def region_on(self, region):
         self.fill_region_by_name(region, self.states[region].hsv)
+    
+    def get_all_states(self):
+        return self.states
