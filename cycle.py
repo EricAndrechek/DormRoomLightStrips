@@ -6,6 +6,7 @@ lights = leds.light_strip()
 
 hsv = (0, 1, 1)
 while(True):
-    lights.loop_region_fill(0, 87, colorsys.hsv_to_rgb(hsv), "r")
+    rgb = colorsys.hsv_to_rgb(hsv[0], hsv[1], hsv[2])
+    lights.loop_region_fill(0, 87, rgb, "r")
     time.sleep(0.1)
     hsv = (hsv[0] + 1, hsv[1], hsv[2])
