@@ -16,7 +16,7 @@ while (True):
     if (choice >= 0.67):
         color = (0, rand, 256 - rand)
     lights.off()
-    time.sleep(0.25)
+    time.sleep(0.18)
     lights.region_fill(31, 116, color)
     lights.set_pixel(117, color)
     time.sleep(0.005)
