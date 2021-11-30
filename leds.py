@@ -78,14 +78,12 @@ class light_strip:
         self.jayden_desk_hsv = (0, 0, 0)
 
     def correct_color(self, hsv):
-        print(hsv)
         hsv = (hsv[0], hsv[1] ** 0.2, hsv[2])
         return hsv
 
     def hsv_to_gbr(self, hsv):
         rgb = colorsys.hsv_to_rgb(hsv[0], hsv[1], hsv[2])
         grb = (256 * rgb[1], 256 * rgb[0], 256 * rgb[2])
-        print(grb)
         return grb
 
     def hex_to_hsv(self, hex):
