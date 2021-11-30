@@ -235,3 +235,6 @@ class light_strip:
     
     def get_all_states(self):
         return self.states
+
+    def get_region_dict(self, region):
+        return self.states[region]
