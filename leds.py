@@ -7,75 +7,93 @@ import math
 
 
 class light_strip:
-    # Defined sections and color calibrations
-    tv_section = [0, 15]
-    tv_section_r_offset = 0
-    tv_section_g_offset = 0
-    tv_section_b_offset = 0
-
-    jayden_lamp = [16, 30]
-    jayden_lamp_r_offset = 0
-    jayden_lamp_g_offset = 0
-    jayden_lamp_b_offset = 0
-
-    window_section = [31, 48]
-    window_section_r_offset = 0
-    window_section_g_offset = 0
-    window_section_b_offset = 0
-
-    jayden_bed = [49, 60]
-    jayden_bed_r_offset = 0
-    jayden_bed_g_offset = 0
-    jayden_bed_b_offset = 0
-
-    eric_bed = [61, 73]
-    eric_bed_r_offset = 0
-    eric_bed_g_offset = 0
-    eric_bed_b_offset = 0
-
-    door_section = [74, 90]
-    door_section_r_offset = 0
-    door_section_g_offset = 0
-    door_section_b_offset = 0
-
-    eric_desk = [91, 103]
-    eric_desk_r_offset = 0
-    eric_desk_g_offset = 0
-    eric_desk_b_offset = 0
-
-    jayden_desk = [104, 117]
-    jayden_desk_r_offset = 0
-    jayden_desk_g_offset = 0
-    jayden_desk_b_offset = 0
-
     def __init__(self):
         self.pixels = neopixel.NeoPixel(
             board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
-        # States and colors:
-
-        self.main_state = 0
-        self.main_hsv = (2/3, 0, 1)
-
-        self.jayden_lamp_state = 0
-        self.jayden_lamp_hsv = (0, 0, 0)
-
-        self.window_section_state = 0
-        self.window_section_hsv = (0, 0, 0)
-
-        self.jayden_bed_state = 0
-        self.jayden_bed_hsv = (0, 0, 0)
-
-        self.eric_bed_state = 0
-        self.eric_bed_hsv = (0, 0, 0)
-
-        self.door_section_state = 0
-        self.door_section_hsv = (0, 0, 0)
-
-        self.eric_desk_state = 0
-        self.eric_desk_hsv = (0, 0, 0)
-
-        self.jayden_desk_state = 0
-        self.jayden_desk_hsv = (0, 0, 0)
+        self.states = {
+            # small sections:
+            "tv_section": {
+                "region": [0, 16],
+                "ceiling": [0, 0],
+                "state": 0,
+                "hsv": (0, 0, 0)
+            },
+            "jayden_lamp": {
+                "region": [16, 31],
+                "ceiling:": [0, 0],
+                "state": 0,
+                "hsv": (0, 0, 0)
+            },
+            "window_section": {
+                "region": [31, 49],
+                "ceiling": [14, 32],
+                "state": 0,
+                "hsv": (0, 0, 0)
+            },
+            "jayden_bed": {
+                "region": [49, 61],
+                "ceiling": [32, 44],
+                "state": 0,
+                "hsv": (0, 0, 0)
+            },
+            "eric_bed": {
+                "region": [61, 74],
+                "ceiling": [44, 57],
+                "state": 0,
+                "hsv": (0, 0, 0)
+            },
+            "door_section": {
+                "region": [74, 91],
+                "ceiling": [57, 74],
+                "state": 0,
+                "hsv": (0, 0, 0)
+            },
+            "eric_desk": {
+                "region": [91, 104],
+                "ceiling": [74, 87],
+                "state": 0,
+                "hsv": (0, 0, 0)
+            },
+            "jayden_desk": {
+                "region": [104, 118],
+                "ceiling": [0, 14],
+                "state": 0,
+                "hsv": (0, 0, 0)
+            },
+            # intermediate sections:
+            "tv_wall": {
+                "region": [91, 118],
+                "ceiling": [-13, 14],
+                "state": 0,
+                "hsv": (0, 0, 0)
+            },
+            "bed_wall": {
+                "region": [49, 74],
+                "ceiling": [32, 57],
+                "state": 0,
+                "hsv": (0, 0, 0)
+            },
+            # larger sections:
+            "jayden_half": {
+                "region": [104, 61],
+                "ceiling": [0, 44],
+                "state": 0,
+                "hsv": (0, 0, 0)
+            },
+            "eric_half": {
+                "region": [61, 104],
+                "ceiling": [44, 87],
+                "state": 0,
+                "hsv": (0, 0, 0)
+            },
+            # whole thing:
+            "main": {
+                "region": [31, 118],
+                "ceiling": [0, 87],
+                "state": 0,
+                "hsv": (0, 0, 0)
+            }
+        }
 
     def correct_color(self, hsv):
         red = 0
