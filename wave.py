@@ -5,6 +5,7 @@ import random
 lights = leds.light_strip()
 count = 0
 hue = 0
+start = 0
 while True:
     hue = (hue + 0.25 + 0.5 * random.random()) % 1
     start = (start + random.randrange(22, 66)) % 87
