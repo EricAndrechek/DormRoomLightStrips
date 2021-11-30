@@ -19,4 +19,4 @@ while True:
     time.sleep(0.05)
     for i in firsts:
         lights.set_pixel(i, (0, 0, 0))
-     count = count + 1
+    count = count + 1
