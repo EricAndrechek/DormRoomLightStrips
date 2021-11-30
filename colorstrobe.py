@@ -17,5 +17,6 @@ for i in range(50):
         color = (0, rand, 256 - rand)
     lights.off()
     time.sleep(0.12)
-    lights.region_fill(31, 117, color)
+    lights.region_fill(31, 116, color)
+    lights.set_pixel(117, color)
     time.sleep(0.01)
