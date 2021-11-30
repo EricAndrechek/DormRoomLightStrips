@@ -1,7 +1,9 @@
 from types import resolve_bases
 import board
 import neopixel
+import colorsys
 import time
+import math
 
 
 class light_strip:
@@ -79,6 +81,12 @@ class light_strip:
         self.jayden_desk_state = 0
         self.jayden_desk_hex = "000000"
 
+    def correct_color(self, rgb):
+        hsv = colorsys.rgb_to_hsv(rgb)
+        hsv = hsv ** 0.05
+        rgb = colorsys.hsv_to_rgb(hsv)
+        return rgb
+
     def all_pixels(self, rgb):
         self.region_fill(0, 117, rgb)
 
@@ -96,6 +104,7 @@ class light_strip:
         self.all_pixels(self.rgb)
 
     def region_fill(self, start, end, rgb):
+        rgb = self.correct_color(rgb)
         if (start > end):
             return None
         for i in range(start, end):
