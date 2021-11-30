@@ -105,6 +105,7 @@ class light_strip:
         self.all_pixels(self.rgb)
 
     def region_fill(self, start, end, rgb):
+        # not inclusive of end
         rgb = self.correct_color(rgb)
         if (start > end):
             return None
@@ -114,7 +115,6 @@ class light_strip:
                 self.pixels[i] = rgb
             except IndexError:
                 print("Skipped pixel at index " + str(i))
-        self.pixels[end] = rgb
         self.pixels.show()
 
     def loop_region_fill(self, start, end, rgb, direction):
