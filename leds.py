@@ -107,23 +107,26 @@ class light_strip:
         self.pixels[end] = rgb
         self.pixels.show()
 
-    def loop_region_fill(self, start, end, rgb):
-        start = 104 + start % 88
-        end = 104 + end % 88
-        if (start > 117):
-            start = start - 87
-        if (end > 117):
-            end = end - 87
-        if (end >= start):
-            if (end < 117):
-                self.region_fill(start, end, rgb)
-            if (end == 117):
+    def loop_region_fill(self, start, end, rgb, direction):
+        if (direction == "r"):
+            start = 104 + start % 88
+            end = 104 + end % 88
+            if (start > 117):
+                start = start - 87
+            if (end > 117):
+                end = end - 87
+            if (end >= start):
+                if (end < 117):
+                    self.region_fill(start, end, rgb)
+                if (end == 117):
+                    self.region_fill(start, 116, rgb)
+                    self.set_pixel(117, rgb)
+            else:
                 self.region_fill(start, 116, rgb)
                 self.set_pixel(117, rgb)
-        else:
-            self.region_fill(start, 116, rgb)
-            self.set_pixel(117, rgb)
-            self.region_fill(31, end, rgb)
+                self.region_fill(31, end, rgb)
+        if (direction == "l"):
+            self.loop_region_fill(end - 1, start - 1, rgb, "r")
 
     def status(self):
         return self.state
