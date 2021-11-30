@@ -15,7 +15,7 @@ def status():
 @app.route('/on')
 def on():
     region = request.args.get('r')
-    lights.on(region)
+    lights.region_on(region)
     return 'on'
 
 @app.route('/off')
