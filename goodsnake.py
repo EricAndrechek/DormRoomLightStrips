@@ -14,7 +14,6 @@ while True:
         count + 22, count + 26, (0.25, 0.9, 0.9), "l", False))
     firsts.append(lights.ceiling_region_fill(
         count - 22, count - 18, (0.75, 0.9, 0.9), "l", False))
-    lights.pixels.show()
 
     for i in firsts:
         lights.set_pixel(i, (0, 0, 0), False)
