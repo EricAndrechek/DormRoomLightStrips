@@ -6,7 +6,8 @@ count = 0
 
 while True:
     firsts = []
-    firsts.append(lights.ceiling_region_fill(count, count + 3, (0, 0, 0), "r"))
+    firsts.append(lights.ceiling_region_fill(
+        count, count + 3, (0, 0.9, 0.9), "r"))
     firsts.append(lights.ceiling_region_fill(
         count + 43, count + 46, (0.5, 0.9, 0.9), "r"))
     firsts.append(lights.ceiling_region_fill(
