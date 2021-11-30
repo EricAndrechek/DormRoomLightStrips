@@ -7,7 +7,7 @@ count = 0
 
 while True:
     hue = random.random()
-    for i in range(0, 87):
+    for i in range(0, 44):
         lights.ceiling_set_pixel(i, (hue, 0.99, 0.99), "r", False)
         lights.ceiling_set_pixel(i, (hue, 0.99, 0.99), "l", False)
         lights.pixels.show()
