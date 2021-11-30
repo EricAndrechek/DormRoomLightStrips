@@ -19,4 +19,4 @@ while (True):
     time.sleep(0.10)
     lights.region_fill(31, 116, color)
     lights.set_pixel(117, color)
-    time.sleep(0.01)
+    time.sleep(0.005)
