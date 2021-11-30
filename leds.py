@@ -140,9 +140,10 @@ class light_strip:
     def all_off(self):
         self.region_fill(0, 118, (0, 0, 0))
 
-    def set_pixel(self, pixel, hsv):
+    def set_pixel(self, pixel, hsv, update="True"):
         self.pixels[pixel] = self.hsv_to_gbr(hsv)
-        self.pixels.show()
+        if (update):
+            self.pixels.show()
 
     def fill_region_by_name(self, region, hsv):
         ceiling = self.states[region].ceiling
@@ -177,10 +178,10 @@ class light_strip:
         if (update):
             self.pixels.show()
 
-    def ceiling_region_fill(self, start, end, hsv, direction):
+    def ceiling_region_fill(self, start, end, hsv, direction="r", update="True"):
         if (direction == "r"):
             if (end - start > 86):
-                self.region_fill(31, 118, hsv)
+                self.region_fill(31, 118, hsv, update)
                 return start
             start = 104 + start % 87
             end = 104 + end % 87
@@ -189,13 +190,13 @@ class light_strip:
             if (end > 118):
                 end = end - 87
             if (end >= start):
-                self.region_fill(start, end, hsv)
+                self.region_fill(start, end, hsv, update)
             else:
-                self.region_fill(start, 118, hsv)
-                self.region_fill(31, end, hsv)
+                self.region_fill(start, 118, hsv, update)
+                self.region_fill(31, end, hsv, update)
             return start
         if (direction == "l"):
-            self.ceiling_region_fill(-end, -start, hsv, "r")
+            self.ceiling_region_fill(-end, -start, hsv, "r", update)
             start = 103 - start % 87
             if (start < 31):
                 start = start + 87
