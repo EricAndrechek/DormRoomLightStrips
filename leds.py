@@ -86,7 +86,6 @@ class light_strip:
         hsv = (hsv[0], hsv[1] ** 0.2, hsv[2])
         rgb = colorsys.hsv_to_rgb(hsv[0], hsv[1], hsv[2])
         rgb = (256 * rgb[0], 256 * rgb[1], 256 * rgb[2])
-        print(rgb)
         return rgb
 
     def all_pixels(self, rgb):
