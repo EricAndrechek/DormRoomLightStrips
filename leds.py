@@ -89,7 +89,7 @@ class light_strip:
         return rgb
 
     def all_pixels(self, rgb):
-        self.region_fill(0, 117, rgb)
+        self.region_fill(0, 118, rgb)
 
     def off(self):
         self.all_pixels((0, 0, 0))
