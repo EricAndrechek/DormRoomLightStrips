@@ -1,5 +1,7 @@
+from colorsys import hsv_to_rgb
 import leds
 import time
+import colorsys
 
 lights = leds.light_strip()
 
@@ -11,7 +13,8 @@ lights.off()
 # green = int(input("Green: "))
 # blue = int(input("Blue: "))
 while True:
+    hsv = (input("H: "), input("S: "), input("V: "))
     lights.all_pixels(lights.correct_color(
-        (int(input("R: ")), int(input("G: ")), int(input("B: ")))))
+        colorsys.hsv_to_rgb(hsv[0], hsv[1], hsv[2])))
     time.sleep(2)
     lights.off()
