@@ -140,9 +140,10 @@ class light_strip:
     def all_off(self):
         self.region_fill(0, 118, (0, 0, 0))
 
-    def set_pixel(self, pixel, hsv):
+    def set_pixel(self, pixel, hsv, update="True"):
         self.pixels[pixel] = self.hsv_to_gbr(hsv)
-        self.pixels.show()
+        if (update):
+            self.pixels.show()
 
     def region_fill(self, start, end, hsv, update=True):
         # not inclusive of end
