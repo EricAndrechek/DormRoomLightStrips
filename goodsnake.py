@@ -24,11 +24,13 @@ rgb = (0, 0, 255)
         lights.set_pixel(31, (0, 0, 0))
     count = count - 1 """
 
-while True:
+""" while True:
     lights.loop_region_fill(count, count + 4, rgb)
     start = 104 + count % 88
     if (start > 117):
         start = start - 87
     time.sleep(0.05)
     lights.set_pixel(start, (0, 0, 0))
-    count = count + 1
+    count = count + 1 """
+
+lights.loop_region_fill(0, 30, rgb)
