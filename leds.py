@@ -155,6 +155,9 @@ class light_strip:
 
     def loop_region_fill(self, start, end, hsv, direction):
         if (direction == "r"):
+            if (end - start > 86):
+                self.region_fill(31, 118, hsv)
+                return start
             start = 104 + start % 87
             end = 104 + end % 87
             if (start > 117):
