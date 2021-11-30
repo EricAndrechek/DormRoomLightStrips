@@ -10,8 +10,8 @@ lights.off()
 # red = int(input("Red: "))
 # green = int(input("Green: "))
 # blue = int(input("Blue: "))
-lights.set_hex(input("Hex: "))
-time.sleep(2)
-lights.off()
-time.sleep(2)
-lights.on()
+while True:
+    lights.all_pixels(lights.correct_color(
+        input("R: "), input("G: "), input("B: ")))
+    time.sleep(2)
+    lights.off()
