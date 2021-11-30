@@ -111,7 +111,7 @@ class light_strip:
         if (end < start):
             self.region_fill(self, start, 116, rgb)
             self.set_pixel(117, rgb)
-            self.regionfill(self, 104, end, rgb)
+            self.region_fill(self, 104, end, rgb)
     def status(self):
         return self.state
     def set_hex(self, hex):
