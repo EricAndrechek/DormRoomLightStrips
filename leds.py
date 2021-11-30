@@ -107,4 +107,7 @@ class light_strip:
         self.on()
     def get_hex(self):
         return self.hex
+    def set_pixel(self, pixel, rgb):
+        self.pixels[pixel] = rgb
+        self.pixels.show()
     
