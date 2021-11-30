@@ -6,5 +6,5 @@ def main(lights):
     print(lights.get_all_states())
 
 if __name__ == '__main__':
-    lights = leds.Leds()
+    lights = leds.light_strip()
     main(lights)
