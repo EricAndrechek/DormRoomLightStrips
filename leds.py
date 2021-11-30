@@ -78,8 +78,28 @@ class light_strip:
         self.jayden_desk_hsv = (0, 0, 0)
 
     def correct_color(self, hsv):
-        hsv = (hsv[0], hsv[1] ** 0.2, hsv[2])
-        return hsv
+        red = 0
+        yellow = 0.037
+        green = 1/3
+        cyan = 0.45
+        blue = 2/3
+        magenta = 0.96
+
+        hue = hsv[0]
+        if (hue < 1/6):
+            hue = hue * 6 * (yellow - red) + red
+        elif (hue >= 1/6 and hue < 1/3):
+            hue = (hue - 1/6) * 6 * (green - yellow) + yellow
+        elif (hue >= 1/3 and hue < 1/2):
+            hue = (hue - 1/3) * 6 * (cyan - green) + green
+        elif (hue >= 1/2 and hue < 2/3):
+            hue = (hue - 1/2) * 6 * (blue - cyan) + cyan
+        elif (hue >= 2/3 and hue < 5/6):
+            hue = (hue - 2/3) * 6 * (magenta - blue) + blue
+        else:
+            hue = (hue - 5/6) * 6 * (1 - magenta) + magenta
+
+        return (hue, hsv[1] ** 0.2, hsv[2])
 
     def hsv_to_gbr(self, hsv):
         rgb = colorsys.hsv_to_rgb(hsv[0], hsv[1], hsv[2])
