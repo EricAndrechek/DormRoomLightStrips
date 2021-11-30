@@ -152,7 +152,7 @@ class light_strip:
                 pixel = pixel - 87
             self.set_pixel(pixel, hsv, update)
         if (direction == "l"):
-            self.ceiling_set_pixel(-pixel - 1, hsv, direction, update)
+            self.ceiling_set_pixel(-pixel - 1, hsv, "r", update)
 
     def fill_region_by_name(self, region, hsv):
         ceiling = self.states[region].ceiling
