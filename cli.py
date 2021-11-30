@@ -15,6 +15,6 @@ lights.off()
 while True:
     hsv = (input("H: "), input("S: "), input("V: "))
     lights.all_pixels(lights.correct_color(
-        colorsys.hsv_to_rgb(hsv[0], hsv[1], hsv[2])))
+        colorsys.hsv_to_rgb(256 * hsv[0], 256 * hsv[1], 256 * hsv[2])))
     time.sleep(2)
     lights.off()
