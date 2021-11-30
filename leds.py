@@ -105,13 +105,13 @@ class light_strip:
         if (end > 117):
             end = end - 87
         if (end >= start):
-            self.region_fill(self, start, end, rgb)
+            self.region_fill(start, end, rgb)
             if (end == 117):
                 self.set_pixel(117, rgb)
         if (end < start):
-            self.region_fill(self, start, 116, rgb)
+            self.region_fill(start, 116, rgb)
             self.set_pixel(117, rgb)
-            self.region_fill(self, 104, end, rgb)
+            self.region_fill(104, end, rgb)
     def status(self):
         return self.state
     def set_hex(self, hex):
