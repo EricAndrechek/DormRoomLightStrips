@@ -1,9 +1,15 @@
 import leds
 import time
+import random
 
 lights = leds.light_strip()
 
 while True:
-    for i in range(31, 112):
-        lights.region_fill(i, i+5, (0, 0, 255))
-        time.sleep(0.01)
+    color = (random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255))
+    color2 = (random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255))
+    for i in range(31, 118):
+        lights.set_pixel(i, color)
+        time.sleep(0.1)
+    for i in range(31, 118):
+        lights.set_pixel(i, color2)
+        time.sleep(0.1)
