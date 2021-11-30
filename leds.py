@@ -134,8 +134,6 @@ class light_strip:
                 start = start - 87
             if (end > 118):
                 end = end - 87
-            print(start)
-            print(end)
             if (end >= start):
                 self.region_fill(start, end, rgb)
             else:
