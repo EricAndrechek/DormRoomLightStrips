@@ -12,6 +12,6 @@ lights.off()
 # blue = int(input("Blue: "))
 while True:
     lights.all_pixels(lights.correct_color(
-        (input("R: "), input("G: "), input("B: "))))
+        (int(input("R: ")), int(input("G: ")), int(input("B: ")))))
     time.sleep(2)
     lights.off()
