@@ -106,8 +106,8 @@ class light_strip:
         self.pixels.show()
 
     def loop_region_fill(self, start, end, rgb):
-        start = 104 + start % 87
-        end = 104 + end % 87
+        start = 104 + start % 88
+        end = 104 + end % 88
         if (start > 117):
             start = start - 87
         if (end > 117):
