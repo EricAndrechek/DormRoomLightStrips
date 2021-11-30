@@ -16,82 +16,82 @@ class light_strip:
                 "region": [0, 16],
                 "ceiling": [0, 0],
                 "state": 0,
-                "hsv": (0, 0, 0)
+                "hsv": (0, 0, 0.99)
             },
             "jayden_lamp": {
                 "region": [16, 31],
                 "ceiling:": [0, 0],
                 "state": 0,
-                "hsv": (0, 0, 0)
+                "hsv": (0, 0, 0.99)
             },
             "window_section": {
                 "region": [31, 49],
                 "ceiling": [14, 32],
                 "state": 0,
-                "hsv": (0, 0, 0)
+                "hsv": (0, 0, 0.99)
             },
             "jayden_bed": {
                 "region": [49, 61],
                 "ceiling": [32, 44],
                 "state": 0,
-                "hsv": (0, 0, 0)
+                "hsv": (0, 0, 0.99)
             },
             "eric_bed": {
                 "region": [61, 74],
                 "ceiling": [44, 57],
                 "state": 0,
-                "hsv": (0, 0, 0)
+                "hsv": (0, 0, 0.99)
             },
             "door_section": {
                 "region": [74, 91],
                 "ceiling": [57, 74],
                 "state": 0,
-                "hsv": (0, 0, 0)
+                "hsv": (0, 0, 0.99)
             },
             "eric_desk": {
                 "region": [91, 104],
                 "ceiling": [74, 87],
                 "state": 0,
-                "hsv": (0, 0, 0)
+                "hsv": (0, 0, 0.99)
             },
             "jayden_desk": {
                 "region": [104, 118],
                 "ceiling": [0, 14],
                 "state": 0,
-                "hsv": (0, 0, 0)
+                "hsv": (0, 0, 0.99)
             },
             # intermediate sections:
             "tv_wall": {
                 "region": [91, 118],
                 "ceiling": [-13, 14],
                 "state": 0,
-                "hsv": (0, 0, 0)
+                "hsv": (0, 0, 0.99)
             },
             "bed_wall": {
                 "region": [49, 74],
                 "ceiling": [32, 57],
                 "state": 0,
-                "hsv": (0, 0, 0)
+                "hsv": (0, 0, 0.99)
             },
             # larger sections:
             "jayden_half": {
                 "region": [104, 61],
                 "ceiling": [0, 44],
                 "state": 0,
-                "hsv": (0, 0, 0)
+                "hsv": (0, 0, 0.99)
             },
             "eric_half": {
                 "region": [61, 104],
                 "ceiling": [44, 87],
                 "state": 0,
-                "hsv": (0, 0, 0)
+                "hsv": (0, 0, 0.99)
             },
             # whole thing:
             "main": {
                 "region": [31, 118],
                 "ceiling": [0, 87],
                 "state": 0,
-                "hsv": (0, 0, 0)
+                "hsv": (0, 0, 0.99)
             }
         }
 
@@ -145,6 +145,16 @@ class light_strip:
         if (update):
             self.pixels.show()
 
+    def fill_region_by_name(self, region, hsv):
+        ceiling = self.states[region].ceiling
+        self.states[region].hsv = hsv
+        self.states[region].state = 1
+        self.ceiling_region_fill(ceiling[0], ceiling[1], hsv)
+    
+    def region_off(self, region):
+        self.states[region].state = 0
+        self.ceiling_region_fill(self.states[region].ceiling[0], self.states[region].ceiling[1], (0, 0, 0))
+
     def region_fill(self, start, end, hsv, update=True):
         # not inclusive of end
         hsv = self.correct_color(hsv)
@@ -193,18 +203,18 @@ class light_strip:
             return start
 
     def status(self, region):
-        return self.main_state
+        return self.states[region].state
 
     def get_hex(self, region):
-        return self.hsv_to_hex(self.main_hsv)
+        return self.hsv_to_hex(self.states[region].hsv)
 
     def get_brightness(self, region):
-        return self.main_hsv[2]
+        return self.states[region].hsv[2]
 
     def set_brightness(self, region, brightness):
-        self.main_hsv = (self.main_hsv[0], self.main_hsv[1], brightness)
-        self.region_fill(0, 118, self.main_hsv)
+        hsv = (self.states[region].hsv[0], self.states[region].hsv[1], brightness)
+        self.fill_region_by_name(region, hsv)
 
     def region_color(self, region, color):
         hsv = self.hex_to_hsv(color)
-        self.region_fill(region[0], region[1], hsv)
+        self.fill_region_by_name(region, hsv)
