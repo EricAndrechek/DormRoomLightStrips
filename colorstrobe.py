@@ -4,7 +4,7 @@ import random
 
 lights = leds.light_strip()
 
-for i in range(50):
+while (True):
     color = (0,0,0)
     choice = random.random()
     rand = random.random()*255
@@ -16,7 +16,7 @@ for i in range(50):
     if (choice >= 0.67):
         color = (0, rand, 256 - rand)
     lights.off()
-    time.sleep(0.12)
+    time.sleep(0.10)
     lights.region_fill(31, 116, color)
     lights.set_pixel(117, color)
     time.sleep(0.01)
