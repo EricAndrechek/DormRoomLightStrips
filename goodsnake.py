@@ -25,8 +25,8 @@ rgb = (0, 0, 255)
     count = count - 1 """
 
 while True:
-    lights.loop_region_fill(count, count + 4, rgb, "r")
-    start = 104 + count % 88
+    lights.loop_region_fill(-count, -count - 4, rgb, "l")
+    start = 104 + (-count - 5) % 88
     if (start > 117):
         start = start - 87
     time.sleep(0.05)
