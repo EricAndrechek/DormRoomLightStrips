@@ -5,12 +5,10 @@ lights = leds.light_strip()
 count = 1000
 rgb = (0,0,255)
 while True:
-    start = 104 + count % 87
-    if (start > 117):
-        start = start - 87
+    start = 31 + count % 86
     end = start + 5
     if (end > 117):
-        end = end - 87
+        end = end - 86
     if (end > start and end != 117):
         lights.region_fill(start, end, rgb)
     if (end > start and end == 117):
