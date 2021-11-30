@@ -21,6 +21,6 @@ while True:
         lights.set_pixel(117, rgb)
         lights.region_fill(104, end)
     time.sleep(0.1)
-    lights.set_pixel(start, (0,0,0))
-    count = count + 1
+    lights.set_pixel(end, (0,0,0))
+    count = count - 1
     
