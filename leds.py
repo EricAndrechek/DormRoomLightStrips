@@ -97,15 +97,13 @@ class light_strip:
 
     def correct_color(self, hsv):
         red = 0
-        yellow = 0.035
+        yellow = 0.04
         green = 1/3
-        cyan = 0.45
+        cyan = 0.5
         blue = 2/3
         magenta = 0.96
 
         hue = hsv[0] % 1
-        print(hue)
-        print(colorsys.hsv_to_rgb(hue, hsv[1], hsv[2]))
         if (hue < 1/6):
             hue = hue * 6 * (yellow - red) + red
         elif (hue >= 1/6 and hue < 1/3):
@@ -171,8 +169,11 @@ class light_strip:
             self.set_pixel(117, hsv)
         self.pixels.show()
 
-    def loop_region_fill(self, start, end, hsv, direction):
+    def ceiling_region_fill(self, start, end, hsv, direction):
         if (direction == "r"):
+            if (end - start > 86):
+                self.region_fill(31, 118, hsv)
+                return start
             start = 104 + start % 87
             end = 104 + end % 87
             if (start > 117):
