@@ -31,4 +31,6 @@ while True:
         start = start - 87
     time.sleep(0.05)
     lights.set_pixel(start, (0, 0, 0))
+    if (start == 117):
+        lights.set_pixel(117, (0, 0, 0))
     count = count + 1
