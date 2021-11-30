@@ -169,7 +169,7 @@ class light_strip:
             self.set_pixel(117, hsv)
         self.pixels.show()
 
-    def ceiling_region_fill(self, start, end, hsv, direction):
+    def ceiling_region_fill(self, start, end, hsv, direction="r"):
         if (direction == "r"):
             if (end - start > 86):
                 self.region_fill(31, 118, hsv)
