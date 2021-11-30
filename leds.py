@@ -80,7 +80,7 @@ class light_strip:
     def correct_color(self, hsv):
         hsv = (hsv[0], hsv[1] ** 0.2, hsv[2])
         return hsv
-    
+
     def hsv_to_gbr(self, hsv):
         rgb = colorsys.hsv_to_rgb(hsv[0], hsv[1], hsv[2])
         grb = (256 * rgb[1], 256 * rgb[0], 256 * rgb[2])
@@ -92,7 +92,7 @@ class light_strip:
         b = int(hex[4:6], 16)
         hsv = colorsys.rgb_to_hsv(r/256, g/256, b/256)
         return hsv
-    
+
     def hsv_to_hex(self, hsv):
         rgb = colorsys.hsv_to_rgb(hsv[0], hsv[1], hsv[2])
         hex = ""
@@ -106,6 +106,9 @@ class light_strip:
     def set_pixel(self, pixel, hsv):
         self.pixels[pixel] = self.hsv_to_gbr(hsv)
         self.pixels.show()
+
+    def all(self, hsv):
+        self.region_fill(0, 118, hsv)
 
     def region_fill(self, start, end, hsv):
         # not inclusive of end
@@ -158,12 +161,11 @@ class light_strip:
 
     def get_brightness(self, region):
         return self.main_hsv[2]
-    
+
     def set_brightness(self, region, brightness):
         self.main_hsv = (self.main_hsv[0], self.main_hsv[1], brightness)
         self.region_fill(0, 118, self.main_hsv)
-    
+
     def region_color(self, region, color):
         hsv = self.hex_to_hsv(color)
         self.region_fill(region[0], region[1], hsv)
-
