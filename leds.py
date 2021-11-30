@@ -105,8 +105,10 @@ class light_strip:
         if (end > 117):
             end = end - 87
         if (end >= start):
-            self.region_fill(start, end, rgb)
+            if (end < 117):
+                self.region_fill(start, end, rgb)
             if (end == 117):
+                self.region_fill(start, 116, rgb)
                 self.set_pixel(117, rgb)
         if (end < start):
             self.region_fill(start, 116, rgb)
