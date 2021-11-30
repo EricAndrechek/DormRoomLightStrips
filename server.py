@@ -11,37 +11,36 @@ Everything below is for the entire light strip
 --------------------------------------------------------------------------------
 '''
 
-@app.route('/status')
-def status():
+@app.route('/main/status')
+def main_status():
     return str(lights.status())
 
-@app.route('/on')
-def on():
+@app.route('/main/on')
+def main_on():
     lights.on()
     return 'on'
 
-@app.route('/off')
-def off():
+@app.route('/main/off')
+def main_off():
     lights.off()
     return 'off'
 
-@app.route('/color')
-def color():
+@app.route('/main/color')
+def main_color():
     return lights.get_hex()
 
-@app.route('/cset/<s>')
-def cset(s):
-    print("\"" + s + "\"")
+@app.route('/main/cset/<s>')
+def main_cset(s):
     lights.set_hex(s)
     return 'set'
 
-@app.route('/bset/<s>')
-def bset(s):
+@app.route('/main/bset/<s>')
+def main_bset(s):
     return 'sorry this does nothing' 
     # jayden figure out if this is possible if you want to help
 
-@app.route('/bright')
-def brightness():
+@app.route('/main/bright')
+def main_brightness():
     return "100" if lights.status() == 1 else "0"
 
 '''
