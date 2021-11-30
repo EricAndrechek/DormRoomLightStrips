@@ -97,6 +97,21 @@ class light_strip:
                 print("Skipped pixel at index " + str(i))
         self.pixels[end] = rgb
         self.pixels.show()
+    def loop_region_fill(self, start, end, rgb):
+        start = 104 + start % 87
+        end = 104 + end % 87
+        if (start > 117):
+            start = start - 87
+        if (end > 117):
+            end = end - 87
+        if (end >= start):
+            self.region_fill(self, start, end, rgb)
+            if (end == 117):
+                self.set_pixel(117, rgb)
+        if (end < start):
+            self.region_fill(self, start, 116, rgb)
+            self.set_pixel(117, rgb)
+            self.regionfill(self, 104, end, rgb)
     def status(self):
         return self.state
     def set_hex(self, hex):
