@@ -6,10 +6,10 @@ lights = leds.light_strip()
 
 for i in range(50):
     color = (0,0,0)
-    choice = random()
-    rand = random()*255
+    choice = random.random()
+    rand = random.random()*255
     if (choice < 0.33):
-        rand = random()*255
+        rand = random.random()*255
         color = (rand, 1 - rand, 0)
     if (choice >= 0.33 and choice < 0.67):
         color = (rand, 0, 1 - rand)
