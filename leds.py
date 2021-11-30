@@ -155,15 +155,15 @@ class light_strip:
             self.ceiling_set_pixel(-pixel - 1, hsv, "r", update)
 
     def fill_region_by_name(self, region, hsv):
-        ceiling = self.states[region].ceiling
-        self.states[region].hsv = hsv
-        self.states[region].state = 1
+        ceiling = self.states[region]["ceiling"]
+        self.states[region]["hsv"] = hsv
+        self.states[region]["state"] = 1
         self.ceiling_region_fill(ceiling[0], ceiling[1], hsv)
 
     def region_off(self, region):
-        self.states[region].state = 0
+        self.states[region]["state"] = 0
         self.ceiling_region_fill(
-            self.states[region].ceiling[0], self.states[region].ceiling[1], (0, 0, 0))
+            self.states[region]["ceiling"][0], self.states[region]["ceiling"][1], (0, 0, 0))
 
     def region_fill(self, start, end, hsv, update=True):
         # not inclusive of end
@@ -213,17 +213,17 @@ class light_strip:
             return start
 
     def status(self, region):
-        return self.states[region].state
+        return self.states[region]["state"]
 
     def get_hex(self, region):
-        return self.hsv_to_hex(self.states[region].hsv)
+        return self.hsv_to_hex(self.states[region]["hsv"])
 
     def get_brightness(self, region):
-        return self.states[region].hsv[2]
+        return self.states[region]["hsv"][2]
 
     def set_brightness(self, region, brightness):
-        hsv = (self.states[region].hsv[0],
-               self.states[region].hsv[1], brightness)
+        hsv = (self.states[region]["hsv"][0],
+               self.states[region]["hsv"][1], brightness)
         self.fill_region_by_name(region, hsv)
 
     def region_color(self, region, color):
@@ -231,7 +231,7 @@ class light_strip:
         self.fill_region_by_name(region, hsv)
 
     def region_on(self, region):
-        self.fill_region_by_name(region, self.states[region].hsv)
+        self.fill_region_by_name(region, self.states[region]["hsv"])
     
     def get_all_states(self):
         return self.states
