@@ -20,5 +20,7 @@ while True:
         lights.region_fill(104, end, rgb)
     time.sleep(0.05)
     lights.set_pixel(end, (0,0,0))
+    if (end == 117):
+        lights.set_pixel(31, (0,0,0))
     count = count - 1
     
