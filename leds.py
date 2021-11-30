@@ -79,7 +79,7 @@ class light_strip:
 
     def correct_color(self, hsv):
         red = 0
-        yellow = 0.037
+        yellow = 0.02
         green = 1/3
         cyan = 0.45
         blue = 2/3
