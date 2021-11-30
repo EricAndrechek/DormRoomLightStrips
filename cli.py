@@ -5,7 +5,7 @@ import colorsys
 
 lights = leds.light_strip()
 
-lights.off()
+lights.all_off()
 
 # start = int(input("Start at: "))
 # end = int(input("End at: "))
