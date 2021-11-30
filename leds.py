@@ -185,7 +185,7 @@ class light_strip:
                 self.region_fill(31, end, hsv)
             return start
         if (direction == "l"):
-            self.loop_region_fill(-end, -start, hsv, "r")
+            self.ceiling_region_fill(-end, -start, hsv, "r")
             start = 103 - start % 87
             if (start < 31):
                 start = start + 87
