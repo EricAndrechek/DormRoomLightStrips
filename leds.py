@@ -131,6 +131,9 @@ class light_strip:
     def all(self, hsv):
         self.region_fill(0, 118, hsv)
 
+    def full_loop(self, hsv):
+        self.loop_region_fill(0, 87)
+
     def region_fill(self, start, end, hsv):
         # not inclusive of end
         hsv = self.correct_color(hsv)
