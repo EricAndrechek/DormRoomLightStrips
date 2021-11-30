@@ -10,5 +10,5 @@ while True:
         lights.set_pixel(i+2, (0, 0, 255))
         lights.set_pixel(i+3, (0, 0, 255))
         lights.set_pixel(i+4, (0, 0, 255))
-        time.sleep(0.05)
+        time.sleep(0.01)
         lights.set_pixel(i, (0, 0, 0))
