@@ -144,10 +144,7 @@ class light_strip:
         self.pixels[pixel] = self.hsv_to_gbr(hsv)
         self.pixels.show()
 
-    def all(self, hsv):
-        self.region_fill(0, 118, hsv)
-
-    def region_fill(self, start, end, hsv):
+    def region_fill(self, start, end, hsv, update=True):
         # not inclusive of end
         hsv = self.correct_color(hsv)
         if (start > end):
@@ -167,7 +164,8 @@ class light_strip:
                 except IndexError:
                     print("Skipped pixel at index " + str(i))
             self.set_pixel(117, hsv)
-        self.pixels.show()
+        if (update):
+            self.pixels.show()
 
     def ceiling_region_fill(self, start, end, hsv, direction="r"):
         if (direction == "r"):
