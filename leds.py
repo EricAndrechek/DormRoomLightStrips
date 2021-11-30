@@ -129,7 +129,7 @@ class light_strip:
                     self.pixels[i] = self.hsv_to_gbr(hsv)
                 except IndexError:
                     print("Skipped pixel at index " + str(i))
-            self.set_pixel(117, self.hsv_to_gbr(hsv))
+            self.set_pixel(117, hsv)
         self.pixels.show()
 
     def loop_region_fill(self, start, end, hsv, direction):
