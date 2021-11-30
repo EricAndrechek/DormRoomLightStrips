@@ -7,6 +7,6 @@ direction = input("Direction: ")
 while True:
     start = input("Start: ")
     end = input("End: ")
-    start = lights.loop_region_fill(int(start), int(end), rgb, direction)
+    start = lights.ceiling_region_fill(int(start), int(end), rgb, direction)
     time.sleep(1.5)
     lights.off()
