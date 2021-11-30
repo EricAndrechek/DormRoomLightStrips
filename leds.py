@@ -3,6 +3,7 @@ import board
 import neopixel
 import time
 
+
 class light_strip:
     # Defined sections and color calibrations
     tv_section = [0, 15]
@@ -46,7 +47,8 @@ class light_strip:
     jayden_desk_b_offset = 0
 
     def __init__(self):
-        self.pixels = neopixel.NeoPixel(board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
+        self.pixels = neopixel.NeoPixel(
+            board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
         # States and colors:
 
         self.state = 0
@@ -76,27 +78,33 @@ class light_strip:
 
         self.jayden_desk_state = 0
         self.jayden_desk_hex = "000000"
+
     def all_pixels(self, rgb):
         self.region_fill(0, 117, rgb)
+
     def off(self):
         self.all_pixels((0, 0, 0))
+
     def hex_to_rgb(self, hex):
         r = int(hex[0:2], 16)
         g = int(hex[2:4], 16)
         b = int(hex[4:6], 16)
         return (g, r, b)
+
     def on(self):
         # self.off()
         self.all_pixels(self.rgb)
+
     def region_fill(self, start, end, rgb):
         for i in range(start, end):
             try:
-                self.pixels[i] = (0,0,0)
+                self.pixels[i] = (0, 0, 0)
                 self.pixels[i] = rgb
             except IndexError:
                 print("Skipped pixel at index " + str(i))
         self.pixels[end] = rgb
         self.pixels.show()
+
     def loop_region_fill(self, start, end, rgb):
         start = 104 + start % 87
         end = 104 + end % 87
@@ -113,18 +121,21 @@ class light_strip:
         if (end < start):
             self.region_fill(start, 116, rgb)
             self.set_pixel(117, rgb)
-            self.region_fill(104, end, rgb)
+            self.region_fill(31, end, rgb)
+
     def status(self):
         return self.state
+
     def set_hex(self, hex):
         self.hex = hex
         time.sleep(0.1)
         self.rgb = self.hex_to_rgb(hex)
         time.sleep(0.1)
         self.on()
+
     def get_hex(self):
         return self.hex
+
     def set_pixel(self, pixel, rgb):
         self.pixels[pixel] = rgb
         self.pixels.show()
-    
