@@ -161,8 +161,7 @@ class light_strip:
         r = int(rgb[0] * 256)
         g = int(rgb[1] * 256)
         b = int(rgb[2] * 256)
-        return '%02x%02x%02x' % (r,g,b)
-
+        return '%02x%02x%02x' % (r, g, b)
 
     def update(self):
         self.pixels.show()
@@ -198,7 +197,8 @@ class light_strip:
         except KeyError:
             ceiling = [0, 0]
         if (ceiling[0] == 0) and (ceiling[1] == 0):
-            self.region_fill(self.states[region]["region"][0], self.states[region]["region"][1], hsv)
+            self.region_fill(
+                self.states[region]["region"][0], self.states[region]["region"][1], hsv)
         else:
             self.ceiling_region_fill(ceiling[0], ceiling[1], hsv)
         self.states[region]["hsv"] = hsv
@@ -212,9 +212,11 @@ class light_strip:
         except KeyError:
             ceiling = [0, 0]
         if (ceiling[0] == 0) and (ceiling[1] == 0):
-            self.region_fill(self.states[region]["region"][0], self.states[region]["region"][1], (0, 0, 0))
+            self.region_fill(
+                self.states[region]["region"][0], self.states[region]["region"][1], (0, 0, 0))
         else:
-            self.ceiling_region_fill(self.states[region]["ceiling"][0], self.states[region]["ceiling"][1], (0, 0, 0))
+            self.ceiling_region_fill(
+                self.states[region]["ceiling"][0], self.states[region]["ceiling"][1], (0, 0, 0))
 
     def region_fill(self, start, end, hsv):
         # not inclusive of end
@@ -255,14 +257,8 @@ class light_strip:
             if (end >= start):
                 self.region_fill(start, end, hsv)
             else:
-<<<<<<< HEAD
                 self.region_fill(start, 118, hsv)
                 self.region_fill(31, end, hsv)
-=======
-                # places like this could ignore update and do both and then push the update depending of the boolean to turn potential 2 phase update into 1
-                self.region_fill(start, 118, hsv, update)
-                self.region_fill(31, end, hsv, update)
->>>>>>> 948e8045b739655523dd4c603900aa2f3912a535
             return start
         if (direction == "l"):
             self.ceiling_region_fill(-end, -start, hsv, "r")
