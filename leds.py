@@ -4,12 +4,14 @@ import neopixel
 import colorsys
 import time
 import math
+import requests
 
 
 class light_strip:
     def __init__(self):
         self.pixels = neopixel.NeoPixel(
             board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
+        self.homebridge_url = "http://localhost:8001/"
         self.states = {
             # small sections:
             "tv_section": {
@@ -165,6 +167,12 @@ class light_strip:
 
     def update(self):
         self.pixels.show()
+    
+    def homebridge_push(self, region, status):
+        requests.post(self.homebridge_url + region, json={
+            "characteristic": "On",
+            "value": True
+            })
 
     def all_off(self):
         self.region_fill(0, 118, (0, 0, 0))
@@ -187,10 +195,14 @@ class light_strip:
             if self.states[included]["state"] == 1:
                 self.region_off(included)
                 self.states[included]["state"] = 0
+                # push update to homebridge here
+                self.homebridge_push(included, "off")
         for included in self.states[region]["included_in"]:
             if self.states[included]["state"] == 1:
                 self.region_off(included)
                 self.states[included]["state"] = 0
+                # push update to homebridge here
+                self.homebridge_push(included, "off")
         ceiling = []
         try:
             ceiling = self.states[region]["ceiling"]
@@ -203,9 +215,13 @@ class light_strip:
             self.ceiling_region_fill(ceiling[0], ceiling[1], hsv)
         self.states[region]["hsv"] = hsv
         self.states[region]["state"] = 1
+        # push update to homebridge here
+        self.homebridge_push(region, "on")
 
     def region_off(self, region):
         self.states[region]["state"] = 0
+        # push update to homebridge here
+        self.homebridge_push(region, "off")
         ceiling = []
         try:
             ceiling = self.states[region]["ceiling"]
@@ -278,7 +294,9 @@ class light_strip:
 
     def set_brightness(self, region, brightness):
         brightness = int(brightness)
-        if (brightness >= 1):
+        if brightness > 1:
+            brightness = brightness / 100
+        if (brightness == 1):
             brightness = 0.99
         hsv = (self.states[region]["hsv"][0],
                self.states[region]["hsv"][1], brightness)
