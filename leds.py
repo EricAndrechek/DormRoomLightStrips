@@ -190,7 +190,11 @@ class light_strip:
             if self.states[included]["state"] == 1:
                 self.region_off(included)
                 self.states[included]["state"] = 0
-        ceiling = self.states[region]["ceiling"]
+        ceiling = []
+        try:
+            ceiling = self.states[region]["ceiling"]
+        except KeyError:
+            ceiling = [0, 0]
         if (ceiling[0] == 0) and (ceiling[1] == 0):
             self.region_fill(self.states[region]["region"][0], self.states[region]["region"][1], hsv)
         else:
@@ -200,8 +204,15 @@ class light_strip:
 
     def region_off(self, region):
         self.states[region]["state"] = 0
-        self.ceiling_region_fill(
-            self.states[region]["ceiling"][0], self.states[region]["ceiling"][1], (0, 0, 0))
+        ceiling = []
+        try:
+            ceiling = self.states[region]["ceiling"]
+        except KeyError:
+            ceiling = [0, 0]
+        if (ceiling[0] == 0) and (ceiling[1] == 0):
+            self.region_fill(self.states[region]["region"][0], self.states[region]["region"][1], (0, 0, 0))
+        else:
+            self.ceiling_region_fill(self.states[region]["ceiling"][0], self.states[region]["ceiling"][1], (0, 0, 0))
 
     def region_fill(self, start, end, hsv, update=True):
         # not inclusive of end
