@@ -16,82 +16,108 @@ class light_strip:
                 "region": [0, 16],
                 "ceiling": [0, 0],
                 "state": 0,
-                "hsv": (0, 0, 0.99)
+                "hsv": (0, 0, 0.99),
+                "includes": [],
+                "included_in": []
             },
             "jayden_lamp": {
                 "region": [16, 31],
                 "ceiling:": [0, 0],
                 "state": 0,
-                "hsv": (0, 0, 0.99)
+                "hsv": (0, 0, 0.99),
+                "includes": [],
+                "included_in": []
             },
             "window_section": {
                 "region": [31, 49],
                 "ceiling": [14, 32],
                 "state": 0,
-                "hsv": (0, 0, 0.99)
+                "hsv": (0, 0, 0.99),
+                "includes": [],
+                "included_in": ["main", "jayden_half"]
             },
             "jayden_bed": {
                 "region": [49, 61],
                 "ceiling": [32, 44],
                 "state": 0,
-                "hsv": (0, 0, 0.99)
+                "hsv": (0, 0, 0.99),
+                "includes": [],
+                "included_in": ["main", "jayden_half", "bed_wall"]
             },
             "eric_bed": {
                 "region": [61, 74],
                 "ceiling": [44, 57],
                 "state": 0,
-                "hsv": (0, 0, 0.99)
+                "hsv": (0, 0, 0.99),
+                "includes": [],
+                "included_in": ["main", "eric_half", "bed_wall"]
             },
             "door_section": {
                 "region": [74, 91],
                 "ceiling": [57, 74],
                 "state": 0,
-                "hsv": (0, 0, 0.99)
+                "hsv": (0, 0, 0.99),
+                "includes": [],
+                "included_in": ["main", "eric_half"]
             },
             "eric_desk": {
                 "region": [91, 104],
                 "ceiling": [74, 87],
                 "state": 0,
-                "hsv": (0, 0, 0.99)
+                "hsv": (0, 0, 0.99),
+                "includes": [],
+                "included_in": ["main", "eric_half", "tv_wall"]
             },
             "jayden_desk": {
                 "region": [104, 118],
                 "ceiling": [0, 14],
                 "state": 0,
-                "hsv": (0, 0, 0.99)
+                "hsv": (0, 0, 0.99),
+                "includes": [],
+                "included_in": ["main", "jayden_half", "tv_wall"]
             },
             # intermediate sections:
             "tv_wall": {
                 "region": [91, 118],
                 "ceiling": [-13, 14],
                 "state": 0,
-                "hsv": (0, 0, 0.99)
+                "hsv": (0, 0, 0.99),
+                "includes": ["eric_desk", "jayden_desk", "jayden_half", "eric_half"],
+                "included_in": ["main", "jayden_half", "eric_half"]
             },
             "bed_wall": {
                 "region": [49, 74],
                 "ceiling": [32, 57],
                 "state": 0,
-                "hsv": (0, 0, 0.99)
+                "hsv": (0, 0, 0.99),
+                "includes": ["eric_bed", "jayden_bed", "jayden_half", "eric_half"],
+                "included_in": ["main", "jayden_half", "eric_half"]
             },
             # larger sections:
             "jayden_half": {
                 "region": [104, 61],
                 "ceiling": [0, 44],
                 "state": 0,
-                "hsv": (0, 0, 0.99)
+                "hsv": (0, 0, 0.99),
+                "includes": ["jayden_bed", "jayden_desk", "window_section", "bed_wall", "tv_wall"],
+                "included_in": ["main", "bed_wall", "tv_wall"]
             },
             "eric_half": {
                 "region": [61, 104],
                 "ceiling": [44, 87],
                 "state": 0,
-                "hsv": (0, 0, 0.99)
+                "hsv": (0, 0, 0.99),
+                "includes": ["eric_bed", "eric_desk", "door_section", "bed_wall", "tv_wall"],
+                "included_in": ["main", "bed_wall", "tv_wall"]
             },
             # whole thing:
             "main": {
                 "region": [31, 118],
                 "ceiling": [0, 87],
                 "state": 0,
-                "hsv": (0, 0, 0.99)
+                "hsv": (0, 0, 0.99),
+                "includes": ["window_section", "jayden_bed", "eric_bed", "door_section", "eric_desk", "jayden_desk", "tv_wall", "bed_wall", "jayden_half", "eric_half"],
+                "included_in": []
             }
         }
 
@@ -157,9 +183,18 @@ class light_strip:
 
     def fill_region_by_name(self, region, hsv):
         ceiling = self.states[region]["ceiling"]
+        if (ceiling[0] == 0) and (ceiling[1] == 0):
+            self.region_fill(self.states[region]["region"][0], self.states[region]["region"][1], hsv)
+        else:
+            self.ceiling_region_fill(ceiling[0], ceiling[1], hsv)
         self.states[region]["hsv"] = hsv
         self.states[region]["state"] = 1
-        self.ceiling_region_fill(ceiling[0], ceiling[1], hsv)
+        for included in self.states[region]["includes"]:
+            self.region_off(included)
+            self.states[included]["state"] = 0
+        for included in self.states[region]["included_in"]:
+            self.region_off(included)
+            self.states[included]["state"] = 0
 
     def region_off(self, region):
         self.states[region]["state"] = 0
