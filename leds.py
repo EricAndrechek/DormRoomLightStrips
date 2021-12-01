@@ -182,6 +182,12 @@ class light_strip:
             self.ceiling_set_pixel(-pixel - 1, hsv, "r", update)
 
     def fill_region_by_name(self, region, hsv):
+        for included in self.states[region]["includes"]:
+            self.region_off(included)
+            self.states[included]["state"] = 0
+        for included in self.states[region]["included_in"]:
+            self.region_off(included)
+            self.states[included]["state"] = 0
         ceiling = self.states[region]["ceiling"]
         if (ceiling[0] == 0) and (ceiling[1] == 0):
             self.region_fill(self.states[region]["region"][0], self.states[region]["region"][1], hsv)
@@ -189,12 +195,6 @@ class light_strip:
             self.ceiling_region_fill(ceiling[0], ceiling[1], hsv)
         self.states[region]["hsv"] = hsv
         self.states[region]["state"] = 1
-        for included in self.states[region]["includes"]:
-            self.region_off(included)
-            self.states[included]["state"] = 0
-        for included in self.states[region]["included_in"]:
-            self.region_off(included)
-            self.states[included]["state"] = 0
 
     def region_off(self, region):
         self.states[region]["state"] = 0
