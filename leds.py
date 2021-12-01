@@ -137,22 +137,24 @@ class light_strip:
             hex += hex(int(rgb[i] * 255))[2:].zfill(2)
         return hex
 
+    def update(self):
+        self.pixels.show()
+
     def all_off(self):
         self.region_fill(0, 118, (0, 0, 0))
+        self.update()
 
-    def set_pixel(self, pixel, hsv, update="True"):
+    def set_pixel(self, pixel, hsv):
         self.pixels[pixel] = self.hsv_to_gbr(hsv)
-        if (update):
-            self.pixels.show()
 
-    def ceiling_set_pixel(self, pixel, hsv, direction="r", update="True"):
+    def ceiling_set_pixel(self, pixel, hsv, direction="r"):
         if (direction == "r"):
             pixel = 104 + pixel % 87
             if (pixel > 117):
                 pixel = pixel - 87
-            self.set_pixel(pixel, hsv, update)
+            self.set_pixel(pixel, hsv)
         if (direction == "l"):
-            self.ceiling_set_pixel(-pixel - 1, hsv, "r", update)
+            self.ceiling_set_pixel(-pixel - 1, hsv, "r")
 
     def fill_region_by_name(self, region, hsv):
         ceiling = self.states[region]["ceiling"]
@@ -165,7 +167,7 @@ class light_strip:
         self.ceiling_region_fill(
             self.states[region]["ceiling"][0], self.states[region]["ceiling"][1], (0, 0, 0))
 
-    def region_fill(self, start, end, hsv, update=True):
+    def region_fill(self, start, end, hsv):
         # not inclusive of end
         hsv = self.correct_color(hsv)
         if (start > end):
@@ -185,13 +187,11 @@ class light_strip:
                 except IndexError:
                     print("Skipped pixel at index " + str(i))
             self.set_pixel(117, hsv)
-        if (update):
-            self.pixels.show()
 
-    def ceiling_region_fill(self, start, end, hsv, direction="r", update="True"):
+    def ceiling_region_fill(self, start, end, hsv, direction="r"):
         if (direction == "r"):
             if (end - start > 86):
-                self.region_fill(31, 118, hsv, update)
+                self.region_fill(31, 118, hsv)
                 return start
             start = 104 + start % 87
             end = 104 + end % 87
@@ -200,13 +200,13 @@ class light_strip:
             if (end > 118):
                 end = end - 87
             if (end >= start):
-                self.region_fill(start, end, hsv, update)
+                self.region_fill(start, end, hsv)
             else:
-                self.region_fill(start, 118, hsv, update)
-                self.region_fill(31, end, hsv, update)
+                self.region_fill(start, 118, hsv)
+                self.region_fill(31, end, hsv)
             return start
         if (direction == "l"):
-            self.ceiling_region_fill(-end, -start, hsv, "r", update)
+            self.ceiling_region_fill(-end, -start, hsv, "r")
             start = 103 - start % 87
             if (start < 31):
                 start = start + 87
