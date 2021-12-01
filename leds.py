@@ -171,7 +171,9 @@ class light_strip:
     def homebridge_push(self, region, status):
         requests.post(self.homebridge_url + region, json={
             "characteristic": status,
-            "value": True
+            "value": True,
+            "accessory": "HttpPushRgb",
+            "service": "Light"
             })
 
     def all_off(self):
