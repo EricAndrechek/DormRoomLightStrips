@@ -177,14 +177,21 @@ class light_strip:
                     self.pixels[i] = (0, 0, 0)
                     self.pixels[i] = self.hsv_to_gbr(hsv)
                 except IndexError:
-                    print("Skipped pixel at index " + str(i))
+                    print("Index Error: Skipped pixel at index " + str(i))
+                except TypeError:
+                    print("Type Error: Skipped pixel at index " + str(i))
         else:
             for i in range(start, 117):
                 try:
                     self.pixels[i] = (0, 0, 0)
                     self.pixels[i] = self.hsv_to_gbr(hsv)
                 except IndexError:
-                    print("Skipped pixel at index " + str(i))
+                    print("Index Error: Skipped pixel at index " + str(i))
+                except TypeError:
+                    print("Type Error: Skipped pixel at index " + str(i))
+                    print("Index Error: Skipped pixel at index " + str(i))
+                except TypeError:
+                    print("Type Error: Skipped pixel at index " + str(i))
             self.set_pixel(117, hsv)
         if (update):
             self.pixels.show()
@@ -203,6 +210,7 @@ class light_strip:
             if (end >= start):
                 self.region_fill(start, end, hsv, update)
             else:
+                # places like this could ignore update and do both and then push the update depending of the boolean to turn potential 2 phase update into 1
                 self.region_fill(start, 118, hsv, update)
                 self.region_fill(31, end, hsv, update)
             return start
