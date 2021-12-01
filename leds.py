@@ -189,9 +189,6 @@ class light_strip:
                     print("Index Error: Skipped pixel at index " + str(i))
                 except TypeError:
                     print("Type Error: Skipped pixel at index " + str(i))
-                    print("Index Error: Skipped pixel at index " + str(i))
-                except TypeError:
-                    print("Type Error: Skipped pixel at index " + str(i))
             self.set_pixel(117, hsv)
         if (update):
             self.pixels.show()
@@ -231,6 +228,8 @@ class light_strip:
         return self.states[region]["hsv"][2]
 
     def set_brightness(self, region, brightness):
+        if (brightness >= 1):
+            brightness = 0.99
         hsv = (self.states[region]["hsv"][0],
                self.states[region]["hsv"][1], brightness)
         self.fill_region_by_name(region, hsv)
