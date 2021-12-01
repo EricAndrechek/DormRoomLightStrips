@@ -132,9 +132,7 @@ class light_strip:
 
     def hsv_to_hex(self, hsv):
         rgb = colorsys.hsv_to_rgb(hsv[0], hsv[1], hsv[2])
-        hex = ""
-        for i in range(3):
-            hex += hex(int(rgb[i] * 255))[2:].zfill(2)
+        hex = ''.join('%02x'%i for i in input)
         return hex
 
     def all_off(self):
@@ -216,7 +214,7 @@ class light_strip:
         return self.states[region]["state"]
 
     def get_hex(self, region):
-        return self.hsv_to_hex(self.states[region]["hsv"])
+        return str(self.hsv_to_hex(self.states[region]["hsv"]))
 
     def get_brightness(self, region):
         return self.states[region]["hsv"][2]

@@ -44,7 +44,7 @@ def bset(s):
 @app.route('/bright')
 def brightness():
     region = request.args.get('r')
-    return lights.get_brightness(region)
+    return str(lights.get_brightness(region))
 
 if __name__ == '__main__':
     lights.all_off()
