@@ -132,8 +132,11 @@ class light_strip:
 
     def hsv_to_hex(self, hsv):
         rgb = colorsys.hsv_to_rgb(hsv[0], hsv[1], hsv[2])
-        hex = ''.join('%02x'%i for i in input)
-        return hex
+        r = int(rgb[0] * 256)
+        g = int(rgb[1] * 256)
+        b = int(rgb[2] * 256)
+        return '%02x%02x%02x' % (r,g,b)
+
 
     def all_off(self):
         self.region_fill(0, 118, (0, 0, 0))
