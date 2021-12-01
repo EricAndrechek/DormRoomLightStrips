@@ -170,7 +170,7 @@ class light_strip:
     
     def homebridge_push(self, region, status):
         requests.post(self.homebridge_url + region, json={
-            "characteristic": "On",
+            "characteristic": status,
             "value": True
             })
 
@@ -196,13 +196,13 @@ class light_strip:
                 self.region_off(included)
                 self.states[included]["state"] = 0
                 # push update to homebridge here
-                self.homebridge_push(included, "off")
+                self.homebridge_push(included, "Off")
         for included in self.states[region]["included_in"]:
             if self.states[included]["state"] == 1:
                 self.region_off(included)
                 self.states[included]["state"] = 0
                 # push update to homebridge here
-                self.homebridge_push(included, "off")
+                self.homebridge_push(included, "Off")
         ceiling = []
         try:
             ceiling = self.states[region]["ceiling"]
@@ -216,12 +216,12 @@ class light_strip:
         self.states[region]["hsv"] = hsv
         self.states[region]["state"] = 1
         # push update to homebridge here
-        self.homebridge_push(region, "on")
+        self.homebridge_push(region, "On")
 
     def region_off(self, region):
         self.states[region]["state"] = 0
         # push update to homebridge here
-        self.homebridge_push(region, "off")
+        self.homebridge_push(region, "Off")
         ceiling = []
         try:
             ceiling = self.states[region]["ceiling"]
