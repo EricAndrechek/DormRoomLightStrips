@@ -228,6 +228,7 @@ class light_strip:
         return self.states[region]["hsv"][2]
 
     def set_brightness(self, region, brightness):
+        brightness = int(brightness)
         if (brightness >= 1):
             brightness = 0.99
         hsv = (self.states[region]["hsv"][0],
