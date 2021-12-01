@@ -183,11 +183,13 @@ class light_strip:
 
     def fill_region_by_name(self, region, hsv):
         for included in self.states[region]["includes"]:
-            self.region_off(included)
-            self.states[included]["state"] = 0
+            if self.states[included]["state"] == 1:
+                self.region_off(included)
+                self.states[included]["state"] = 0
         for included in self.states[region]["included_in"]:
-            self.region_off(included)
-            self.states[included]["state"] = 0
+            if self.states[included]["state"] == 1:
+                self.region_off(included)
+                self.states[included]["state"] = 0
         ceiling = self.states[region]["ceiling"]
         if (ceiling[0] == 0) and (ceiling[1] == 0):
             self.region_fill(self.states[region]["region"][0], self.states[region]["region"][1], hsv)
