@@ -12,12 +12,14 @@ def status():
     region = request.args.get('r')
     return str(lights.status(region))
 
+
 @app.route('/on')
 def on():
     region = request.args.get('r')
     lights.region_on(region)
     lights.update()
     return 'on'
+
 
 @app.route('/off')
 def off():
@@ -26,10 +28,12 @@ def off():
     lights.update()
     return 'off'
 
+
 @app.route('/color')
 def color():
     region = request.args.get('r')
     return lights.get_hex(region)
+
 
 @app.route('/cset/<s>')
 def cset(s):
@@ -38,6 +42,7 @@ def cset(s):
     lights.update()
     return 'set'
 
+
 @app.route('/bset/<s>')
 def bset(s):
     region = request.args.get('r')
@@ -45,10 +50,12 @@ def bset(s):
     lights.update()
     return 'set'
 
+
 @app.route('/bright')
 def brightness():
     region = request.args.get('r')
-    return lights.get_brightness(region)
+    return str(lights.get_brightness(region))
+
 
 if __name__ == '__main__':
     lights.all_off()
