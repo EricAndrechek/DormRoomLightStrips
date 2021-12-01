@@ -3,8 +3,8 @@
         "accessory": "HttpPushRgb",
         "name": "Light Strip",
         "service": "Light",
-        "notificationID": "main",
         "switch": {
+            "notificationID": "main",
             "status": "http://localhost:8000/status?r=main",
             "powerOn": "http://localhost:8000/on?r=main",
             "powerOff": "http://localhost:8000/off?r=main"
@@ -23,8 +23,8 @@
         "accessory": "HttpPushRgb",
         "name": "Jayden Lamp",
         "service": "Light",
-        "notificationID": "jayden_lamp",
         "switch": {
+            "notificationID": "jayden_lamp",
             "status": "http://localhost:8000/status?r=jayden_lamp",
             "powerOn": "http://localhost:8000/on?r=jayden_lamp",
             "powerOff": "http://localhost:8000/off?r=jayden_lamp"
@@ -43,8 +43,8 @@
         "accessory": "HttpPushRgb",
         "name": "Window Section",
         "service": "Light",
-        "notificationID": "window_section",
         "switch": {
+            "notificationID": "window_section",
             "status": "http://localhost:8000/status?r=window_section",
             "powerOn": "http://localhost:8000/on?r=window_section",
             "powerOff": "http://localhost:8000/off?r=window_section"
@@ -63,8 +63,8 @@
         "accessory": "HttpPushRgb",
         "name": "Jayden's Bed",
         "service": "Light",
-        "notificationID": "jayden_bed",
         "switch": {
+            "notificationID": "jayden_bed",
             "status": "http://localhost:8000/status?r=jayden_bed",
             "powerOn": "http://localhost:8000/on?r=jayden_bed",
             "powerOff": "http://localhost:8000/off?r=jayden_bed"
@@ -83,8 +83,8 @@
         "accessory": "HttpPushRgb",
         "name": "Eric's Bed",
         "service": "Light",
-        "notificationID": "eric_bed",
         "switch": {
+            "notificationID": "eric_bed",
             "status": "http://localhost:8000/status?r=eric_bed",
             "powerOn": "http://localhost:8000/on?r=eric_bed",
             "powerOff": "http://localhost:8000/off?r=eric_bed"
@@ -103,8 +103,8 @@
         "accessory": "HttpPushRgb",
         "name": "Door Section",
         "service": "Light",
-        "notificationID": "door_section",
         "switch": {
+            "notificationID": "door_section",
             "status": "http://localhost:8000/status?r=door_section",
             "powerOn": "http://localhost:8000/on?r=door_section",
             "powerOff": "http://localhost:8000/off?r=door_section"
@@ -123,8 +123,8 @@
         "accessory": "HttpPushRgb",
         "name": "Eric's Desk",
         "service": "Light",
-        "notificationID": "eric_desk",
         "switch": {
+            "notificationID": "eric_desk",
             "status": "http://localhost:8000/status?r=eric_desk",
             "powerOn": "http://localhost:8000/on?r=eric_desk",
             "powerOff": "http://localhost:8000/off?r=eric_desk"
@@ -143,8 +143,8 @@
         "accessory": "HttpPushRgb",
         "name": "Jayden's Desk",
         "service": "Light",
-        "notificationID": "jayden_desk",
         "switch": {
+            "notificationID": "jayden_desk",
             "status": "http://localhost:8000/status?r=jayden_desk",
             "powerOn": "http://localhost:8000/on?r=jayden_desk",
             "powerOff": "http://localhost:8000/off?r=jayden_desk"
@@ -163,8 +163,8 @@
         "accessory": "HttpPushRgb",
         "name": "TV Wall",
         "service": "Light",
-        "notificationID": "tv_wall",
         "switch": {
+            "notificationID": "tv_wall",
             "status": "http://localhost:8000/status?r=tv_wall",
             "powerOn": "http://localhost:8000/on?r=tv_wall",
             "powerOff": "http://localhost:8000/off?r=tv_wall"
@@ -183,8 +183,8 @@
         "accessory": "HttpPushRgb",
         "name": "Bed Wall",
         "service": "Light",
-        "notificationID": "bed_wall",
         "switch": {
+            "notificationID": "bed_wall",
             "status": "http://localhost:8000/status?r=bed_wall",
             "powerOn": "http://localhost:8000/on?r=bed_wall",
             "powerOff": "http://localhost:8000/off?r=bed_wall"
@@ -203,8 +203,8 @@
         "accessory": "HttpPushRgb",
         "name": "Jayden's Side",
         "service": "Light",
-        "notificationID": "jayden_half",
         "switch": {
+            "notificationID": "jayden_half",
             "status": "http://localhost:8000/status?r=jayden_half",
             "powerOn": "http://localhost:8000/on?r=jayden_half",
             "powerOff": "http://localhost:8000/off?r=jayden_half"
@@ -223,8 +223,8 @@
         "accessory": "HttpPushRgb",
         "name": "Eric's Side",
         "service": "Light",
-        "notificationID": "eric_half",
         "switch": {
+            "notificationID": "eric_half",
             "status": "http://localhost:8000/status?r=eric_half",
             "powerOn": "http://localhost:8000/on?r=eric_half",
             "powerOff": "http://localhost:8000/off?r=eric_half"
