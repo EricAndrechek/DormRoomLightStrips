@@ -9,6 +9,7 @@ def main(lights):
         for i in range(0, 87):
             lights.set_pixel(i, ((hue + i / 87) % 1, 0.99, 0.9))
             time.sleep(0.1)
+        lights.update()
         hue = (hue + 1 / 87) % 1
 
 
