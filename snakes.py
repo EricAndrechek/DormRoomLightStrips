@@ -12,9 +12,9 @@ def main(lights):
             count + 43, count + 47, (0.5, 0.9, 0.9), "r"))
         if (count % 3 == 0):
             firsts.append(lights.ceiling_region_fill(
-                count / 3 + 22, count / 3 + 26, (0.25, 0.9, 0.9), "l"))
+                int(count / 3) + 22, int(count / 3) + 26, (0.25, 0.9, 0.9), "l"))
             firsts.append(lights.ceiling_region_fill(
-                count / 3 - 22, count / 3 - 18, (0.75, 0.9, 0.9), "l"))
+                int(count / 3) - 22, int(count / 3) - 18, (0.75, 0.9, 0.9), "l"))
         for i in firsts:
             lights.set_pixel(i, (0, 0, 0))
         lights.update()
