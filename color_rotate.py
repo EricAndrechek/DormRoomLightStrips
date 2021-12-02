@@ -16,4 +16,4 @@ def main(lights, speed=0.1):
 if __name__ == '__main__':
     lights = leds.light_strip()
     speed = float(input("Speed: "))
-    main(lights)
+    main(lights, speed)
