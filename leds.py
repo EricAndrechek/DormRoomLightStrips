@@ -259,7 +259,7 @@ class light_strip:
                     print("Index Error: Skipped pixel at index " + str(i))
                 except TypeError:
                     print("Type Error: Skipped pixel at index " + str(i))
-            self.set_pixel(117, hsv)
+            self.pixels[117] = self.hsv_to_gbr(hsv)
 
     def ceiling_region_fill(self, start, end, hsv, direction="r"):
         if (direction == "r"):
