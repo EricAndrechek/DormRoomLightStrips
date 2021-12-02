@@ -13,7 +13,7 @@ def main(lights):
             lights.ceiling_set_pixel(start + i, (hue, 0.9, 0.9))
             lights.ceiling_set_pixel(start - i, (hue, 0.9, 0.9))
             lights.update()
-            time.sleep(0.1)
+            time.sleep(0.05)
 
 
 if __name__ == '__main__':
