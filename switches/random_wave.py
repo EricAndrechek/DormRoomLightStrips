@@ -1,4 +1,4 @@
-import leds
+
 import time
 import random
 import os
@@ -6,6 +6,8 @@ import sys
 
 p = os.path.abspath('.')
 sys.path.insert(1, p)
+
+import leds
 
 
 def main(lights):
