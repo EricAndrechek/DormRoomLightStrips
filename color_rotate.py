@@ -13,7 +13,7 @@ def main(lights, speed=0.1):
                 num_at_time = 2
             for j in range(0, num_at_time):
                 lights.ceiling_set_pixel(
-                    i + j, ((hue + i * j / 87) % 1, 0.99, 0.9))
+                    i + j, ((hue + (i + j) / 87) % 1, 0.99, 0.9))
             i = i + num_at_time
         lights.update()
         time.sleep(speed)
