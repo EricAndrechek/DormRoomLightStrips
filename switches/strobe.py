@@ -1,5 +1,10 @@
-import leds
 import time
+import leds
+import os
+import sys
+
+p = os.path.abspath('.')
+sys.path.insert(1, p)
 
 
 def main(lights):
