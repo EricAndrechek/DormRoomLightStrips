@@ -8,7 +8,7 @@ def main(lights, speed=0.1):
     while True:
         for i in range(0, 87):
             lights.ceiling_set_pixel(i, ((hue + i / 87) % 1, 0.99, 0.9))
-            i = i + 3 if speed < 0.001 else i
+            i = i + 12 if speed < 0.001 else i
         lights.update()
         time.sleep(speed)
         hue = (hue + 1 / 87) % 1
