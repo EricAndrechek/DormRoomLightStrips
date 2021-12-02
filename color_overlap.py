@@ -8,7 +8,7 @@ def main(lights, speed=0.1):
     spot = 0
     while True:
         lights.ceiling_set_pixel(spot, (hue, 0.99, 0.99))
-        hue = hue + 0.001 % 1
+        hue = hue + 0.0001 % 1
         spot = (spot + 1) % 87
         time.sleep(speed)
         lights.update()
