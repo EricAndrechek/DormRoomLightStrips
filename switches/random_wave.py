@@ -1,6 +1,12 @@
 
 import time
 import random
+import os
+import sys
+
+p = os.path.abspath('.')
+sys.path.insert(1, p)
+
 from ..DormRoomLightStrips import leds
 
 
