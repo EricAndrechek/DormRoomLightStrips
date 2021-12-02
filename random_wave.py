@@ -12,7 +12,7 @@ def main(lights):
         for i in range(0, 44):
             lights.ceiling_set_pixel(start + i, (hue, 0.9, 0.9))
             lights.ceiling_set_pixel(start - i, (hue, 0.9, 0.9))
-            lights.update
+            lights.update()
             time.sleep(0.1)
 
 
