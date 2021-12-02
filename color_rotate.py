@@ -3,8 +3,7 @@ import random
 import leds
 
 
-def main(lights):
-    speed = int(input("Speed: "))
+def main(lights, speed=0.1):
     hue = 0
     while True:
         for i in range(0, 87):
@@ -16,4 +15,5 @@ def main(lights):
 
 if __name__ == '__main__':
     lights = leds.light_strip()
+    speed = float(input("Speed: "))
     main(lights)
