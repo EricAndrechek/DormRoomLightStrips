@@ -12,7 +12,7 @@ def main(lights, speed=0.1):
             i = i + 1
         lights.update()
         time.sleep(speed if speed >= 0.001 else 0.001)
-        num_at_time = 1 if speed >= 0.001 else 141
+        num_at_time = 1 if speed >= 0.001 else 4
         hue = (hue + num_at_time / 87) % 1
 
 
