@@ -8,7 +8,7 @@ def main(lights):
     start = 0
     while True:
         hue = (hue + 0.1 + 0.8 * random.random()) % 1
-        start = (start + 10 + round(60 * random.random())) % 87
+        start = round(87 * random.random())
         for i in range(0, 44):
             lights.ceiling_set_pixel(start + i, (hue, 0.9, 0.9))
             lights.ceiling_set_pixel(start - i, (hue, 0.9, 0.9))
