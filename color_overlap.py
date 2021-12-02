@@ -10,6 +10,7 @@ def main(lights, speed=0.1):
         lights.ceiling_set_pixel(spot, (hue, 0.99, 0.99))
         hue = hue + 0.001
         spot = (spot + 1) % 87
+        time.sleep(speed)
 
 
 if __name__ == '__main__':
