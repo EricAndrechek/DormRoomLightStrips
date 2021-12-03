@@ -109,7 +109,7 @@ def main(lights):
             hue_shift = album_hue - avg_hue
             spotify_time = get_playback_position() + 0.5
             for beat in beats:
-                if beat["start"] < spotify_time:
+                if beat["start"] < spotify_time:\
                     continue
                 if not spotify.is_playing():
                     break
