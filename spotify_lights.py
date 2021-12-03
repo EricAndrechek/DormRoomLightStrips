@@ -93,7 +93,7 @@ def main(lights):
                 hsv = lights.rgb_to_hsv(new_color)
                 album_hue = hsv[0]
 
-            track = spotify.get_audio_features()["id"]
+            track = spotify.get_audio_features()[0]["id"]
             min_loudness = 0
             max_loudness = 0
             hues = []
