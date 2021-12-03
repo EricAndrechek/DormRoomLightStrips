@@ -92,7 +92,7 @@ def wave2(lights, beat, start_time, duration, min_loudness, max_loudness, hue_sh
         (max_loudness - min_loudness)
     if loudness != max_loudness:
         loudness = 1 / (1 + (loudness / (1 - loudness))**(-3))
-    print("Loudness: " + loudness)
+    print("Loudness: " + str(loudness))
     length = 1 + int(loudness * 7)
     hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
     for i in range(0, length + 1):
