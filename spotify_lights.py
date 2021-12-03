@@ -113,7 +113,7 @@ def main(lights):
                 if time.time() - start_time > beat["start"]:
                     continue
                 if time.time() - start_time < beat["start"]:
-                    time.sleep(time.time() - start_time - beat["start"])
+                    time.sleep(beat["start"] + start_time - time.time())
 
                 """ spotify_time = get_playback_position()
                 if (beat["start"]) > spotify_time:
