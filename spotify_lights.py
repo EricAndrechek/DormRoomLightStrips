@@ -126,6 +126,7 @@ def main(lights):
                         break
                 duration = start_time + \
                     beat["start"] + beat["duration"] - time.time()
+                print(duration)
                 if duration > 0:
                     wave(lights, beat, time.time(), duration,
                          min_loudness, max_loudness, hue_shift)
