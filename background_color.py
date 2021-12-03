@@ -7,6 +7,8 @@ import urllib.request
 from PIL import Image
 import time
 
+def get_background_color(set_b):
+
 
 def main(lights):
     last_hsv = (0,0,0)
