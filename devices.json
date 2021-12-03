@@ -15,6 +15,7 @@
             "brightness": false
         },
         "brightness": {
+            "max": 99,
             "status": "http://localhost:8000/bright?r=main",
             "url": "http://localhost:8000/bset/%s?r=main"
         }
@@ -35,6 +36,7 @@
             "brightness": false
         },
         "brightness": {
+            "max": 99,
             "status": "http://localhost:8000/bright?r=jayden_lamp",
             "url": "http://localhost:8000/bset/%s?r=jayden_lamp"
         }
@@ -55,6 +57,7 @@
             "brightness": false
         },
         "brightness": {
+            "max": 99,
             "status": "http://localhost:8000/bright?r=window_section",
             "url": "http://localhost:8000/bset/%s?r=window_section"
         }
@@ -75,6 +78,7 @@
             "brightness": false
         },
         "brightness": {
+            "max": 99,
             "status": "http://localhost:8000/bright?r=jayden_bed",
             "url": "http://localhost:8000/bset/%s?r=jayden_bed"
         }
@@ -95,6 +99,7 @@
             "brightness": false
         },
         "brightness": {
+            "max": 99,
             "status": "http://localhost:8000/bright?r=eric_bed",
             "url": "http://localhost:8000/bset/%s?r=eric_bed"
         }
@@ -115,6 +120,7 @@
             "brightness": false
         },
         "brightness": {
+            "max": 99,
             "status": "http://localhost:8000/bright?r=door_section",
             "url": "http://localhost:8000/bset/%s?r=door_section"
         }
@@ -135,6 +141,7 @@
             "brightness": false
         },
         "brightness": {
+            "max": 99,
             "status": "http://localhost:8000/bright?r=eric_desk",
             "url": "http://localhost:8000/bset/%s?r=eric_desk"
         }
@@ -155,6 +162,7 @@
             "brightness": false
         },
         "brightness": {
+            "max": 99,
             "status": "http://localhost:8000/bright?r=jayden_desk",
             "url": "http://localhost:8000/bset/%s?r=jayden_desk"
         }
@@ -175,6 +183,7 @@
             "brightness": false
         },
         "brightness": {
+            "max": 99,
             "status": "http://localhost:8000/bright?r=tv_wall",
             "url": "http://localhost:8000/bset/%s?r=tv_wall"
         }
@@ -195,6 +204,7 @@
             "brightness": false
         },
         "brightness": {
+            "max": 99,
             "status": "http://localhost:8000/bright?r=bed_wall",
             "url": "http://localhost:8000/bset/%s?r=bed_wall"
         }
@@ -215,6 +225,7 @@
             "brightness": false
         },
         "brightness": {
+            "max": 99,
             "status": "http://localhost:8000/bright?r=jayden_half",
             "url": "http://localhost:8000/bset/%s?r=jayden_half"
         }
@@ -235,6 +246,7 @@
             "brightness": false
         },
         "brightness": {
+            "max": 99,
             "status": "http://localhost:8000/bright?r=eric_half",
             "url": "http://localhost:8000/bset/%s?r=eric_half"
         }

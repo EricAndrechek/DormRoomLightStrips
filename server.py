@@ -54,7 +54,6 @@ def bset(s):
 @app.route('/bright')
 def brightness():
     region = request.args.get('r')
-    print(lights.get_brightness(region))
     return str(lights.get_brightness(region))
 
 
