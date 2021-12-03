@@ -9,8 +9,8 @@ import time
 
 
 def main(lights):
+    last_url = ""
     while True:
-        last_url = ""
         url = ""
         if spotify.is_playing():
             url = spotify.get_album_image()
@@ -22,7 +22,7 @@ def main(lights):
                 helper = image_color_helper.SpotifyBackgroundColor(image)
                 print(helper)
                 hsv = lights.rgb_to_hsv(helper.best_color())
-                lights.region_fill(0, 87, hsv)
+                lights.ceiling_region_fill(0, 87, hsv)
                 lights.update()
         time.sleep(2)
 
