@@ -137,7 +137,7 @@ def main(lights):
                 else:
                     print("skip")
                 index = index + 1
-        time.sleep(1)
+        time.sleep(3)
 
 
 if __name__ == '__main__':
