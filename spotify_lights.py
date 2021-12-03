@@ -60,9 +60,9 @@ def wave(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shi
         lights.ceiling_set_pixel(i, hsv, "l")
         lights.update()
         time.sleep(duration / 8 / distance)
-    for i in range(distance - 1, -1, -1):
+    for i in range(distance - 1, 2, -1):
         if time.time() > start_time + beat["start"] + beat["duration"] - 0.2:
-            lights.ceiling_region_fill(0, 87, (0, 0, 0))
+            lights.ceiling_region_fill(3, 84, (0, 0, 0))
             lights.update()
             break
         lights.ceiling_set_pixel(i, (0, 0, 0), "r")
@@ -109,7 +109,7 @@ def main(lights):
                 hue_shift = album_hue - avg_hue
             else:
                 hue_shift = 0
-            start_time = time.time() - get_playback_position() - 0.7
+            start_time = time.time() - get_playback_position() + 0.5
             index = 0
             for beat in beats:
                 while time.time() < start_time + beat["start"]:
@@ -140,7 +140,7 @@ def main(lights):
                 else:
                     print("skip")
                 index = index + 1
-        time.sleep(3)
+        time.sleep(5)
 
 
 if __name__ == '__main__':
