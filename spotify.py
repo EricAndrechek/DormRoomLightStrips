@@ -19,6 +19,21 @@ def main():
     current_track = sp.current_user_playing_track()
     return current_track, sp
 
+def is_playing():
+    current_track, sp = main()
+    if current_track is not None:
+        if current_track['is_playing'] == True:
+            return True
+    return False
+
+def get_album_image():
+    current_track, sp = main()
+    if current_track is not None:
+        album_image = current_track['item']['album']['images'][0]['url']
+        return album_image
+    else:
+        return False
+
 def get_playback_position():
     current_track, sp = main()
     if current_track is not None:
