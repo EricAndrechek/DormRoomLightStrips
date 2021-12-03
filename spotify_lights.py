@@ -77,7 +77,7 @@ def main(lights):
             min_loudness = beat["loudness"]
         if beat["loudness"] > max_loudness:
             max_loudness = beat["loudness"]
-    spotify_time = get_playback_position()
+    spotify_time = get_playback_position() - 1
     for beat in beats:
         if beat["start"] < spotify_time:
             continue
