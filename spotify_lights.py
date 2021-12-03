@@ -42,6 +42,7 @@ def get_beats_info():
 
 
 def wave(lights, beat, start_time, min_loudness, max_loudness):
+    print(beat)
     loudness = (beat["loudness"] - min_loudness) / \
         (max_loudness - min_loudness)
     distance = int(loudness * 44)
