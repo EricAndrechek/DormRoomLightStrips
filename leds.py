@@ -164,6 +164,10 @@ class light_strip:
         g = int(rgb[1] * 256)
         b = int(rgb[2] * 256)
         return '%02x%02x%02x' % (r, g, b)
+    
+    def rgb_to_hsv(self, rgb):
+        hsv = colorsys.rgb_to_hsv(rgb[0] / 256, rgb[1] / 256, rgb[2] / 256)
+        return hsv
 
     def update(self):
         self.pixels.show()
@@ -285,6 +289,10 @@ class light_strip:
                 start = start + 87
             return start
 
+    def smooth_transition(self, start, end, old_hsv, new_hsv, transition_time):
+        # the goal is to have the color shift from the old color to the new color over the given time period in a smooth format slowly iterating through the difference in the hue
+        pass
+
     def status(self, region):
         return self.states[region]["state"]
 
@@ -292,7 +300,7 @@ class light_strip:
         return str(self.hsv_to_hex(self.states[region]["hsv"]))
 
     def get_brightness(self, region):
-        return self.states[region]["hsv"][2]
+        return int(self.states[region]["hsv"][2] * 100)
 
     def set_brightness(self, region, brightness):
         brightness = int(brightness)
