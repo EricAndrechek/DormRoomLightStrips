@@ -291,8 +291,8 @@ class light_strip:
 
     def smooth_transition(self, start, end, old_hsv, new_hsv, transition_time):
         # start and end for ceiling, time in s
-        old_rgb = colorsys.hsv_to_rgb(old_hsv)
-        new_rgb = colorsys.hsv_to_rgb(new_hsv)
+        old_rgb = colorsys.hsv_to_rgb(old_hsv[0], old_hsv[1], old_hsv[2])
+        new_rgb = colorsys.hsv_to_rgb(new_hsv[0], new_hsv[1], new_hsv[2])
 
         r_step = (new_rgb[0] - old_rgb[0]) / transition_time / 1000
         g_step = (new_rgb[1] - old_rgb[1]) / transition_time / 1000
@@ -301,7 +301,7 @@ class light_strip:
         rgb = old_rgb
         for i in range(0, transition_time * 1000):
             rgb = (rgb[0] + r_step, rgb[1] + g_step, rgb[2] + b_step)
-            hsv = colorsys.rgb_to_hsv(rgb)
+            hsv = colorsys.rgb_to_hsv(rgb[0], rgb[1], rgb[2])
             self.ceiling_region_fill(start, end, hsv)
             self.update()
             time.sleep(0.001)
