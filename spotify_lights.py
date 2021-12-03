@@ -45,7 +45,7 @@ def wave(lights, beat, start_time, min_loudness, max_loudness):
     print(beat)
     loudness = (beat["loudness"] - min_loudness) / \
         (max_loudness - min_loudness)
-    distance = int(loudness * 44)
+    distance = int(loudness * 30)
     duration = beat["duration"]
     hsv = (beat["pitch"], 0.99, 0.99)
     for i in range(0, distance):
