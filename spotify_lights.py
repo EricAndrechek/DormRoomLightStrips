@@ -47,28 +47,25 @@ def get_beats_info():
     return beats
 
 
-def wave(lights, beat, start_time, min_loudness, max_loudness, hue_shift, speed):
-    print(beat)
+def wave(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
     loudness = (beat["loudness"] - min_loudness) / \
         (max_loudness - min_loudness)
     distance = int(loudness * 30)
-    duration = beat["duration"]
     hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
     for i in range(0, distance):
         lights.ceiling_set_pixel(i, hsv, "r")
         lights.ceiling_set_pixel(i, hsv, "l")
         lights.update()
-        time.sleep(duration / 8 / distance)
-    if speed != "fast":
-        for i in range(distance - 1, -1, -1):
-            if time.time() > start_time + duration - 0.1 and speed != "slow":
-                lights.ceiling_region_fill(0, 87, (0, 0, 0))
-                lights.update()
-                break
-            lights.ceiling_set_pixel(i, (0, 0, 0), "r")
-            lights.ceiling_set_pixel(i, (0, 0, 0), "l")
+        time.sleep(duration / 4 / distance)
+    for i in range(distance - 1, -1, -1):
+        if time.time() > start_time + beat["duration"]:
+            lights.ceiling_region_fill(0, 87, (0, 0, 0))
             lights.update()
-            time.sleep(duration / 3 / distance)
+            break
+        lights.ceiling_set_pixel(i, (0, 0, 0), "r")
+        lights.ceiling_set_pixel(i, (0, 0, 0), "l")
+        lights.update()
+        time.sleep(duration / 2 / distance)
 
 
 def main(lights):
@@ -93,10 +90,6 @@ def main(lights):
                     album_hue = hsv[0]
 
             track = spotify.get_audio_features()[0]["id"]
-            tempo = spotify.get_audio_features()[0]["tempo"]
-            slow = False
-            if tempo > 155:
-                slow = True
             min_loudness = 0
             max_loudness = 0
             hues = []
@@ -113,38 +106,27 @@ def main(lights):
                 hue_shift = album_hue - avg_hue
             else:
                 hue_shift = 0
-            start_time = time.time() - get_playback_position() - 0.5
+            start_time = time.time() - get_playback_position() - 1.5
             index = 0
             for beat in beats:
                 beat_speed = "normal"
-                if time.time() - start_time - beat["start"] > 1:
+                if time.time() - start_time - beat["start"] > 0.5:
                     print("skip")
                     continue
-                elif time.time() - start_time - beat["start"] > 0:
-                    beat_speed = "fast"
-                if time.time() - start_time + 0.5 < beat["start"]:
-                    time.sleep(beat["start"] + start_time - time.time() - 0.2)
-
                 if index % 10 == 0:
                     stopped = False
                     while not spotify.is_playing():
                         time.sleep(0.5)
                         stopped = True
                     if stopped:
-                        start_time = time.time() - get_playback_position() - 0.5
+                        start_time = time.time() - get_playback_position() - 1.5
                 if index % 10 == 5:
                     if spotify.get_audio_features()[0]["id"] != track:
                         break
-                if slow:
-                    if index % 2 == 0:
-                        wave(lights, beat, time.time(), min_loudness,
-                             max_loudness, hue_shift, "slow")
-                elif beat_speed == "fast":
-                    wave(lights, beat, time.time(), min_loudness,
-                         max_loudness, hue_shift, "fast")
-                else:
-                    wave(lights, beat, time.time(), min_loudness,
-                         max_loudness, hue_shift, "normal")
+                duration = start_time + \
+                    beat["start"] + beat["duration"] - time.time()
+                wave(lights, beat, duration, min_loudness,
+                     max_loudness, hue_shift, "normal")
                 index = index + 1
 
 
