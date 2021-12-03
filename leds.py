@@ -164,7 +164,7 @@ class light_strip:
         g = int(rgb[1] * 256)
         b = int(rgb[2] * 256)
         return '%02x%02x%02x' % (r, g, b)
-    
+
     def rgb_to_hsv(self, rgb):
         hsv = colorsys.rgb_to_hsv(rgb[0] / 256, rgb[1] / 256, rgb[2] / 256)
         return hsv
@@ -290,8 +290,17 @@ class light_strip:
             return start
 
     def smooth_transition(self, start, end, old_hsv, new_hsv, transition_time):
-        # the goal is to have the color shift from the old color to the new color over the given time period in a smooth format slowly iterating through the difference in the hue
-        pass
+        # start and end for ceiling, time in s
+        hue_step = (new_hsv[0] - old_hsv[0]) / transition_time / 1000
+        sat_step = (new_hsv[1] - old_hsv[1]) / transition_time / 1000
+        val_step = (new_hsv[2] - old_hsv[2]) / transition_time / 1000
+
+        hsv = old_hsv
+        for i in range(0, transition_time * 1000):
+            hsv = (hsv[0] + hue_step, hsv[1] + sat_step, hsv[2] + val_step)
+            self.ceiling_region_fill(start, end, hsv)
+            self.update()
+            time.sleep(0.001)
 
     def status(self, region):
         return self.states[region]["state"]
