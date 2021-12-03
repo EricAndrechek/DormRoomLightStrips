@@ -128,7 +128,7 @@ def main(lights):
                     beat["start"] + beat["duration"] - time.time()
                 print(duration)
                 if duration > 0:
-                    wave(lights, beat, time.time(), duration,
+                    wave(lights, beat, start_time, duration,
                          min_loudness, max_loudness, hue_shift)
                 index = index + 1
 
