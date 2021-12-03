@@ -47,7 +47,7 @@ def get_beats_info():
     return beats
 
 
-def wave(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
+def wave1(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
     loudness = (beat["loudness"] - min_loudness) / \
         (max_loudness - min_loudness)
     distance = int(loudness * 30)
@@ -69,6 +69,40 @@ def wave(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shi
         lights.ceiling_set_pixel(i, (0, 0, 0), "l")
         lights.update()
         time.sleep(duration / 3 / distance)
+
+
+active_beats = []
+
+
+def update_active_beats():
+    for b in active_beats:
+        if (b[3] > 43):
+            active_beats.remove(b)
+            continue
+        lights.ceiling_set_pixel(b[3], (0, 0, 0), "r")
+        lights.ceiling_set_pixel(b[3], (0, 0, 0), "l")
+        b[3] = b[3] + 1
+        if (b[3] + b[2] <= 43):
+            lights.ceiling_set_pixel(b[3] + b[2], b[1], "r")
+            lights.ceiling_set_pixel(b[3] + b[2], b[1], "l")
+
+
+def wave2(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
+    loudness = (beat["loudness"] - min_loudness) / \
+        (max_loudness - min_loudness)
+    length = 3 + int(loudness * 4)
+    hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
+    for i in range(0, 5):
+        lights.ceiling_set_pixel(i, hsv, "r")
+        lights.ceiling_set_pixel(i, hsv, "l")
+        update_active_beats()
+        lights.update()
+        time.sleep(duration / 20)
+    active_beats.append((0, hsv, length, 0))
+    for i in range(0, 5):
+        update_active_beats()
+        lights.update()
+        time.sleep(duration / 20)
 
 
 def main(lights):
@@ -135,12 +169,12 @@ def main(lights):
                 print(time.time() - start_time - beat["start"])
                 print(duration)
                 if duration > 0:
-                    wave(lights, beat, start_time, duration,
-                         min_loudness, max_loudness, hue_shift)
+                    wave2(lights, beat, start_time, duration,
+                          min_loudness, max_loudness, hue_shift)
                 else:
                     print("skip")
                 index = index + 1
-        time.sleep(5)
+        time.sleep(1)
 
 
 if __name__ == '__main__':
