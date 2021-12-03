@@ -111,12 +111,11 @@ def main(lights):
             for beat in beats:
                 while time.time() < start_time + beat["start"]:
                     continue
-                beat_speed = "normal"
                 if time.time() - start_time - beat["start"] > 0.5:
                     print("skip")
                     continue
                 print(beat)
-                if index % 10 == 0:
+                """ if index % 10 == 0:
                     stopped = False
                     while not spotify.is_playing():
                         time.sleep(0.5)
@@ -125,7 +124,7 @@ def main(lights):
                         start_time = time.time() - get_playback_position() - 1.5
                 if index % 10 == 5:
                     if spotify.get_audio_features()[0]["id"] != track:
-                        break
+                        break """
                 duration = start_time + \
                     beat["start"] + beat["duration"] - time.time()
                 if duration > beat["duration"]:
@@ -135,6 +134,8 @@ def main(lights):
                 if duration > 0:
                     wave(lights, beat, start_time, duration,
                          min_loudness, max_loudness, hue_shift)
+                else:
+                    print("skip")
                 index = index + 1
 
 
