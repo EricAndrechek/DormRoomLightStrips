@@ -71,7 +71,7 @@ def wave(lights, beat, start_time, min_loudness, max_loudness, hue_shift):
 
 
 def main(lights):
-    adjust_hue = False
+    adjust_hue = True
     last_url = ""
     while True:
         url = ""
