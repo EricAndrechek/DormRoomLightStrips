@@ -117,7 +117,7 @@ def main(lights):
                 stop = False
                 while not spotify.is_playing():
                     time.sleep(0.5)
-                    if spotify.get_audio_features()["id"] != track:
+                    if spotify.get_audio_features()[0]["id"] != track:
                         stop = True
                 if stop:
                     break
