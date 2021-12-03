@@ -106,7 +106,7 @@ def main(lights):
                 hue_shift = album_hue - avg_hue
             else:
                 hue_shift = 0
-            start_time = time.time() - get_playback_position() - 1.7
+            start_time = time.time() - get_playback_position() - 2
             index = 0
             for beat in beats:
                 while time.time() < start_time + beat["start"]:
