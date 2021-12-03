@@ -292,7 +292,7 @@ class light_strip:
         return str(self.hsv_to_hex(self.states[region]["hsv"]))
 
     def get_brightness(self, region):
-        return self.states[region]["hsv"][2]
+        return int(self.states[region]["hsv"][2] * 100)
 
     def set_brightness(self, region, brightness):
         brightness = int(brightness)
