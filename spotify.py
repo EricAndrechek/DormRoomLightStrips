@@ -29,7 +29,8 @@ def is_playing():
 def get_album_image():
     current_track, sp = main()
     if current_track is not None:
-        album_image = current_track['item']['album']['images'][0]['url']
+        last_item = len(current_track['item']['album']['images'])
+        album_image = current_track['item']['album']['images'][last_item]['url']
         return album_image
     else:
         return False
