@@ -52,7 +52,7 @@ def wave(lights, beat, start_time, min_loudness, max_loudness):
         lights.ceiling_set_pixel(i, hsv, "l")
         time.sleep(duration / 3 / distance)
     for i in range(distance - 1, -1, -1):
-        if time.time > start_time + duration:
+        if time.time() > start_time + duration:
             break
         lights.ceiling_set_pixel(i, (0, 0, 0), "r")
         lights.ceiling_set_pixel(i, (0, 0, 0), "l")
@@ -61,7 +61,7 @@ def wave(lights, beat, start_time, min_loudness, max_loudness):
 
 
 def main(lights):
-    start_time = time.time
+    start_time = time.time()
     min_loudness = 0
     max_loudness = 0
     beats = get_beats_info()
