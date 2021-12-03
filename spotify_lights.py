@@ -97,12 +97,12 @@ def wave2(lights, beat, start_time, duration, min_loudness, max_loudness, hue_sh
         lights.ceiling_set_pixel(i, hsv, "l")
         update_active_beats()
         lights.update()
-        time.sleep(duration / 20)
+        time.sleep(duration / 30)
     active_beats.append([0, hsv, length, 0])
     for i in range(0, 9):
         update_active_beats()
         lights.update()
-        time.sleep(duration / 20)
+        time.sleep(duration / 30)
 
 
 def main(lights):
