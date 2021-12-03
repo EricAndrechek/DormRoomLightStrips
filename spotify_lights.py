@@ -54,7 +54,7 @@ def wave(lights, beat, start_time, min_loudness, max_loudness):
         lights.update()
         time.sleep(duration / 10 / distance)
     for i in range(distance - 1, -1, -1):
-        if time.time() > start_time + duration - 0.01:
+        if time.time() > start_time + duration - 0.005:
             print("fail")
             lights.ceiling_region_fill(3, 84, (0, 0, 0))
             lights.update()
