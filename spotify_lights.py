@@ -52,7 +52,10 @@ def wave(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shi
         (max_loudness - min_loudness)
     distance = int(loudness * 30)
     hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
-    for i in range(0, distance):
+    lights.ceiling_region_fill(0, 3, hsv, "r")
+    lights.ceiling_region_fill(0, 3, hsv, "l")
+    lights.update()
+    for i in range(3, distance):
         lights.ceiling_set_pixel(i, hsv, "r")
         lights.ceiling_set_pixel(i, hsv, "l")
         lights.update()
@@ -106,7 +109,7 @@ def main(lights):
                 hue_shift = album_hue - avg_hue
             else:
                 hue_shift = 0
-            start_time = time.time() - get_playback_position() - 0.3
+            start_time = time.time() - get_playback_position() - 0.7
             index = 0
             for beat in beats:
                 while time.time() < start_time + beat["start"]:
