@@ -108,16 +108,15 @@ def main(lights):
                 hue_shift = album_hue - avg_hue
             else:
                 hue_shift = 0
-            position = 0
-            start_time = time.time() + get_playback_position() + 0.5
+            position = get_playback_position() + 0.5
+            start_time = time.time()
             for beat in beats:
-                if time.time() + beat["start"] < start_time + position:
+                if time.time() - start_time < position:
                     continue
                 else:
                     position = position + beat["duration"]
-                if time.time() + beat["start"] > start_time + position:
-                    time.sleep(time.time() +
-                               beat["start"] - start_time - position)
+                if time.time() - start_time > position:
+                    time.sleep(time.time() - start_time - position)
 
                 """ spotify_time = get_playback_position()
                 if (beat["start"]) > spotify_time:
