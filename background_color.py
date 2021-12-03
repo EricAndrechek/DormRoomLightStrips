@@ -24,7 +24,6 @@ def main(lights):
                 new_color = helper.best_color()
                 hsv = lights.rgb_to_hsv(new_color)
                 lights.smooth_transition(0, 87, last_hsv, hsv, 1)
-                lights.update()
                 last_hsv = hsv
         time.sleep(2)
 
