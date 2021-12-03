@@ -92,7 +92,7 @@ def wave2(lights, beat, start_time, duration, min_loudness, max_loudness, hue_sh
         (max_loudness - min_loudness)
     length = 1 + int(loudness * 4)
     hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
-    for i in range(0, 4):
+    for i in range(0, length + 1):
         lights.ceiling_set_pixel(i, hsv, "r")
         lights.ceiling_set_pixel(i, hsv, "l")
         update_active_beats()
