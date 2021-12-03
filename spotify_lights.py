@@ -96,7 +96,7 @@ def main(lights):
             max_loudness = 0
             hues = []
             beats = get_beats_info()
-
+            print(beats)
             for beat in beats:
                 if beat["loudness"] < min_loudness:
                     min_loudness = beat["loudness"]
