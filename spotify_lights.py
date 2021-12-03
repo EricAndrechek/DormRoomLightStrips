@@ -112,9 +112,10 @@ def main(lights):
             start_time = time.time() + get_playback_position() + 0.5
             for beat in beats:
                 if time.time() + beat["start"] < start_time + position:
-                    position = position + beat["duration"]
                     continue
-                elif time.time() + beat["start"] > start_time + position:
+                else:
+                    position = position + beat["duration"]
+                if time.time() + beat["start"] > start_time + position:
                     time.sleep(time.time() +
                                beat["start"] - start_time - position)
 
