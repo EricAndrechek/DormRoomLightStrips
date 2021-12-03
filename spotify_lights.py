@@ -2,6 +2,12 @@ from time import time
 import leds
 import time
 from spotify import get_audio_analysis, get_playback_position
+import spotify
+import image_color_helper
+import numpy as np
+from io import BytesIO
+import urllib.request
+from PIL import Image
 from cmath import sin, cos, phase, pi
 
 
@@ -41,13 +47,13 @@ def get_beats_info():
     return beats
 
 
-def wave(lights, beat, start_time, min_loudness, max_loudness):
+def wave(lights, beat, start_time, min_loudness, max_loudness, hue_shift):
     print(beat)
     loudness = (beat["loudness"] - min_loudness) / \
         (max_loudness - min_loudness)
     distance = int(loudness * 30)
     duration = beat["duration"]
-    hsv = (beat["pitch"], 0.99, 0.99)
+    hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
     for i in range(0, distance):
         lights.ceiling_set_pixel(i, hsv, "r")
         lights.ceiling_set_pixel(i, hsv, "l")
@@ -63,25 +69,52 @@ def wave(lights, beat, start_time, min_loudness, max_loudness):
         lights.ceiling_set_pixel(i, (0, 0, 0), "l")
         lights.update()
         time.sleep(duration / 3 / distance)
+    while time.time() <= start_time + duration - 0.005:
+        continue
     return duration
 
 
 def main(lights):
-    min_loudness = 0
-    max_loudness = 0
-    beats = get_beats_info()
-    print(beats)
+    last_hsv = (0, 0, 0)
+    last_url = ""
+    while True:
+        url = ""
+        album_hue = 0
+        if spotify.is_playing():
+            url = spotify.get_album_image()
+            if url is not None and url != "" and url != last_url:
+                last_url = url
+                print(url)
+                image_bytes = BytesIO(urllib.request.urlopen(url).read())
+                image = np.array(Image.open(image_bytes))
+                helper = image_color_helper.SpotifyBackgroundColor(
+                    image, image_processing_size=(100, 100))
+                new_color = helper.best_color()
+                hsv = lights.rgb_to_hsv(new_color)
+                album_hue = hsv[0]
 
-    for beat in beats:
-        if beat["loudness"] < min_loudness:
-            min_loudness = beat["loudness"]
-        if beat["loudness"] > max_loudness:
-            max_loudness = beat["loudness"]
-    spotify_time = get_playback_position() + 0.5
-    for beat in beats:
-        if beat["start"] < spotify_time:
-            continue
-        wave(lights, beat, time.time(), min_loudness, max_loudness)
+            min_loudness = 0
+            max_loudness = 0
+            hues = []
+            beats = get_beats_info()
+            print(beats)
+
+            for beat in beats:
+                if beat["loudness"] < min_loudness:
+                    min_loudness = beat["loudness"]
+                if beat["loudness"] > max_loudness:
+                    max_loudness = beat["loudness"]
+                hues.append(beat["pitch"])
+            avg_hue = circular_average(hues)
+            hue_shift = album_hue - avg_hue
+            spotify_time = get_playback_position() + 0.5
+            for beat in beats:
+                if beat["start"] < spotify_time:
+                    continue
+                if not spotify.is_playing():
+                    break
+                wave(lights, beat, time.time(),
+                     min_loudness, max_loudness, hue_shift)
 
 
 if __name__ == '__main__':
