@@ -109,6 +109,8 @@ def main(lights):
             start_time = time.time() - get_playback_position() - 1.5
             index = 0
             for beat in beats:
+                while time.time() < start_time + beat["start"]:
+                    continue
                 beat_speed = "normal"
                 if time.time() - start_time - beat["start"] > 0.5:
                     print("skip")
@@ -126,6 +128,8 @@ def main(lights):
                         break
                 duration = start_time + \
                     beat["start"] + beat["duration"] - time.time()
+                if duration > beat["duration"]:
+                    duration = beat["duration"]
                 print(duration)
                 if duration > 0:
                     wave(lights, beat, start_time, duration,
