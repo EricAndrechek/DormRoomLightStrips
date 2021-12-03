@@ -56,7 +56,7 @@ def wave(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shi
         lights.ceiling_set_pixel(i, hsv, "r")
         lights.ceiling_set_pixel(i, hsv, "l")
         lights.update()
-        time.sleep(duration / 4 / distance)
+        time.sleep(duration / 8 / distance)
     for i in range(distance - 1, -1, -1):
         if time.time() > start_time + beat["duration"]:
             lights.ceiling_region_fill(0, 87, (0, 0, 0))
@@ -65,7 +65,7 @@ def wave(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shi
         lights.ceiling_set_pixel(i, (0, 0, 0), "r")
         lights.ceiling_set_pixel(i, (0, 0, 0), "l")
         lights.update()
-        time.sleep(duration / 2 / distance)
+        time.sleep(duration / 3 / distance)
 
 
 def main(lights):
@@ -113,6 +113,7 @@ def main(lights):
                 if time.time() - start_time - beat["start"] > 0.5:
                     print("skip")
                     continue
+                print(beat)
                 if index % 10 == 0:
                     stopped = False
                     while not spotify.is_playing():
