@@ -1,10 +1,20 @@
-import leds
 import time
+import leds
+import os
+import sys
 
-lights = leds.light_strip()
+p = os.path.abspath('.')
+sys.path.insert(1, p)
 
-for i in range(50):
-    lights.off()
-    time.sleep(0.12)
-    lights.on()
-    time.sleep(0.01)
+
+def main(lights):
+    while True:
+        lights.off()
+        time.sleep(0.12)
+        lights.on()
+        time.sleep(0.005)
+
+
+if __name__ == '__main__':
+    lights = leds.light_strip()
+    main(lights)

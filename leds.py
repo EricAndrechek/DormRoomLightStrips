@@ -126,24 +126,24 @@ class light_strip:
     def correct_color(self, hsv):
         red = 0
         yellow = 0.04
-        green = 1/3
+        green = 1 / 3
         cyan = 0.5
-        blue = 2/3
+        blue = 2 / 3
         magenta = 0.96
 
         hue = hsv[0] % 1
-        if (hue < 1/6):
+        if (hue < 1 / 6):
             hue = hue * 6 * (yellow - red) + red
-        elif (hue >= 1/6 and hue < 1/3):
-            hue = (hue - 1/6) * 6 * (green - yellow) + yellow
-        elif (hue >= 1/3 and hue < 1/2):
-            hue = (hue - 1/3) * 6 * (cyan - green) + green
-        elif (hue >= 1/2 and hue < 2/3):
-            hue = (hue - 1/2) * 6 * (blue - cyan) + cyan
-        elif (hue >= 2/3 and hue < 5/6):
-            hue = (hue - 2/3) * 6 * (magenta - blue) + blue
+        elif (hue >= 1 / 6 and hue < 1 / 3):
+            hue = (hue - 1 / 6) * 6 * (green - yellow) + yellow
+        elif (hue >= 1 / 3 and hue < 1 / 2):
+            hue = (hue - 1 / 3) * 6 * (cyan - green) + green
+        elif (hue >= 1 / 2 and hue < 2 / 3):
+            hue = (hue - 1 / 2) * 6 * (blue - cyan) + cyan
+        elif (hue >= 2 / 3 and hue < 5 / 6):
+            hue = (hue - 2 / 3) * 6 * (magenta - blue) + blue
         else:
-            hue = (hue - 5/6) * 6 * (1 - magenta) + magenta
+            hue = (hue - 5 / 6) * 6 * (1 - magenta) + magenta
         return (hue, hsv[1] ** 0.2, hsv[2])
 
     def hsv_to_gbr(self, hsv):
@@ -155,7 +155,7 @@ class light_strip:
         r = int(hex[0:2], 16)
         g = int(hex[2:4], 16)
         b = int(hex[4:6], 16)
-        hsv = colorsys.rgb_to_hsv(r/256, g/256, b/256)
+        hsv = colorsys.rgb_to_hsv(r / 256, g / 256, b / 256)
         return hsv
 
     def hsv_to_hex(self, hsv):
@@ -167,21 +167,21 @@ class light_strip:
 
     def update(self):
         self.pixels.show()
-    
+
     def homebridge_push(self, region, status):
         requests.post(self.homebridge_url + region, json={
             "characteristic": "On",
             "value": status,
             "accessory": "HttpPushRgb",
             "service": "Light"
-            })
+        })
 
     def all_off(self):
         self.region_fill(0, 118, (0, 0, 0))
         self.update()
 
     def set_pixel(self, pixel, hsv):
-        self.pixels[pixel] = self.hsv_to_gbr(hsv)
+        self.pixels[pixel] = self.hsv_to_gbr(self.correct_color(hsv))
 
     def ceiling_set_pixel(self, pixel, hsv, direction="r"):
         if (direction == "r"):
@@ -259,7 +259,7 @@ class light_strip:
                     print("Index Error: Skipped pixel at index " + str(i))
                 except TypeError:
                     print("Type Error: Skipped pixel at index " + str(i))
-            self.set_pixel(117, hsv)
+            self.pixels[117] = self.hsv_to_gbr(hsv)
 
     def ceiling_region_fill(self, start, end, hsv, direction="r"):
         if (direction == "r"):
@@ -296,8 +296,7 @@ class light_strip:
 
     def set_brightness(self, region, brightness):
         brightness = int(brightness)
-        if brightness > 1:
-            brightness = brightness / 100
+        brightness = brightness / 100
         if (brightness == 1):
             brightness = 0.99
         hsv = (self.states[region]["hsv"][0],
