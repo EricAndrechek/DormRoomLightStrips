@@ -60,7 +60,7 @@ def wave(lights, beat, start_time, min_loudness, max_loudness, hue_shift):
         lights.update()
         time.sleep(duration / 15 / distance)
     for i in range(distance - 1, -1, -1):
-        if time.time() > start_time + duration - 0.005:
+        if time.time() > start_time + duration - 0.04:
             lights.ceiling_region_fill(0, 87, (0, 0, 0))
             lights.update()
             break
@@ -109,6 +109,7 @@ def main(lights):
             else:
                 hue_shift = 0
             start_time = time.time() - get_playback_position() - 0.5
+            index = 0
             for beat in beats:
                 if time.time() - start_time > beat["start"]:
                     print("skip")
@@ -116,17 +117,20 @@ def main(lights):
                 if time.time() - start_time + 0.5 < beat["start"]:
                     time.sleep(beat["start"] + start_time - time.time() - 0.1)
 
-                """ spotify_time = get_playback_position()
-                if (beat["start"]) > spotify_time:
-                    time.sleep(beat["start"] - spotify_time)
-
-                while not spotify.is_playing():
-                    time.sleep(0.5)
-                if spotify.get_audio_features()[0]["id"] != track:
-                    break """
+                if index % 10 == 0:
+                    stoppped = False
+                    while not spotify.is_playing():
+                        time.sleep(0.5)
+                        stopped = True
+                    if stopped:
+                        start_time = time.time() - get_playback_position() - 0.5
+                if index % 10 == 5:    
+                    if spotify.get_audio_features()[0]["id"] != track:
+                        break
 
                 wave(lights, beat, time.time(),
                      min_loudness, max_loudness, hue_shift)
+                index = index + 1
 
 
 if __name__ == '__main__':
