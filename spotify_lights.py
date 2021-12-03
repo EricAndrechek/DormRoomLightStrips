@@ -58,7 +58,7 @@ def wave(lights, beat, start_time, min_loudness, max_loudness, hue_shift):
         lights.ceiling_set_pixel(i, hsv, "r")
         lights.ceiling_set_pixel(i, hsv, "l")
         lights.update()
-        time.sleep(duration / 8 / distance)
+        time.sleep(duration / 15 / distance)
     for i in range(distance - 1, -1, -1):
         if time.time() > start_time + duration - 0.005:
             lights.ceiling_region_fill(0, 87, (0, 0, 0))
@@ -67,8 +67,7 @@ def wave(lights, beat, start_time, min_loudness, max_loudness, hue_shift):
         lights.ceiling_set_pixel(i, (0, 0, 0), "r")
         lights.ceiling_set_pixel(i, (0, 0, 0), "l")
         lights.update()
-        time.sleep(duration / 2 / distance)
-    return duration
+        time.sleep(duration / 3 / distance)
 
 
 def main(lights):
