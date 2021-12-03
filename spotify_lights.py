@@ -81,8 +81,8 @@ def main(lights):
     for beat in beats:
         if beat["start"] < spotify_time:
             continue
-        if beat["start"] < get_playback_position():
-            time.sleep(0.2)
+        if beat["start"] > get_playback_position() + 1:
+            time.sleep(0.5)
         wave(lights, beat, time.time(), min_loudness, max_loudness)
 
 
