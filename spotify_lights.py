@@ -118,13 +118,13 @@ def main(lights):
                     time.sleep(beat["start"] + start_time - time.time() - 0.1)
 
                 if index % 10 == 0:
-                    stoppped = False
+                    stopped = False
                     while not spotify.is_playing():
                         time.sleep(0.5)
                         stopped = True
                     if stopped:
                         start_time = time.time() - get_playback_position() - 0.5
-                if index % 10 == 5:    
+                if index % 10 == 5:
                     if spotify.get_audio_features()[0]["id"] != track:
                         break
 
