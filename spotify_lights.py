@@ -112,7 +112,7 @@ def main(lights):
                     position = position + beat["duration"]
                     continue
 
-                if (beat[])
+                # if (beat[])
 
                 while not spotify.is_playing():
                     time.sleep(0.5)
