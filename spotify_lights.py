@@ -100,7 +100,7 @@ def wave2(lights, beat, start_time, duration, min_loudness, max_loudness, hue_sh
         lights.update()
         time.sleep(duration / 30)
     active_beats.append([0, hsv, length, 0])
-    for i in range(0, 9):
+    for i in range(0, 5):
         update_active_beats()
         lights.update()
         time.sleep(duration / 30)
