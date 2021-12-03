@@ -20,6 +20,7 @@ def main(lights):
                 image_bytes = BytesIO(urllib.request.urlopen(url).read())
                 image = np.array(Image.open(image_bytes))
                 helper = image_color_helper.SpotifyBackgroundColor(image)
+                print(helper)
                 hsv = lights.rgb_to_hsv(helper.best_color())
                 lights.region_fill(0, 87, hsv)
                 lights.update()
