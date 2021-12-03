@@ -1,3 +1,6 @@
+from time import time
+import leds
+import time
 from spotify import get_audio_analysis
 from cmath import sin, cos, phase, pi
 
@@ -21,24 +24,57 @@ def get_beats_info():
         loudnesses = []
         pitches = []
         segments_count = 0
-
-        if spot < spot_length:
-            while segments[spot]["start"] < beat["start"] + beat["duration"]:
-                loudnesses.append(segments[spot]["loudness_max"])
-                for pitch in segments[spot]["pitches"]:
-                    pitches.append(pitch)
-                segments_count = 0
-                spot = spot + 1
-            loudness_avg = 0
-            if segments_count > 0:
-                for l in loudnesses:
-                    loudness_avg = loudness_avg + l / segments_count
-                loudness = loudness_avg
-                pitch = circular_average(pitches)
+        while spot < spot_length and segments[spot]["start"] < beat["start"] + beat["duration"]:
+            loudnesses.append(segments[spot]["loudness_max"])
+            for pitch in segments[spot]["pitches"]:
+                pitches.append(pitch)
+            segments_count = segments_count + 1
+            spot = spot + 1
+        loudness_avg = 0
+        if segments_count > 0:
+            for l in loudnesses:
+                loudness_avg = loudness_avg + l / segments_count
+            loudness = loudness_avg
+            pitch = circular_average(pitches)
         beat["loudness"] = loudness
         beat["pitch"] = pitch
     return beats
 
 
+def wave(lights, beat, start_time, min_loudness, max_loudness):
+    loudness = (beat["loudness"] - min_loudness) / \
+        (max_loudness - min_loudness)
+    distance = loudness * 44
+    duration = beat["duration"]
+    hsv = (beat["pitch"], 0.99, 0.99)
+    for i in range(0, distance):
+        lights.ceiling_set_pixel(i, hsv, "r")
+        lights.ceiling_set_pixel(i, hsv, "l")
+        time.sleep(duration / 3 / distance)
+    for i in range(distance - 1, -1, -1):
+        if time.time > start_time + duration:
+            break
+        lights.ceiling_set_pixel(i, (0, 0, 0), "r")
+        lights.ceiling_set_pixel(i, (0, 0, 0), "l")
+        time.sleep(2 * duration / 3 / distance)
+    return duration
+
+
+def main(lights):
+    start_time = time.time
+    min_loudness = 0
+    max_loudness = 0
+    beats = get_beats_info()
+    for beat in beats:
+        if beat["loudness"] < min_loudness:
+            min_loudness = beat["loudness"]
+        if beat["loudness"] > max_loudness:
+            max_loudness = beat["loudness"]
+    for beat in beats:
+        wave(lights, beat, start_time, min_loudness, max_loudness)
+        start_time = start_time + beat["duration"]
+
+
 if __name__ == '__main__':
-    print(get_beats_info())
+    lights = leds.light_strip()
+    main(lights)
