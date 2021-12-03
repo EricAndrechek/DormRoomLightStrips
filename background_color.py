@@ -23,7 +23,7 @@ def main(lights):
                 helper = image_color_helper.SpotifyBackgroundColor(image,  image_processing_size=(100,100))
                 new_color = helper.best_color()
                 hsv = lights.rgb_to_hsv(new_color)
-                lights.smooth_transition(0, 87, last_hsv, hsv, 1)
+                lights.smooth_transition(0, 87, last_hsv, hsv, 0.3)
                 last_hsv = hsv
         time.sleep(2)
 
