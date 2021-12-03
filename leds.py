@@ -299,7 +299,7 @@ class light_strip:
         b_step = (new_rgb[2] - old_rgb[2]) / transition_time / 1000
 
         rgb = old_rgb
-        for i in range(0, transition_time * 1000):
+        for i in range(0, int(transition_time * 1000)):
             rgb = (rgb[0] + r_step, rgb[1] + g_step, rgb[2] + b_step)
             hsv = colorsys.rgb_to_hsv(rgb[0], rgb[1], rgb[2])
             self.ceiling_region_fill(start, end, hsv)
