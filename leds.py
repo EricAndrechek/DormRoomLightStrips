@@ -304,7 +304,6 @@ class light_strip:
             hsv = colorsys.rgb_to_hsv(rgb[0], rgb[1], rgb[2])
             self.ceiling_region_fill(start, end, hsv)
             self.update()
-            time.sleep(0.001)
 
     def status(self, region):
         return self.states[region]["state"]
