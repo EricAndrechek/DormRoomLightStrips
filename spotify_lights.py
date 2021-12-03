@@ -47,7 +47,7 @@ def get_beats_info():
     return beats
 
 
-def wave(lights, beat, start_time, min_loudness, max_loudness, hue_shift):
+def wave(lights, beat, start_time, min_loudness, max_loudness, hue_shift, slow):
     print(beat)
     loudness = (beat["loudness"] - min_loudness) / \
         (max_loudness - min_loudness)
@@ -60,7 +60,7 @@ def wave(lights, beat, start_time, min_loudness, max_loudness, hue_shift):
         lights.update()
         time.sleep(duration / 15 / distance)
     for i in range(distance - 1, -1, -1):
-        if time.time() > start_time + duration - 0.1:
+        if time.time() > start_time + duration - 0.1 and not slow:
             lights.ceiling_region_fill(0, 87, (0, 0, 0))
             lights.update()
             break
@@ -92,6 +92,10 @@ def main(lights):
                     album_hue = hsv[0]
 
             track = spotify.get_audio_features()[0]["id"]
+            tempo = spotify.get_audio_features()[0]["tempo"]
+            slow = False
+            if tempo > 155:
+                slow = True
             min_loudness = 0
             max_loudness = 0
             hues = []
@@ -127,9 +131,9 @@ def main(lights):
                 if index % 10 == 5:
                     if spotify.get_audio_features()[0]["id"] != track:
                         break
-
-                wave(lights, beat, time.time(),
-                     min_loudness, max_loudness, hue_shift)
+                if not slow:
+                    wave(lights, beat, time.time(), min_loudness,
+                         max_loudness, hue_shift, slow)
                 index = index + 1
 
 
