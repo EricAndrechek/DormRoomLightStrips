@@ -67,20 +67,21 @@ def wave(lights, beat, start_time, min_loudness, max_loudness):
 
 
 def main(lights):
-    start_time = time.time()
     min_loudness = 0
     max_loudness = 0
     beats = get_beats_info()
     print(beats)
+
     for beat in beats:
         if beat["loudness"] < min_loudness:
             min_loudness = beat["loudness"]
         if beat["loudness"] > max_loudness:
             max_loudness = beat["loudness"]
-
+    spotify_time = get_playback_position()
     for beat in beats:
-        wave(lights, beat, start_time, min_loudness, max_loudness)
-        start_time = start_time + beat["duration"]
+        if beat["start"] < spotify_time:
+            continue
+        wave(lights, beat, time.time(), min_loudness, max_loudness)
 
 
 if __name__ == '__main__':
