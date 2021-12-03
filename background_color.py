@@ -9,6 +9,7 @@ import time
 
 
 def main(lights):
+    last_hsv = (0,0,0)
     last_url = ""
     while True:
         url = ""
@@ -22,9 +23,9 @@ def main(lights):
                 helper = image_color_helper.SpotifyBackgroundColor(image,  image_processing_size=(100,100))
                 new_color = helper.best_color()
                 hsv = lights.rgb_to_hsv(new_color)
-                print(hsv)
-                lights.ceiling_region_fill(0, 87, hsv)
+                lights.smooth_transition(0, 87, last_hsv, hsv, 1)
                 lights.update()
+                last_hsv = hsv
         time.sleep(2)
 
 
