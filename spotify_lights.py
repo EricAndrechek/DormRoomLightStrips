@@ -111,6 +111,7 @@ def main(lights):
             start_time = time.time() - get_playback_position() - 0.5
             for beat in beats:
                 if time.time() - start_time > beat["start"]:
+                    print("skip")
                     continue
                 if time.time() - start_time < beat["start"]:
                     time.sleep(beat["start"] + start_time - time.time())
