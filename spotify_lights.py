@@ -126,7 +126,7 @@ def main(lights):
                 duration = start_time + \
                     beat["start"] + beat["duration"] - time.time()
                 wave(lights, beat, duration, min_loudness,
-                     max_loudness, hue_shift, "normal")
+                     max_loudness, hue_shift)
                 index = index + 1
 
 
