@@ -1,7 +1,7 @@
 from time import time
 import leds
 import time
-from spotify import get_audio_analysis
+from spotify import get_audio_analysis, get_playback_position
 from cmath import sin, cos, phase, pi
 
 
@@ -56,7 +56,7 @@ def wave(lights, beat, start_time, min_loudness, max_loudness):
     for i in range(distance - 1, -1, -1):
         if time.time() > start_time + duration:
             print("fail")
-            lights.ceiling_region_fill(0, 87, (0, 0, 0))
+            lights.ceiling_region_fill(3, 84, (0, 0, 0))
             lights.update()
             break
         lights.ceiling_set_pixel(i, (0, 0, 0), "r")
@@ -77,6 +77,7 @@ def main(lights):
             min_loudness = beat["loudness"]
         if beat["loudness"] > max_loudness:
             max_loudness = beat["loudness"]
+
     for beat in beats:
         wave(lights, beat, start_time, min_loudness, max_loudness)
         start_time = start_time + beat["duration"]
