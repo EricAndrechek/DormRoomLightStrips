@@ -130,6 +130,7 @@ def main(lights):
                     beat["start"] + beat["duration"] - time.time()
                 if duration > beat["duration"]:
                     duration = beat["duration"]
+                print(time.time() - start_time - beat["start"])
                 print(duration)
                 if duration > 0:
                     wave(lights, beat, start_time, duration,
