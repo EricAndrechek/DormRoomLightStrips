@@ -69,8 +69,6 @@ def wave(lights, beat, start_time, min_loudness, max_loudness, hue_shift):
         lights.ceiling_set_pixel(i, (0, 0, 0), "l")
         lights.update()
         time.sleep(duration / 2 / distance)
-    while time.time() <= start_time + duration - 0.005:
-        continue
     return duration
 
 
@@ -113,6 +111,8 @@ def main(lights):
                 if beat["start"] < spotify_time:
                     position = position + beat["duration"]
                     continue
+
+                if (beat[])
 
                 while not spotify.is_playing():
                     time.sleep(0.5)
