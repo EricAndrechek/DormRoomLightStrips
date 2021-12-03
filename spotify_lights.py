@@ -58,17 +58,17 @@ def wave(lights, beat, start_time, min_loudness, max_loudness, hue_shift):
         lights.ceiling_set_pixel(i, hsv, "r")
         lights.ceiling_set_pixel(i, hsv, "l")
         lights.update()
-        time.sleep(duration / 10 / distance)
+        time.sleep(duration / 8 / distance)
     for i in range(distance - 1, -1, -1):
         if time.time() > start_time + duration - 0.005:
             print("fail")
-            lights.ceiling_region_fill(3, 84, (0, 0, 0))
+            lights.ceiling_region_fill(0, 87, (0, 0, 0))
             lights.update()
             break
         lights.ceiling_set_pixel(i, (0, 0, 0), "r")
         lights.ceiling_set_pixel(i, (0, 0, 0), "l")
         lights.update()
-        time.sleep(duration / 3 / distance)
+        time.sleep(duration / 2 / distance)
     while time.time() <= start_time + duration - 0.005:
         continue
     return duration
@@ -93,11 +93,11 @@ def main(lights):
                 hsv = lights.rgb_to_hsv(new_color)
                 album_hue = hsv[0]
 
+            track = spotify.get_audio_features()["id"]
             min_loudness = 0
             max_loudness = 0
             hues = []
             beats = get_beats_info()
-            print(beats)
 
             for beat in beats:
                 if beat["loudness"] < min_loudness:
@@ -108,13 +108,23 @@ def main(lights):
             avg_hue = circular_average(hues)
             hue_shift = album_hue - avg_hue
             spotify_time = get_playback_position() + 0.5
+            position = 0
             for beat in beats:
-                if beat["start"] < spotify_time:\
+                if beat["start"] < spotify_time:
+                    position = position + beat["duration"]
                     continue
-                if not spotify.is_playing():
+
+                stop = False
+                while not spotify.is_playing():
+                    time.sleep(0.5)
+                    if spotify.get_audio_features()["id"] != track:
+                        stop = True
+                if stop:
                     break
+
                 wave(lights, beat, time.time(),
                      min_loudness, max_loudness, hue_shift)
+                position = position + beat["duration"]
 
 
 if __name__ == '__main__':
