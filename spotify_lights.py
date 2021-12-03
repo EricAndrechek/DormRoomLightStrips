@@ -90,7 +90,8 @@ def update_active_beats():
 def wave2(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
     loudness = (beat["loudness"] - min_loudness) / \
         (max_loudness - min_loudness)
-    loudness = 1 / (1 + (loudness / (1 - loudness))**(-3))
+    if loudness != max_loudness:
+        loudness = 1 / (1 + (loudness / (1 - loudness))**(-3))
     length = 1 + int(loudness * 7)
     hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
     for i in range(0, length + 1):
