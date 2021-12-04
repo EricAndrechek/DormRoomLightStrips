@@ -43,7 +43,7 @@ def get_playback_position():
     current_track, sp = main()
     if current_track is not None:
         position = current_track['progress_ms']
-        return position
+        return position / 1000
     else:
         return False
 
