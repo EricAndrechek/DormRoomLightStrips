@@ -172,7 +172,7 @@ def main(lights):
                 print(time.time() - start_time - beat["start"])
                 print(duration)
                 if duration > 0:
-                    wave2(lights, beat, start_time, duration,
+                    wave1(lights, beat, start_time, duration,
                           min_loudness, max_loudness, hue_shift)
                 else:
                     print("skip")
