@@ -11,9 +11,9 @@ def main(lights):
         while True:
             for j in range(0, 87):
                 if j % 8 <= 3:
-                    lights.ceiling_set_pixel(i, blue)
+                    lights.ceiling_set_pixel(i + j, blue)
                 else:
-                    lights.ceiling_set_pixel(i, maize)
+                    lights.ceiling_set_pixel(i + j, maize)
             lights.update()
             time.sleep(0.1)
             i = i + 1
