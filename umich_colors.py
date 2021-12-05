@@ -16,6 +16,7 @@ def main(lights):
                     lights.ceiling_set_pixel(i, maize)
             lights.update()
             time.sleep(0.1)
+            i = i + 1
 
 
 if __name__ == '__main__':
