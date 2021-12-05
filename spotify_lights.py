@@ -177,7 +177,8 @@ def main(lights):
                 else:
                     print("skip")
                 index = index + 1
-        time.sleep(2)
+        while(spotify.get_audio_features()[0]["id"] == track):
+            continue
 
 
 if __name__ == '__main__':
