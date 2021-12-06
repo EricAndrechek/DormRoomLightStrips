@@ -130,7 +130,6 @@ def pattern3(lights, beat, start_time, duration, min_loudness, max_loudness, hue
         center = random.randrange((prev_end) % 87, prev_start + 1)
     else:
         center = random.randrange(prev_end, prev_start % 87 + 1)
-    lights.ceiling_region_fill(0, 87, (0, 0, 0))
     for i in range(0, length + 1):
         lights.ceiling_set_pixel(center + i, hsv)
         lights.ceiling_set_pixel(center - i, hsv)
@@ -144,7 +143,6 @@ def pattern3(lights, beat, start_time, duration, min_loudness, max_loudness, hue
                                        prev_beat[1] + i + 1, (prev_beat[2][0], prev_beat[2][1], 1 - i * 0.2))
         lights.update()
         time.sleep(duration / 15)
-
     prev_beat = (center, length, hsv)
 
 
