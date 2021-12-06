@@ -108,22 +108,25 @@ def pattern2(lights, beat, start_time, duration, min_loudness, max_loudness, hue
         time.sleep((i + 1) * duration / 30)
 
 
+center3 = 0
+
+
 def pattern3(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
     loudness = (beat["loudness"] - min_loudness) / \
         (max_loudness - min_loudness)
     if loudness != max_loudness:
         loudness = loudness ** 2
     hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
-    center = int(randrange(0, 87))
+    center3 = (center3 + int(randrange(22, 66))) % 87
     lights.ceiling_region_fill(0, 87, (0, 0, 0))
     for i in range(0, 1 + int(loudness * 2)):
-        lights.ceiling_set_pixel(center + i, hsv)
-        lights.ceiling_set_pixel(center - i, hsv)
+        lights.ceiling_set_pixel(center3 + i, hsv)
+        lights.ceiling_set_pixel(center3 - i, hsv)
         lights.update()
         time.sleep(duration / 30)
     for i in range(1, 1 + int(loudness * 2)):
-        lights.ceiling_region_fill(center - int(4 + loudness * 2) - i, center + int(
-            4 + loudness * 2) + i + 1, (hsv[0], hsv[1], 1 - i / (loudness * 2 + 1)))
+        lights.ceiling_region_fill(center3 - int(4 + loudness * 2) - i, center3 + int(
+            4 + loudness * 2) + i + 1, (hsv[0], hsv[1], 1 - i / int(loudness * 2 + 1)))
         lights.update()
         time.sleep(duration / 30)
 
