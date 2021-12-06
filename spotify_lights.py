@@ -128,7 +128,7 @@ def pattern3(lights, beat, start_time, duration, min_loudness, max_loudness, hue
 
         if beat["start"] != 0:
             lights.ceiling_region_fill(prev_beat[0] - prev_beat[1] - i, prev_beat[0] + prev_beat[1] +
-                                       i + 1, (prev_beat[2][0], prev_beat[2][1], (1 - i / length) ** 2))
+                                       i + 1, (prev_beat[2][0], prev_beat[2][1], (1 - i / length)))
 
         lights.update()
         time.sleep(duration / 10)
