@@ -207,7 +207,7 @@ def main(lights):
                     print(duration)
                     if duration > 0:
                         light_pattern(lights, beat, start_time, duration,
-                                      min_loudness, max_loudness, hue_shift, str(pattern))
+                                      min_loudness, max_loudness, hue_shift, int(pattern))
                     else:
                         print("skip")
                     index = index + 1
