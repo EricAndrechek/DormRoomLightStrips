@@ -170,7 +170,7 @@ def main(lights):
                 url = spotify.get_album_image()
                 if url is not None and url != "" and url != last_url:
                     last_url = url
-                    print(url)
+                    # print(url)
                     image_bytes = BytesIO(
                         urllib.request.urlopen(url).read())
                     image = np.array(Image.open(image_bytes))
