@@ -124,12 +124,12 @@ def pattern3(lights, beat, start_time, duration, min_loudness, max_loudness, hue
         lights.ceiling_set_pixel(center3 + i, hsv)
         lights.ceiling_set_pixel(center3 - i, hsv)
         lights.update()
-        time.sleep(duration / 15)
+        time.sleep(duration / 10)
     for i in range(1, 3 + int(loudness * 2)):
         lights.ceiling_region_fill(center3 - int(1 + loudness * 2) - i, center3 + int(
             1 + loudness * 2) + i + 1, (hsv[0], hsv[1], 1 - i / int(2 + loudness * 2)))
         lights.update()
-        time.sleep(duration / 15)
+        time.sleep(duration / 10)
 
 
 def light_pattern(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift, pattern):
