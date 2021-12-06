@@ -9,6 +9,7 @@ from io import BytesIO
 import urllib.request
 from PIL import Image
 from cmath import sin, cos, phase, pi
+from random import randrange
 
 
 def circular_average(inputs):
@@ -47,7 +48,7 @@ def get_beats_info():
     return beats
 
 
-def wave1(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
+def pattern1(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
     loudness = (beat["loudness"] - min_loudness) / \
         (max_loudness - min_loudness)
     distance = int(loudness * 30)
@@ -87,12 +88,11 @@ def update_active_beats():
             lights.ceiling_set_pixel(b[3] + b[2], b[1], "l")
 
 
-def wave2(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
+def pattern2(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
     loudness = (beat["loudness"] - min_loudness) / \
         (max_loudness - min_loudness)
     if loudness != max_loudness:
         loudness = loudness ** 2
-    print("Loudness: " + str(loudness))
     length = 1 + int(loudness * 7)
     hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
     for i in range(0, length + 1):
@@ -108,9 +108,41 @@ def wave2(lights, beat, start_time, duration, min_loudness, max_loudness, hue_sh
         time.sleep((i + 1) * duration / 30)
 
 
+def pattern3(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
+    loudness = (beat["loudness"] - min_loudness) / \
+        (max_loudness - min_loudness)
+    if loudness != max_loudness:
+        loudness = loudness ** 2
+    hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
+    center = int(randrange(0, 87))
+    for i in range(0, 4 + loudness * 2):
+        lights.ceiling_set_pixel(center + i, hsv)
+        lights.ceiling_set_pixel(center - i, hsv)
+        lights.update()
+        time.sleep(duration / 30)
+    for i in range(1, 6):
+        lights.ceiling_region_fill(center - (4 + loudness * 2) - i, center + (
+            4 + loudness * 2) + i + 1, (hsv[0], hsv[1], hsv[1 - 0.2 * i]))
+        lights.update()
+        time.sleep(duration / 30)
+
+
+def light_pattern(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift, pattern):
+    if pattern == 1:
+        pattern1(lights, beat, start_time, duration,
+                 min_loudness, max_loudness, hue_shift)
+    elif pattern == 2:
+        pattern2(lights, beat, start_time, duration,
+                 min_loudness, max_loudness, hue_shift)
+    elif pattern == 3:
+        pattern3(lights, beat, start_time, duration,
+                 min_loudness, max_loudness, hue_shift)
+
+
 def main(lights):
     adjust_hue = True
     last_url = ""
+    pattern = input("Pattern: ")
     while True:
         try:
             url = ""
@@ -173,8 +205,8 @@ def main(lights):
                     print(time.time() - start_time - beat["start"])
                     print(duration)
                     if duration > 0:
-                        wave2(lights, beat, start_time, duration,
-                              min_loudness, max_loudness, hue_shift)
+                        light_pattern(lights, beat, start_time, duration,
+                                      min_loudness, max_loudness, hue_shift, pattern)
                     else:
                         print("skip")
                     index = index + 1
