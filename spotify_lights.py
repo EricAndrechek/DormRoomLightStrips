@@ -122,8 +122,8 @@ def pattern3(lights, beat, start_time, duration, min_loudness, max_loudness, hue
     if beat["start"] == 0:
         center = random.randrange(0, 87)
     else:
-        center = random.choice(range(0, prev_beat[0] + prev_beat[1] + length + 1) + range(
-            87 - prev_beat[0] - prev_beat[1] - length + 1, 87))
+        center = random.choice(list(range(0, prev_beat[0] + prev_beat[1] + length + 1)) + list(range(
+            87 - prev_beat[0] - prev_beat[1] - length + 1, 87)))
     lights.ceiling_region_fill(0, 87, (0, 0, 0))
     for i in range(0, length + 1):
         lights.ceiling_set_pixel(center + i, hsv)
