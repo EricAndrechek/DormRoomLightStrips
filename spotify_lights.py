@@ -152,79 +152,75 @@ def main(lights):
     last_url = ""
     pattern = input("Pattern: ")
     while True:
-        try:
-            url = ""
-            album_hue = 0
-            if spotify.is_playing():
-                if adjust_hue:
-                    url = spotify.get_album_image()
-                    if url is not None and url != "" and url != last_url:
-                        last_url = url
-                        print(url)
-                        image_bytes = BytesIO(
-                            urllib.request.urlopen(url).read())
-                        image = np.array(Image.open(image_bytes))
-                        helper = image_color_helper.SpotifyBackgroundColor(
-                            image, image_processing_size=(100, 100))
-                        new_color = helper.best_color()
-                        hsv = lights.rgb_to_hsv(new_color)
-                        album_hue = hsv[0]
+        url = ""
+        album_hue = 0
+        if spotify.is_playing():
+            if adjust_hue:
+                url = spotify.get_album_image()
+                if url is not None and url != "" and url != last_url:
+                    last_url = url
+                    print(url)
+                    image_bytes = BytesIO(
+                        urllib.request.urlopen(url).read())
+                    image = np.array(Image.open(image_bytes))
+                    helper = image_color_helper.SpotifyBackgroundColor(
+                        image, image_processing_size=(100, 100))
+                    new_color = helper.best_color()
+                    hsv = lights.rgb_to_hsv(new_color)
+                    album_hue = hsv[0]
 
-                track = spotify.get_audio_features()[0]["id"]
-                min_loudness = 0
-                max_loudness = 0
-                hues = []
-                beats = get_beats_info()
-                print(beats)
-                for beat in beats:
-                    if beat["loudness"] < min_loudness:
-                        min_loudness = beat["loudness"]
-                    if beat["loudness"] > max_loudness:
-                        max_loudness = beat["loudness"]
-                    hues.append(beat["pitch"])
-                avg_hue = circular_average(hues)
-                if adjust_hue:
-                    hue_shift = album_hue - avg_hue
+            track = spotify.get_audio_features()[0]["id"]
+            min_loudness = 0
+            max_loudness = 0
+            hues = []
+            beats = get_beats_info()
+            print(beats)
+            for beat in beats:
+                if beat["loudness"] < min_loudness:
+                    min_loudness = beat["loudness"]
+                if beat["loudness"] > max_loudness:
+                    max_loudness = beat["loudness"]
+                hues.append(beat["pitch"])
+            avg_hue = circular_average(hues)
+            if adjust_hue:
+                hue_shift = album_hue - avg_hue
+            else:
+                hue_shift = 0
+            start_time = time.time() - get_playback_position() + 0.3
+            index = 0
+            for beat in beats:
+                while time.time() < start_time + beat["start"]:
+                    continue
+                if time.time() - start_time - beat["start"] > 0.5:
+                    print("skip")
+                    continue
+                print(beat)
+                """ if index % 10 == 0:
+                    stopped = False
+                    while not spotify.is_playing():
+                        time.sleep(0.5)
+                        stopped = True
+                    if stopped:
+                        start_time = time.time() - get_playback_position() + 0.3
+                if index % 10 == 5:
+                    if spotify.get_audio_features()[0]["id"] != track:
+                        break """
+                duration = start_time + \
+                    beat["start"] + beat["duration"] - time.time()
+                if duration > beat["duration"]:
+                    duration = beat["duration"]
+                print(time.time() - start_time - beat["start"])
+                print(duration)
+                if duration > 0:
+                    light_pattern(lights, beat, start_time, duration,
+                                  min_loudness, max_loudness, hue_shift, int(pattern))
                 else:
-                    hue_shift = 0
-                start_time = time.time() - get_playback_position() + 0.3
-                index = 0
-                for beat in beats:
-                    while time.time() < start_time + beat["start"]:
-                        continue
-                    if time.time() - start_time - beat["start"] > 0.5:
-                        print("skip")
-                        continue
-                    print(beat)
-                    """ if index % 10 == 0:
-                        stopped = False
-                        while not spotify.is_playing():
-                            time.sleep(0.5)
-                            stopped = True
-                        if stopped:
-                            start_time = time.time() - get_playback_position() + 0.3
-                    if index % 10 == 5:
-                        if spotify.get_audio_features()[0]["id"] != track:
-                            break """
-                    duration = start_time + \
-                        beat["start"] + beat["duration"] - time.time()
-                    if duration > beat["duration"]:
-                        duration = beat["duration"]
-                    print(time.time() - start_time - beat["start"])
-                    print(duration)
-                    if duration > 0:
-                        light_pattern(lights, beat, start_time, duration,
-                                      min_loudness, max_loudness, hue_shift, int(pattern))
-                    else:
-                        print("skip")
-                    index = index + 1
-            while(spotify.get_audio_features()[0]["id"]):
-                if (spotify.get_playback_position() < time.time() - start_time - 5):
-                    break
-                continue
-        except Exception as e:
-            print(e)
-            time.sleep(1)
+                    print("skip")
+                index = index + 1
+        while(spotify.get_audio_features()[0]["id"]):
+            if (spotify.get_playback_position() < time.time() - start_time - 5):
+                break
+            continue
 
 
 if __name__ == '__main__':
