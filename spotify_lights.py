@@ -112,6 +112,7 @@ center3 = 0
 
 
 def pattern3(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
+    global center3
     loudness = (beat["loudness"] - min_loudness) / \
         (max_loudness - min_loudness)
     if loudness != max_loudness:
