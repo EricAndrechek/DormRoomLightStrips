@@ -142,6 +142,8 @@ def pattern3(lights, beat, start_time, duration, min_loudness, max_loudness, hue
                 prev_beat[0] - 5 + i, prev_beat[0] + 5 - i, (prev_beat[1][0], prev_beat[1][1], 1 - i * 0.2))
         lights.update()
         time.sleep(duration / 10)
+    lights.ceiling_set_pixel(prev_beat[0], (0, 0, 0))
+    lights.update()
     prev_beat = (center, hsv)
 
 
