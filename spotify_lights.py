@@ -134,7 +134,7 @@ def pattern3(lights, beat, start_time, duration, min_loudness, max_loudness, hue
         lights.ceiling_set_pixel(center + i, hsv)
         lights.ceiling_set_pixel(center - i, hsv)
         lights.update()
-        time.sleep(duration / 20)
+        time.sleep(duration / 15 * 4 / length)
     while time.time() < start_time + beat["start"] + beat["duration"] / 2:
         continue
     if beat["start"] != 0:
