@@ -119,8 +119,8 @@ def pattern3(lights, beat, start_time, duration, min_loudness, max_loudness, hue
         loudness = loudness ** 2
     hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
     length = 1 + int(loudness * 5)
-    prev_start = prev_beat[0] - prev_beat[1] - length
-    prev_end = prev_beat[0] + prev_beat[1] + length
+    prev_start = prev_beat[0] - prev_beat[1] - 2 * length
+    prev_end = prev_beat[0] + prev_beat[1] + 2 * length
     if beat["start"] == 0:
         center = random.randrange(0, 87)
     elif prev_start > 0:
