@@ -202,6 +202,9 @@ def light_pattern(lights, beat, start_time, duration, min_loudness, max_loudness
     elif pattern == 3:
         pattern3(lights, beat, start_time, duration,
                  min_loudness, max_loudness, hue_shift)
+    elif pattern == 4:
+        pattern4(lights, beat, start_time, duration,
+                 min_loudness, max_loudness, hue_shift)
 
 
 def main(lights):
