@@ -131,7 +131,7 @@ def pattern3(lights, beat, start_time, duration, min_loudness, max_loudness, hue
         center = random.randrange(prev_end, prev_start % 87 + 1)
     lights.ceiling_set_pixel(center, hsv)
     lights.update()
-    time.sleep(duration / 20)
+    time.sleep(duration / 22)
     for i in range(1, 6):
         lights.ceiling_set_pixel(center + i, hsv)
         lights.ceiling_set_pixel(center - i, hsv)
@@ -141,7 +141,7 @@ def pattern3(lights, beat, start_time, duration, min_loudness, max_loudness, hue
             lights.ceiling_region_fill(
                 prev_beat[0] - 5 + i, prev_beat[0] + 5 - i, (prev_beat[1][0], prev_beat[1][1], 1 - i * 0.2))
         lights.update()
-        time.sleep(duration / 20)
+        time.sleep(duration / 22)
     lights.ceiling_set_pixel(prev_beat[0], (0, 0, 0))
     lights.update()
     prev_beat = (center, hsv)
@@ -186,7 +186,6 @@ def main(lights):
             max_loudness = 0
             hues = []
             beats = get_beats_info()
-            print(beats)
             for beat in beats:
                 if beat["loudness"] < min_loudness:
                     min_loudness = beat["loudness"]
@@ -206,7 +205,7 @@ def main(lights):
                 if time.time() - start_time - beat["start"] > 0.5:
                     print("skip")
                     continue
-                print(beat)
+                print("Beat " + index + ": " + beat["start"])
                 """ if index % 10 == 0:
                     stopped = False
                     while not spotify.is_playing():
@@ -229,7 +228,7 @@ def main(lights):
                 else:
                     print("skip")
                 index = index + 1
-        while(spotify.get_audio_features()[0]["id"]):
+        while(spotify.get_audio_features()[0]["id"] == track):
             if (spotify.get_playback_position() < time.time() - start_time - 5):
                 break
             continue
