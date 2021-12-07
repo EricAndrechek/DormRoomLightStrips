@@ -162,33 +162,30 @@ def pattern4(lights, beat, start_time, duration, min_loudness, max_loudness, hue
     else:
         center = (state4[0] + state4[1] + length + 3) % 87
 
-    shorter_count = 1
     if length >= state4[1]:
         for i in range(0, length + 1):
             lights.ceiling_set_pixel(center + i, hsv)
             lights.ceiling_set_pixel(center - i, hsv)
-            if beat["start"] != 0 and shorter_count < state4[1]:
+            if beat["start"] != 0 and i < state4[1]:
                 lights.ceiling_set_pixel(state4[0] - state4[1] + i, (0, 0, 0))
                 lights.ceiling_set_pixel(state4[0] + state4[1] - i, (0, 0, 0))
                 lights.ceiling_region_fill(
-                    state4[0] - state4[1] + i + 1, state4[0] + state4[1] - i - 1, (state4[2][0], state4[2][1], 1 - 1 / (shorter_count + 1)))
+                    state4[0] - state4[1] + i + 1, state4[0] + state4[1] - i - 1, (state4[2][0], state4[2][1], 1 - (i + 1) / state4[1]))
             lights.update()
             time.sleep(duration / 22)
-            shorter_count = shorter_count + 1
 
     if length < state4[1]:
-        for i in range(0, state4[1] + 1):
-            if shorter_count < length:
+        for i in range(0, state4[1]):
+            if i < length + 1:
                 lights.ceiling_set_pixel(center + i, hsv)
                 lights.ceiling_set_pixel(center - i, hsv)
             if beat["start"] != 0:
                 lights.ceiling_set_pixel(state4[0] - state4[1] + i, (0, 0, 0))
                 lights.ceiling_set_pixel(state4[0] + state4[1] - i, (0, 0, 0))
                 lights.ceiling_region_fill(
-                    state4[0] - state4[1] + i + 1, state4[0] + state4[1] - i - 1, (state4[2][0], state4[2][1], 1 - 1 / (shorter_count + 1)))
+                    state4[0] - state4[1] + i + 1, state4[0] + state4[1] - i - 1, (state4[2][0], state4[2][1], 1 - (i + 1) / state4[1]))
             lights.update()
             time.sleep(duration / 22)
-            shorter_count = shorter_count + 1
     state4 = (center, length, hsv)
 
 
