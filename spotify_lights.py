@@ -175,6 +175,8 @@ def pattern4(lights, beat, start_time, duration, min_loudness, max_loudness, hue
                     state4[0] - state4[1] + i + 1, state4[0] + state4[1] - i - 1, (state4[2][0], state4[2][1], 1 - (i + 1) / state4[1]))
             lights.update()
             time.sleep(duration / 22)
+        lights.ceiling_set_pixel(state4[0], (0, 0, 0))
+        lights.update()
 
     if length < state4[1]:
         for i in range(0, state4[1]):
