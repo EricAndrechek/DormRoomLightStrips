@@ -232,7 +232,7 @@ def main(lights):
                 else:
                     print("skip")
                 index = index + 1
-        while(spotify.get_audio_features()[0]["id"] == track):
+        while(spotify.get_audio_features()["id"] == track):
             if (spotify.get_playback_position() < time.time() - start_time - 5):
                 break
             continue
