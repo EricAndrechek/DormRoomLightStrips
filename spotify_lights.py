@@ -163,6 +163,7 @@ def light_pattern(lights, beat, start_time, duration, min_loudness, max_loudness
 
 
 def main(lights):
+    track = ""
     adjust_hue = True
     last_url = ""
     division = input("Division: ")
