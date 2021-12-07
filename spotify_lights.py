@@ -205,7 +205,7 @@ def main(lights):
                 if time.time() - start_time - beat["start"] > 0.5:
                     print("skip")
                     continue
-                print("Beat " + index + ": " + beat["start"])
+                print("Beat " + str(index) + ": " + str(beat["start"]))
                 """ if index % 10 == 0:
                     stopped = False
                     while not spotify.is_playing():
