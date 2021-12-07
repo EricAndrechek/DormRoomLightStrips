@@ -19,9 +19,12 @@ def circular_average(inputs):
     return phase(sum) / (2 * pi)
 
 
-def get_beats_info():
+def get_beats_info(division):
     analysis = get_audio_analysis()
-    beats = analysis["beats"]
+    if division == "tatum":
+        beats = analysis["tatums"]
+    else:
+        beats = analysis["beats"]
     segments = analysis["segments"]
     spot = 0
     loudness = 0
@@ -162,6 +165,7 @@ def light_pattern(lights, beat, start_time, duration, min_loudness, max_loudness
 def main(lights):
     adjust_hue = True
     last_url = ""
+    division = input("Division: ")
     pattern = input("Pattern: ")
     while True:
         url = ""
@@ -185,7 +189,7 @@ def main(lights):
             min_loudness = 0
             max_loudness = 0
             hues = []
-            beats = get_beats_info()
+            beats = get_beats_info(division)
             for beat in beats:
                 if beat["loudness"] < min_loudness:
                     min_loudness = beat["loudness"]
@@ -220,8 +224,8 @@ def main(lights):
                     beat["start"] + beat["duration"] - time.time()
                 if duration > beat["duration"]:
                     duration = beat["duration"]
-                print(time.time() - start_time - beat["start"])
-                print(duration)
+                # print(time.time() - start_time - beat["start"])
+                # print(duration)
                 if duration > 0:
                     light_pattern(lights, beat, start_time, duration,
                                   min_loudness, max_loudness, hue_shift, int(pattern))
