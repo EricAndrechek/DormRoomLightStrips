@@ -162,7 +162,7 @@ def pattern4(lights, beat, start_time, duration, min_loudness, max_loudness, hue
     else:
         center = (state4[0] + state4[1] + length + 3) % 87
 
-    shorter_count = 0
+    shorter_count = 1
     if length >= state4[1]:
         for i in range(0, length + 1):
             lights.ceiling_set_pixel(center + i, hsv)
