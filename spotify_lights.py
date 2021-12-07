@@ -156,7 +156,7 @@ def pattern4(lights, beat, start_time, duration, min_loudness, max_loudness, hue
     if loudness != max_loudness:
         loudness = loudness ** 2
     hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
-    length = 2 + 6 * loudness
+    length = int(2 + 6 * loudness)
     if beat["start"] == 0:
         center = 0
     else:
