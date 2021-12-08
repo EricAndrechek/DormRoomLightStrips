@@ -229,8 +229,8 @@ def pattern5(lights, beat, start_time, duration, min_loudness, max_loudness, hue
         lights.update()
         time.sleep(0.02)
         lights.ceiling_region_fill(0, 87, (0, 0, 0))
-        time.sleep(0.02)
         lights.update()
+        time.sleep(0.02)
 
 
 def light_pattern(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift, pattern):
