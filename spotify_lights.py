@@ -170,15 +170,13 @@ def pattern4(lights, beat, start_time, duration, min_loudness, max_loudness, hue
             lights.ceiling_set_pixel(center + i + 43, hsv)
             lights.ceiling_set_pixel(center - i + 43, hsv)
 
-            if beat["start"] != 0 and i < state4[1]:
+            if beat["start"] != 0 and i <= state4[1]:
                 lights.ceiling_set_pixel(
                     state4[0] - state4[1] + i, (0, 0, 0))
                 lights.ceiling_set_pixel(
                     state4[0] + state4[1] - i, (0, 0, 0))
                 lights.ceiling_region_fill(
                     state4[0] - state4[1] + i + 1, state4[0] + state4[1] - i - 1, (state4[2][0], state4[2][1], 1 - ((i + 1) / state4[1]) ** 2))
-                if i == state4[1] - 1:
-                    lights.ceiling_set_pixel(state4[0], (0, 0, 0))
 
                 lights.ceiling_set_pixel(
                     state4[0] - state4[1] + i + 43, (0, 0, 0))
@@ -186,13 +184,11 @@ def pattern4(lights, beat, start_time, duration, min_loudness, max_loudness, hue
                     state4[0] + state4[1] - i + 43, (0, 0, 0))
                 lights.ceiling_region_fill(
                     state4[0] - state4[1] + i + 1 + 43, state4[0] + state4[1] - i - 1 + 43, (state4[2][0], state4[2][1], 1 - ((i + 1) / state4[1]) ** 2))
-                if i == state4[1] - 1:
-                    lights.ceiling_set_pixel(state4[0] + 43, (0, 0, 0))
             lights.update()
             time.sleep(duration / 14)
 
     if length < state4[1]:
-        for i in range(0, state4[1]):
+        for i in range(0, state4[1] + 1):
             if i <= length:
                 lights.ceiling_set_pixel(center + i, hsv)
                 lights.ceiling_set_pixel(center - i, hsv)
@@ -206,8 +202,6 @@ def pattern4(lights, beat, start_time, duration, min_loudness, max_loudness, hue
                     state4[0] + state4[1] - i, (0, 0, 0))
                 lights.ceiling_region_fill(
                     state4[0] - state4[1] + i + 1, state4[0] + state4[1] - i - 1, (state4[2][0], state4[2][1], 1 - ((i + 1) / state4[1]) ** 2))
-                if i == state4[1] - 1:
-                    lights.ceiling_set_pixel(state4[0], (0, 0, 0))
 
                 lights.ceiling_set_pixel(
                     state4[0] - state4[1] + i + 43, (0, 0, 0))
@@ -215,8 +209,6 @@ def pattern4(lights, beat, start_time, duration, min_loudness, max_loudness, hue
                     state4[0] + state4[1] - i + 43, (0, 0, 0))
                 lights.ceiling_region_fill(
                     state4[0] - state4[1] + i + 1 + 43, state4[0] + state4[1] - i - 1 + 43, (state4[2][0], state4[2][1], 1 - ((i + 1) / state4[1]) ** 2))
-                if i == state4[1] - 1:
-                    lights.ceiling_set_pixel(state4[0] + 43, (0, 0, 0))
             lights.update()
             time.sleep(duration / 18)
     state4 = (center, length, hsv)
