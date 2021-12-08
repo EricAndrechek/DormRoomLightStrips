@@ -176,14 +176,14 @@ def pattern4(lights, beat, start_time, duration, min_loudness, max_loudness, hue
                 lights.ceiling_set_pixel(
                     state4[0] + state4[1] - i, (0, 0, 0))
                 lights.ceiling_region_fill(
-                    state4[0] - state4[1] + i + 1, state4[0] + state4[1] - i - 1, (state4[2][0], state4[2][1], 1 - ((i + 1) / state4[1]) ** 2))
+                    state4[0] - state4[1] + i + 1, state4[0] + state4[1] - i - 1, (state4[2][0], state4[2][1], 1 - (i / state4[1]) ** 2))
 
                 lights.ceiling_set_pixel(
                     state4[0] - state4[1] + i + 43, (0, 0, 0))
                 lights.ceiling_set_pixel(
                     state4[0] + state4[1] - i + 43, (0, 0, 0))
                 lights.ceiling_region_fill(
-                    state4[0] - state4[1] + i + 1 + 43, state4[0] + state4[1] - i - 1 + 43, (state4[2][0], state4[2][1], 1 - ((i + 1) / state4[1]) ** 2))
+                    state4[0] - state4[1] + i + 1 + 43, state4[0] + state4[1] - i - 1 + 43, (state4[2][0], state4[2][1], 1 - (i / state4[1]) ** 2))
             lights.update()
             time.sleep(duration / 14)
 
@@ -201,14 +201,14 @@ def pattern4(lights, beat, start_time, duration, min_loudness, max_loudness, hue
                 lights.ceiling_set_pixel(
                     state4[0] + state4[1] - i, (0, 0, 0))
                 lights.ceiling_region_fill(
-                    state4[0] - state4[1] + i + 1, state4[0] + state4[1] - i - 1, (state4[2][0], state4[2][1], 1 - ((i + 1) / state4[1]) ** 2))
+                    state4[0] - state4[1] + i + 1, state4[0] + state4[1] - i - 1, (state4[2][0], state4[2][1], 1 - (i / state4[1]) ** 2))
 
                 lights.ceiling_set_pixel(
                     state4[0] - state4[1] + i + 43, (0, 0, 0))
                 lights.ceiling_set_pixel(
                     state4[0] + state4[1] - i + 43, (0, 0, 0))
                 lights.ceiling_region_fill(
-                    state4[0] - state4[1] + i + 1 + 43, state4[0] + state4[1] - i - 1 + 43, (state4[2][0], state4[2][1], 1 - ((i + 1) / state4[1]) ** 2))
+                    state4[0] - state4[1] + i + 1 + 43, state4[0] + state4[1] - i - 1 + 43, (state4[2][0], state4[2][1], 1 - (i / state4[1]) ** 2))
             lights.update()
             time.sleep(duration / 18)
     state4 = (center, length, hsv)
