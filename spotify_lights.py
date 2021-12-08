@@ -218,7 +218,7 @@ def pattern4(lights, beat, start_time, duration, min_loudness, max_loudness, hue
                 if i == state4[1] - 1:
                     lights.ceiling_set_pixel(state4[0] + 43, (0, 0, 0))
             lights.update()
-            time.sleep(duration / 14)
+            time.sleep(duration / 18)
     state4 = (center, length, hsv)
 
 
