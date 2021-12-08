@@ -226,9 +226,11 @@ def pattern5(lights, beat, start_time, duration, min_loudness, max_loudness, hue
     hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
     while time.time() < start_time - duration - 0.05:
         lights.ceiling_region_fill(0, 87, hsv)
+        lights.update()
         time.sleep(0.02)
         lights.ceiling_region_fill(0, 87, (0, 0, 0))
         time.sleep(0.02)
+        lights.update()
 
 
 def light_pattern(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift, pattern):
