@@ -146,7 +146,7 @@ def pattern3(lights, beat, start_time, duration, min_loudness, max_loudness, hue
     state3 = (center, hsv)
 
 
-state4 = (0, 1, (0, 0, 0))   # (center, length, hsv)
+state4 = (0, 0, (0, 0, 0))   # (center, length, hsv)
 
 
 def pattern4(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
