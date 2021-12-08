@@ -222,6 +222,15 @@ def pattern4(lights, beat, start_time, duration, min_loudness, max_loudness, hue
     state4 = (center, length, hsv)
 
 
+def pattern5(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
+    hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
+    while time.time() < start_time - duration - 0.05:
+        lights.ceiling_region_fill(0, 87, hsv)
+        time.sleep(0.02)
+        lights.ceiling_region_fill(0, 87, (0, 0, 0))
+        time.sleep(0.02)
+
+
 def light_pattern(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift, pattern):
     if pattern == 1:
         pattern1(lights, beat, start_time, duration,
@@ -234,6 +243,9 @@ def light_pattern(lights, beat, start_time, duration, min_loudness, max_loudness
                  min_loudness, max_loudness, hue_shift)
     elif pattern == 4:
         pattern4(lights, beat, start_time, duration,
+                 min_loudness, max_loudness, hue_shift)
+    elif pattern == 5:
+        pattern5(lights, beat, start_time, duration,
                  min_loudness, max_loudness, hue_shift)
 
 
