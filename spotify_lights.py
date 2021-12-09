@@ -227,7 +227,7 @@ def pattern5(lights, beat, start_time, duration, min_loudness, max_loudness, hue
     for i in range(0, 1):
         lights.ceiling_region_fill(0, 87, hsv)
         lights.update()
-        time.sleep(duration / 45)
+        time.sleep(duration / 80)
         lights.ceiling_region_fill(0, 87, (0, 0, 0))
         lights.update()
         time.sleep(duration / 5)
