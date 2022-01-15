@@ -1,6 +1,6 @@
 from types import resolve_bases
 import board
-import janky_arduino
+import neopixel
 import colorsys
 import time
 import math
@@ -9,7 +9,8 @@ import requests
 
 class light_strip:
     def __init__(self):
-        self.pixels = janky_arduino.connection()
+        self.pixels = neopixel.NeoPixel(
+            board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
         self.homebridge_url = "http://localhost:8001/"
         self.states = {
             # small sections:
@@ -184,7 +185,7 @@ class light_strip:
         self.update()
 
     def set_pixel(self, pixel, hsv):
-        self.pixels.set_pixel(pixel, self.hsv_to_gbr(self.correct_color(hsv)))
+        self.pixels[pixel] = self.hsv_to_gbr(self.correct_color(hsv))
 
     def ceiling_set_pixel(self, pixel, hsv, direction="r"):
         if (direction == "r"):
@@ -247,8 +248,8 @@ class light_strip:
         if (end != 118):
             for i in range(start, end):
                 try:
-                    self.pixels.set_pixel(i, (0, 0, 0))
-                    self.pixels.set_pixel(i, self.hsv_to_gbr(hsv))
+                    self.pixels[i] = (0, 0, 0)
+                    self.pixels[i] = self.hsv_to_gbr(hsv)
                 except IndexError:
                     print("Index Error: Skipped pixel at index " + str(i))
                 except TypeError:
@@ -256,13 +257,13 @@ class light_strip:
         else:
             for i in range(start, 117):
                 try:
-                    self.pixels.set_pixel(i, (0, 0, 0))
-                    self.pixels.set_pixel(i, self.hsv_to_gbr(hsv))
+                    self.pixels[i] = (0, 0, 0)
+                    self.pixels[i] = self.hsv_to_gbr(hsv)
                 except IndexError:
                     print("Index Error: Skipped pixel at index " + str(i))
                 except TypeError:
                     print("Type Error: Skipped pixel at index " + str(i))
-            self.pixels.set_pixel(117, self.hsv_to_gbr(hsv))
+            self.pixels[117] = self.hsv_to_gbr(hsv)
 
     def ceiling_region_fill(self, start, end, hsv, direction="r"):
         if (direction == "r"):

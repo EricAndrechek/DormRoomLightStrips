@@ -2,10 +2,10 @@
 
 #define PIN 6
 
-#define NUMPIXELS 118
+#define NUMPIXELS 117
 #define INPUT_SIZE 5
 
-Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ400);
 
 #define DELAYVAL 0 // Time (in milliseconds) to pause between pixels
 
@@ -59,7 +59,9 @@ void loop() {
             g = g + 86 * h;
             b = b + 86 * i;
             r = r + 86 * j;
-            pixels.setPixelColor(n, g, b, r);
+            pixels.setPixelColor(n, pixels.Color(0, 0, 0));
+            pixels.setPixelColor(n, pixels.Color(g, r, b));
+            pixels.show();
             Serial.println(data + ": " + n + " " + g + " " + b + " " + r);
         }
     }
