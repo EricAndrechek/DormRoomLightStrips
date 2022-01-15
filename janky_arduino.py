@@ -21,8 +21,8 @@ class connection:
             self.ser.reset_input_buffer()
     def set_pixel(self, pixel, gbr):
         g, b, r = gbr
-        print(pixel, g, b, r)
-        self.ser.write("{}\n".format(self.get_char_map(pixel, g, b, r)).encode('utf-8'))
+        char_map = self.get_char_map(pixel, g, b, r)
+        self.ser.write("{}\n".format(char_map).encode('utf-8'))
     def get_char_map(n, g, b, r):
         # 32 -> 117 inclusively
         x = 9*int(g/86) + 3*int(b/86) + int(r/86)
