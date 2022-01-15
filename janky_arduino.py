@@ -23,7 +23,7 @@ class connection:
         g, b, r = gbr
         char_map = self.get_char_map(pixel, g, b, r)
         self.ser.write("{}\n".format(char_map).encode('utf-8'))
-    def get_char_map(n, g, b, r):
+    def get_char_map(self, n, g, b, r):
         # 32 -> 117 inclusively
         x = 9*int(g/86) + 3*int(b/86) + int(r/86)
         if n >= 59:
