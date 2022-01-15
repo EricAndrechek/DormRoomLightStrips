@@ -3,7 +3,7 @@ import serial
 import time
 
 def try_connection(ser):
-    ser.write("comm".encode('utf-8'))
+    ser.write("comm\n".encode('utf-8'))
     line = ser.readline().decode('utf-8').rstrip()
     if line == "good":
         print("Connected to Arduino!")
@@ -19,7 +19,7 @@ class connection:
         try_connection(ser)
         self.ser = ser
     def show(self):   
-        self.ser.write("show".encode('utf-8'))
+        self.ser.write("show\n".encode('utf-8'))
         line = self.ser.readline().decode('utf-8').rstrip()
         if line != "data":
             print("Failed to push update: " + line)
