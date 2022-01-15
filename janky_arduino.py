@@ -76,7 +76,7 @@ class connection:
         to_write = "{}\n".format(char_map).encode('utf-8')
         self.ser.write(to_write)
         line = self.ser.readline().decode('utf-8').rstrip()
-        expected = "{}: {} {} {} {}".format(char_map, pixel, g, b, r)
+        expected = "{}: {} {} {} {}".format(char_map, pixel, int(g), int(b), int(r))
         if line != expected:
             print("Failed to push data: {}, received: {}, expected: {}".format(char_map, line, expected))
             self.ser.reset_input_buffer()
