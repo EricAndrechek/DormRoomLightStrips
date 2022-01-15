@@ -2,16 +2,21 @@
 import serial
 import time
 
+def try_connection(ser):
+    ser.write("comm".encode('utf-8'))
+    line = ser.readline().decode('utf-8').rstrip()
+    if line == "good":
+        print("Connected to Arduino!")
+        return True
+    else:
+        print("Failed to connect: " + line)
+        return try_connection(ser)
+
 class connection:
     def __init__(self, port, baudrate):
         ser = serial.Serial(port, baudrate, timeout=1)
         ser.reset_input_buffer()
-        ser.write("comm".encode('utf-8'))
-        line = ser.readline().decode('utf-8').rstrip()
-        if line == "good":
-            print("Connected to Arduino!")
-        else:
-            print("Failed to connect: " + line)
+        try_connection(ser)
         self.ser = ser
     def show(self):   
         self.ser.write("show".encode('utf-8'))
