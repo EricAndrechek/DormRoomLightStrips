@@ -11,13 +11,13 @@ class connection:
         if line == "good":
             print("Connected to Arduino!")
         else:
-            print("Failed to connect to Arduino!")
+            print("Failed to connect: " + line)
         self.ser = ser
     def show(self):   
         self.ser.write("show".encode('utf-8'))
         line = self.ser.readline().decode('utf-8').rstrip()
         if line != "data":
-            print("Failed to push data to Arduino! - Message from Arduino: " + line)
+            print("Failed to push data: " + line)
             self.ser.reset_input_buffer()
     def set_pixel(self, pixel, gbr):
         g, b, r = gbr
