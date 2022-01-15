@@ -24,6 +24,7 @@ class connection:
         char_map = self.get_char_map(pixel, g, b, r)
         self.ser.write("{}\n".format(char_map).encode('utf-8'))
     def get_char_map(self, n, g, b, r):
+        print("{}: {} {} {}".format(n, g, b, r))
         # 32 -> 117 inclusively
         x = 9*int(g/86) + 3*int(b/86) + int(r/86)
         if n >= 59:
@@ -32,7 +33,7 @@ class connection:
         b = b % 86
         r = r % 86
         n = n % 59
-        print("{} {} {} {} {}".format(n, g, b, r, x))
+        print("new: {} {} {} {} {}".format(n, g, b, r, x))
         return chr(n+32) + chr(g+32) + chr(b+32) + chr(r+32) + chr(x+32)
     
     
