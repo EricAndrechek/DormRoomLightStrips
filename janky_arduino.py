@@ -32,6 +32,7 @@ class connection:
         b = b % 86
         r = r % 86
         n = n % 59
+        print("{} {} {} {} {}".format(n, g, b, r, x))
         return chr(n+32) + chr(g+32) + chr(b+32) + chr(r+32) + chr(x+32)
     
     
