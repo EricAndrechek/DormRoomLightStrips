@@ -29,7 +29,7 @@ if __name__ == '__main__':
     successful = 0
     for i in range(0, 118):
         data = chr(0) + chr(0) + chr(0) + chr(0)
-        ser.write(b"{}\n".format(data))
+        ser.write(data.encode('utf-8'))
         line = ser.readline().decode('utf-8').rstrip()
         if line == data:
             successful += 1
