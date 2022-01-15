@@ -14,4 +14,4 @@ if __name__ == '__main__':
             successful += 1
         else:
             print("Failed: " + line)
-    print("" + successful + "/118")
+    print("{}/118".format(successful))
