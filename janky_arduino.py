@@ -27,10 +27,11 @@ class connection:
     def set_pixel(self, pixel, gbr):
         g, b, r = gbr
         char_map = self.get_char_map(pixel, g, b, r)
-        self.ser.write("{}\n".format(char_map).encode('utf-8'))
+        to_write = "{}\n".format(char_map).encode('utf-8')
+        self.ser.write(to_write)
         line = self.ser.readline().decode('utf-8').rstrip()
         if line != char_map:
-            print("Failed to push data: " + line)
+            print("Failed to push data: {}, received: {}".format(to_write, line))
             self.ser.reset_input_buffer()
     def get_char_map(self, n, g, b, r):
         n = int(n)
