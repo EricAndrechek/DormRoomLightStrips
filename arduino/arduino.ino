@@ -7,10 +7,10 @@
 
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
-#define DELAYVAL 500 // Time (in milliseconds) to pause between pixels
+#define DELAYVAL 0 // Time (in milliseconds) to pause between pixels
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(115200);
     pixels.begin();
     pixels.clear();
 }
@@ -60,7 +60,7 @@ void loop() {
             b = b + 86 * i;
             r = r + 86 * j;
             pixels.setPixelColor(n, g, b, r);
-            Serial.println(data);
+            Serial.println(data + ": " + n + " " + g + " " + b + " " + r);
         }
     }
 }
