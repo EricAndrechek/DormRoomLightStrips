@@ -9,6 +9,7 @@ from io import BytesIO
 import urllib.request
 from PIL import Image
 from cmath import sin, cos, phase, pi
+import random
 
 
 def circular_average(inputs):
@@ -18,9 +19,12 @@ def circular_average(inputs):
     return phase(sum) / (2 * pi)
 
 
-def get_beats_info():
+def get_beats_info(division):
     analysis = get_audio_analysis()
-    beats = analysis["beats"]
+    if division == "tatum":
+        beats = analysis["tatums"]
+    else:
+        beats = analysis["beats"]
     segments = analysis["segments"]
     spot = 0
     loudness = 0
@@ -47,7 +51,7 @@ def get_beats_info():
     return beats
 
 
-def wave1(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
+def pattern1(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
     loudness = (beat["loudness"] - min_loudness) / \
         (max_loudness - min_loudness)
     distance = int(loudness * 30)
@@ -71,13 +75,13 @@ def wave1(lights, beat, start_time, duration, min_loudness, max_loudness, hue_sh
         time.sleep(duration / 3 / distance)
 
 
-active_beats = []
+state2 = []
 
 
-def update_active_beats():
-    for b in active_beats:
+def update_state2():
+    for b in state2:
         if (b[3] > 43):
-            active_beats.remove(b)
+            state2.remove(b)
             continue
         lights.ceiling_set_pixel(b[3], (0, 0, 0), "r")
         lights.ceiling_set_pixel(b[3], (0, 0, 0), "l")
@@ -87,30 +91,172 @@ def update_active_beats():
             lights.ceiling_set_pixel(b[3] + b[2], b[1], "l")
 
 
-def wave2(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
+def pattern2(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
     loudness = (beat["loudness"] - min_loudness) / \
         (max_loudness - min_loudness)
     if loudness != max_loudness:
         loudness = loudness ** 2
-    print("Loudness: " + str(loudness))
     length = 1 + int(loudness * 7)
     hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
     for i in range(0, length + 1):
         lights.ceiling_set_pixel(i, hsv, "r")
         lights.ceiling_set_pixel(i, hsv, "l")
-        update_active_beats()
+        update_state2()
         lights.update()
         time.sleep(duration / 30)
-    active_beats.append([0, hsv, length, 0])
+    state2.append([0, hsv, length, 0])
     for i in range(0, 5):
-        update_active_beats()
+        update_state2()
         lights.update()
         time.sleep((i + 1) * duration / 30)
 
 
+state3 = (0, (0, 0, 0))  # (center, hsv)
+
+
+def pattern3(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
+    global state3
+    hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
+    prev_start = state3[0] - 10
+    prev_end = state3[0] + 10
+    if beat["start"] == 0:
+        center = random.randrange(0, 87)
+    elif prev_start >= 0 and prev_end < 87:
+        center = random.choice(
+            list(range(0, prev_start + 1)) + list(range(prev_end, 87)))
+    elif prev_end >= 87:
+        center = random.randrange((prev_end) % 87, prev_start + 1)
+    else:
+        center = random.randrange(prev_end, prev_start % 87 + 1)
+    lights.ceiling_set_pixel(center, hsv)
+    lights.update()
+    time.sleep(duration / 22)
+    for i in range(1, 6):
+        lights.ceiling_set_pixel(center + i, hsv)
+        lights.ceiling_set_pixel(center - i, hsv)
+        if beat["start"] != 0:
+            lights.ceiling_set_pixel(state3[0] - 6 + i, (0, 0, 0))
+            lights.ceiling_set_pixel(state3[0] + 6 - i, (0, 0, 0))
+            lights.ceiling_region_fill(
+                state3[0] - 5 + i, state3[0] + 5 - i, (state3[1][0], state3[1][1], 1 - i * 0.2))
+        lights.update()
+        time.sleep(duration / 22)
+    lights.ceiling_set_pixel(state3[0], (0, 0, 0))
+    lights.update()
+    state3 = (center, hsv)
+
+
+state4 = (0, 0, (0, 0, 0))   # (center, length, hsv)
+
+
+def pattern4(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
+    global state4
+    loudness = (beat["loudness"] - min_loudness) / \
+        (max_loudness - min_loudness)
+    if loudness != max_loudness:
+        loudness = loudness ** 2
+    hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
+    length = int(2 + 4 * loudness)
+    if beat["start"] == 0:
+        center = 0
+    else:
+        center = (state4[0] + state4[1] + length + 3) % 87
+
+    if length >= state4[1]:
+        for i in range(0, length + 1):
+            lights.ceiling_set_pixel(center + i, hsv)
+            lights.ceiling_set_pixel(center - i, hsv)
+
+            lights.ceiling_set_pixel(center + i + 43, hsv)
+            lights.ceiling_set_pixel(center - i + 43, hsv)
+
+            if beat["start"] != 0 and i < state4[1]:
+                lights.ceiling_set_pixel(
+                    state4[0] - state4[1] + i, (0, 0, 0))
+                lights.ceiling_set_pixel(
+                    state4[0] + state4[1] - i, (0, 0, 0))
+                lights.ceiling_region_fill(
+                    state4[0] - state4[1] + i + 1, state4[0] + state4[1] - i - 1, (state4[2][0], state4[2][1], 1 - ((i + 1) / state4[1]) ** 2))
+                if i == state4[1] - 1:
+                    lights.ceiling_set_pixel(state4[0], (0, 0, 0))
+
+                lights.ceiling_set_pixel(
+                    state4[0] - state4[1] + i + 43, (0, 0, 0))
+                lights.ceiling_set_pixel(
+                    state4[0] + state4[1] - i + 43, (0, 0, 0))
+                lights.ceiling_region_fill(
+                    state4[0] - state4[1] + i + 1 + 43, state4[0] + state4[1] - i - 1 + 43, (state4[2][0], state4[2][1], 1 - ((i + 1) / state4[1]) ** 2))
+                if i == state4[1] - 1:
+                    lights.ceiling_set_pixel(state4[0] + 43, (0, 0, 0))
+            lights.update()
+            time.sleep(duration / 14)
+
+    if length < state4[1]:
+        for i in range(0, state4[1]):
+            if i < length + 1:
+                lights.ceiling_set_pixel(center + i, hsv)
+                lights.ceiling_set_pixel(center - i, hsv)
+
+                lights.ceiling_set_pixel(center + i + 43, hsv)
+                lights.ceiling_set_pixel(center - i + 43, hsv)
+            if beat["start"] != 0:
+                lights.ceiling_set_pixel(
+                    state4[0] - state4[1] + i, (0, 0, 0))
+                lights.ceiling_set_pixel(
+                    state4[0] + state4[1] - i, (0, 0, 0))
+                lights.ceiling_region_fill(
+                    state4[0] - state4[1] + i + 1, state4[0] + state4[1] - i - 1, (state4[2][0], state4[2][1], 1 - ((i + 1) / state4[1]) ** 2))
+                if i == state4[1] - 1:
+                    lights.ceiling_set_pixel(state4[0], (0, 0, 0))
+
+                lights.ceiling_set_pixel(
+                    state4[0] - state4[1] + i + 43, (0, 0, 0))
+                lights.ceiling_set_pixel(
+                    state4[0] + state4[1] - i + 43, (0, 0, 0))
+                lights.ceiling_region_fill(
+                    state4[0] - state4[1] + i + 1 + 43, state4[0] + state4[1] - i - 1 + 43, (state4[2][0], state4[2][1], 1 - ((i + 1) / state4[1]) ** 2))
+                if i == state4[1] - 1:
+                    lights.ceiling_set_pixel(state4[0] + 43, (0, 0, 0))
+            lights.update()
+            time.sleep(duration / 18)
+    state4 = (center, length, hsv)
+
+
+def pattern5(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
+    hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
+    for i in range(0, 1):
+        lights.ceiling_region_fill(0, 87, hsv)
+        lights.update()
+        time.sleep(duration / 80)
+        lights.ceiling_region_fill(0, 87, (0, 0, 0))
+        lights.update()
+        time.sleep(duration / 5)
+
+
+def light_pattern(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift, pattern):
+    if pattern == 1:
+        pattern1(lights, beat, start_time, duration,
+                 min_loudness, max_loudness, hue_shift)
+    elif pattern == 2:
+        pattern2(lights, beat, start_time, duration,
+                 min_loudness, max_loudness, hue_shift)
+    elif pattern == 3:
+        pattern3(lights, beat, start_time, duration,
+                 min_loudness, max_loudness, hue_shift)
+    elif pattern == 4:
+        pattern4(lights, beat, start_time, duration,
+                 min_loudness, max_loudness, hue_shift)
+    elif pattern == 5:
+        pattern5(lights, beat, start_time, duration,
+                 min_loudness, max_loudness, hue_shift)
+
+
 def main(lights):
+    track = ""
     adjust_hue = True
     last_url = ""
+    division = input("Division: ")
+    pattern = input("Pattern: ")
     while True:
         url = ""
         album_hue = 0
@@ -119,7 +265,7 @@ def main(lights):
                 url = spotify.get_album_image()
                 if url is not None and url != "" and url != last_url:
                     last_url = url
-                    print(url)
+                    # print(url)
                     image_bytes = BytesIO(
                         urllib.request.urlopen(url).read())
                     image = np.array(Image.open(image_bytes))
@@ -133,8 +279,7 @@ def main(lights):
             min_loudness = 0
             max_loudness = 0
             hues = []
-            beats = get_beats_info()
-            print(beats)
+            beats = get_beats_info(division)
             for beat in beats:
                 if beat["loudness"] < min_loudness:
                     min_loudness = beat["loudness"]
@@ -147,21 +292,22 @@ def main(lights):
             else:
                 hue_shift = 0
             start_time = time.time() - get_playback_position() + 0.3
-            index = 0
+            index = -1
             for beat in beats:
+                index = index + 1
                 while time.time() < start_time + beat["start"]:
                     continue
                 if time.time() - start_time - beat["start"] > 0.5:
                     print("skip")
                     continue
-                print(beat)
+                print("Beat " + str(index) + ": " + str(beat["start"]))
                 """ if index % 10 == 0:
                     stopped = False
                     while not spotify.is_playing():
                         time.sleep(0.5)
                         stopped = True
                     if stopped:
-                        start_time = time.time() - get_playback_position() - 1.5
+                        start_time = time.time() - get_playback_position() + 0.3
                 if index % 10 == 5:
                     if spotify.get_audio_features()[0]["id"] != track:
                         break """
@@ -169,15 +315,17 @@ def main(lights):
                     beat["start"] + beat["duration"] - time.time()
                 if duration > beat["duration"]:
                     duration = beat["duration"]
-                print(time.time() - start_time - beat["start"])
-                print(duration)
+                # print(time.time() - start_time - beat["start"])
+                # print(duration)
                 if duration > 0:
-                    wave2(lights, beat, start_time, duration,
-                          min_loudness, max_loudness, hue_shift)
+                    light_pattern(lights, beat, start_time, duration,
+                                  min_loudness, max_loudness, hue_shift, int(pattern))
                 else:
                     print("skip")
-                index = index + 1
-        time.sleep(2)
+        while(spotify.get_audio_features()[0]["id"] == track):
+            if (spotify.get_playback_position() < time.time() - start_time - 5):
+                break
+            continue
 
 
 if __name__ == '__main__':
