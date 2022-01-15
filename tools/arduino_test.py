@@ -15,3 +15,24 @@ if __name__ == '__main__':
         else:
             print("Failed: " + line)
     print("{}/118".format(successful))
+
+    successful = 0
+    for i in range(0, 118):
+        ser.write(b"show\n")
+        line = ser.readline().decode('utf-8').rstrip()
+        if line == "data":
+            successful += 1
+        else:
+            print("Failed: " + line)
+    print("{}/118".format(successful))
+
+    successful = 0
+    for i in range(0, 118):
+        data = chr(0) + chr(0) + chr(0) + chr(0)
+        ser.write(b"{}\n".format(data))
+        line = ser.readline().decode('utf-8').rstrip()
+        if line == data:
+            successful += 1
+        else:
+            print("Failed: " + line)
+    print("{}/118".format(successful))
