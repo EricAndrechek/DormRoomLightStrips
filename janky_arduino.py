@@ -32,6 +32,6 @@ class connection:
         b = b % 86
         r = r % 86
         n = n % 59
-        return str(chr(n+32) + chr(g+32) + chr(b+32) + chr(r+32) + chr(x+32))
+        return chr(n+32) + chr(g+32) + chr(b+32) + chr(r+32) + chr(x+32)
     
     
