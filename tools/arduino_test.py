@@ -12,4 +12,6 @@ if __name__ == '__main__':
         line = ser.readline().decode('utf-8').rstrip()
         if line == "good":
             successful += 1
-    print(successful/118 * 100)
+        else:
+            print("Failed: " + line)
+    print(successful + "/118")
