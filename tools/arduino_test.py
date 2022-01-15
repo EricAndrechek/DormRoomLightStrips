@@ -13,5 +13,5 @@ if __name__ == '__main__':
         if line == "good":
             successful += 1
         else:
-            print("Failed: " + line)
-    print(successful + "/118")
+            print("Failed: " + ord(line))
+    print("" + successful + "/118")
