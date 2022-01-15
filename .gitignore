@@ -2,3 +2,8 @@
 .spotify-credentials.json
 .cache
 .vscode
+node_modules
+document_body
+example.png
+httpbin-cookies.json
+creds.json
