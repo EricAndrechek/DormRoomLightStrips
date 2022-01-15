@@ -17,12 +17,16 @@ class connection:
         self.ser.write("show".encode('utf-8'))
         line = self.ser.readline().decode('utf-8').rstrip()
         if line != "data":
-            print("Failed to push data: " + line)
+            print("Failed to push update: " + line)
             self.ser.reset_input_buffer()
     def set_pixel(self, pixel, gbr):
         g, b, r = gbr
         char_map = self.get_char_map(pixel, g, b, r)
         self.ser.write("{}\n".format(char_map).encode('utf-8'))
+        line = self.ser.readline().decode('utf-8').rstrip()
+        if line != char_map:
+            print("Failed to push data: " + line)
+            self.ser.reset_input_buffer()
     def get_char_map(self, n, g, b, r):
         n = int(n)
         g = int(g)
@@ -36,7 +40,6 @@ class connection:
         b = b % 86
         r = r % 86
         n = n % 59
-        print("new: {} {} {} {} {}".format(n, g, b, r, x))
         return chr(n+32) + chr(g+32) + chr(b+32) + chr(r+32) + chr(x+32)
     
     
