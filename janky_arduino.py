@@ -21,10 +21,16 @@ class connection:
             self.ser.reset_input_buffer()
     def set_pixel(self, pixel, gbr):
         g, b, r = gbr
-        g = chr(g)
-        b = chr(b)
-        r = chr(r)
-        n = chr(pixel)
-        self.ser.write("{}{}{}{}".format(n, g, b, r).encode('utf-8'))
+        self.ser.write("{}\n".format(self.get_char_map(pixel, g, b, r)).encode('utf-8'))
+    def get_char_map(n, g, b, r):
+        # 32 -> 117 inclusively
+        x = 9*int(g/86) + 3*int(b/86) + int(r/86)
+        if n >= 59:
+            x = x*2
+        g = g % 86
+        b = b % 86
+        r = r % 86
+        n = n % 59
+        return str(chr(n+32) + chr(g+32) + chr(b+32) + chr(r+32) + chr(x+32))
     
     

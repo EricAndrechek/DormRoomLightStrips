@@ -3,7 +3,7 @@
 #define PIN 6
 
 #define NUMPIXELS 118
-#define INPUT_SIZE 4
+#define INPUT_SIZE 5
 
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
@@ -44,11 +44,22 @@ void loop() {
             Serial.println("data");
         }
         else {
-            int pixel = data.charAt(0);
-            int g = data.charAt(1);
-            int b = data.charAt(2);
-            int r = data.charAt(3);
-            pixels.setPixelColor(pixel, g, b, r);
+            int n = (int)data.charAt(0) - 32;
+            int g = (int)data.charAt(1) - 32;
+            int b = (int)data.charAt(2) - 32;
+            int r = (int)data.charAt(3) - 32;
+            int x = (int)data.charAt(4) - 32;
+            if (x >= 27) n += 59;
+            x = x % 27;
+            int h = x / 9;
+            x = x % 9;
+            int i = x / 3;
+            x = x % 3;
+            int j = x;
+            g = g + 86 * h;
+            b = b + 86 * i;
+            r = r + 86 * j;
+            pixels.setPixelColor(n, g, b, r);
             Serial.println(data);
         }
     }
