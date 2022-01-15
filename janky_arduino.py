@@ -20,8 +20,8 @@ class connection:
             print("Failed to push data: " + line)
             self.ser.reset_input_buffer()
     def set_pixel(self, pixel, gbr):
-        print(pixel)
         g, b, r = gbr
+        print(pixel, g, b, r)
         self.ser.write("{}\n".format(self.get_char_map(pixel, g, b, r)).encode('utf-8'))
     def get_char_map(n, g, b, r):
         # 32 -> 117 inclusively
