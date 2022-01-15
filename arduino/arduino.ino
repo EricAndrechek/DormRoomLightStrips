@@ -44,11 +44,11 @@ void loop() {
             Serial.println("data");
         }
         else {
-            int n = ((int)data.charAt(0)) - 32;
-            int g = ((int)data.charAt(1)) - 32;
-            int b = ((int)data.charAt(2)) - 32;
-            int r = ((int)data.charAt(3)) - 32;
-            int x = ((int)data.charAt(4)) - 32;
+            int n = ((int)data.charAt(0)) - 33;
+            int g = ((int)data.charAt(1)) - 33;
+            int b = ((int)data.charAt(2)) - 33;
+            int r = ((int)data.charAt(3)) - 33;
+            int x = ((int)data.charAt(4)) - 33;
             if (x >= 27) n += 59;
             x = x % 27;
             int h = x / 9;
