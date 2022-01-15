@@ -33,6 +33,7 @@ void loop() {
             int b = (int)input[2];
             int r = (int)input[3];
             pixels.setPixelColor(pixel, g, b, r);
+            Serial.println(input);
         }
     }
 }
