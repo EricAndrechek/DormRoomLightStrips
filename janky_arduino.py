@@ -13,8 +13,11 @@ def try_connection(ser):
         return try_connection(ser)
 
 class connection:
-    def __init__(self, port, baudrate):
-        ser = serial.Serial(port, baudrate, timeout=1)
+    def __init__(self, port='/dev/ttyACM0', baudrate=9600):
+        try:
+            ser = serial.Serial(port, baudrate, timeout=1)
+        except serial.SerialException:
+            ser = serial.Serial('/dev/ttyACM1', baudrate, timeout=1)
         ser.reset_input_buffer()
         try_connection(ser)
         self.ser = ser

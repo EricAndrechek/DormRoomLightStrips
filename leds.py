@@ -9,7 +9,7 @@ import requests
 
 class light_strip:
     def __init__(self):
-        self.pixels = janky_arduino.connection('/dev/ttyACM0', 9600)
+        self.pixels = janky_arduino.connection()
         self.homebridge_url = "http://localhost:8001/"
         self.states = {
             # small sections:
