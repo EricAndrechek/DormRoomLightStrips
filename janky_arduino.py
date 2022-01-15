@@ -44,7 +44,7 @@ class connection:
         # 32 -> 117 inclusively
         x = 9*int(g/86) + 3*int(b/86) + int(r/86)
         if n >= 59:
-            x = x*2
+            x = x+27
         g = g % 86
         b = b % 86
         r = r % 86
