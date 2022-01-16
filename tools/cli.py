@@ -1,3 +1,5 @@
+import sys
+sys.path.append("../")
 from colorsys import hsv_to_rgb
 import leds
 import time

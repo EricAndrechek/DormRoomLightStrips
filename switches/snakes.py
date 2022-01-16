@@ -1,9 +1,7 @@
 import sys
-import time
-import os
-
 sys.path.append("../")
-from leds import light_strip
+import leds
+import time
 
 def main(lights):
     count = 0
@@ -26,5 +24,5 @@ def main(lights):
 
 
 if __name__ == '__main__':
-    lights = light_strip()
+    lights = leds.light_strip()
     main(lights)

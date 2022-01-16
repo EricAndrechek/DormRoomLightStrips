@@ -1,3 +1,5 @@
+import sys
+sys.path.append("../")
 import leds
 import spotify
 import time
