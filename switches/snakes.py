@@ -1,8 +1,8 @@
 import sys
 import time
 
-sys.path.insert(0, "/home/pi/DormRoomLights")
-from leds import light_strip
+sys.path.abspath("/home/pi/DormRoomLights")
+from DormRoomLights.leds import light_strip
 
 def main(lights):
     count = 0
