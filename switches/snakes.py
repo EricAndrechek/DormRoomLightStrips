@@ -2,7 +2,7 @@ import sys
 import time
 
 sys.path.append("/home/pi/DormRoomLights")
-from leds import light_strip
+import DormRoomLights.leds
 
 def main(lights):
     count = 0
@@ -25,5 +25,5 @@ def main(lights):
 
 
 if __name__ == '__main__':
-    lights = light_strip()
+    lights = leds.light_strip()
     main(lights)
