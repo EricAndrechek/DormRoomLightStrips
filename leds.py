@@ -10,7 +10,7 @@ import requests
 class light_strip:
     def __init__(self):
         self.pixels = neopixel.NeoPixel(
-            board.D12, 118, auto_write=False, pixel_order=neopixel.GRB)
+            board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
         self.homebridge_url = "http://192.168.2.16:8001/"
         self.states = {
             # small sections:
@@ -55,7 +55,7 @@ class light_strip:
                 "included_in": ["main", "eric_half", "bed_wall"]
             },
             "door_section": {
-                "region": [74, 91],
+                "region": [74, 90],
                 "ceiling": [57, 74],
                 "state": 0,
                 "hsv": (0, 0, 0.99),
@@ -63,7 +63,7 @@ class light_strip:
                 "included_in": ["main", "eric_half"]
             },
             "eric_desk": {
-                "region": [91, 104],
+                "region": [90, 104],
                 "ceiling": [74, 87],
                 "state": 0,
                 "hsv": (0, 0, 0.99),
