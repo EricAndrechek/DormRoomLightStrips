@@ -10,8 +10,8 @@ import requests
 class light_strip:
     def __init__(self):
         self.pixels = neopixel.NeoPixel(
-            board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
-        self.homebridge_url = "http://localhost:8001/"
+            board.D12, 118, auto_write=False, pixel_order=neopixel.GRB)
+        self.homebridge_url = "http://192.168.2.16:8001/"
         self.states = {
             # small sections:
             "tv_section": {
