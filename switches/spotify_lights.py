@@ -3,6 +3,7 @@ sys.path.append("../")
 from time import time
 import leds
 import time
+sys.path.append("../spotify")
 from spotify import get_audio_analysis, get_playback_position
 import spotify
 import image_color_helper
