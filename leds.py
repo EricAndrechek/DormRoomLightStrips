@@ -56,7 +56,7 @@ class light_strip:
             },
             "door_section": {
                 "region": [74, 90],
-                "ceiling": [57, 74],
+                "ceiling": [57, 73],
                 "state": 0,
                 "hsv": (0, 0, 0.99),
                 "includes": [],
@@ -64,7 +64,7 @@ class light_strip:
             },
             "eric_desk": {
                 "region": [90, 104],
-                "ceiling": [74, 87],
+                "ceiling": [73, 87],
                 "state": 0,
                 "hsv": (0, 0, 0.99),
                 "includes": [],

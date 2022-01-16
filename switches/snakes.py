@@ -1,6 +1,8 @@
-import leds
+import sys
 import time
 
+sys.path.append("/home/pi/DormRoomLights")
+import leds
 
 def main(lights):
     count = 0
