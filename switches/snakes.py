@@ -2,8 +2,8 @@ import sys
 import time
 import os
 
-sys.path.append(os.path.abspath("/home/pi/DormRoomLights"))
-from DormRoomLights.leds import light_strip
+sys.path.append("../")
+from leds import light_strip
 
 def main(lights):
     count = 0
