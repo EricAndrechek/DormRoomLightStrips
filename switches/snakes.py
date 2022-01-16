@@ -3,7 +3,7 @@ import time
 import os
 
 os.path.abspath("/home/pi/DormRoomLights")
-from DormRoomLights.leds import light_strip
+from leds import light_strip
 
 def main(lights):
     count = 0
