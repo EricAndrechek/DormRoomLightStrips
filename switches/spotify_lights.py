@@ -4,7 +4,6 @@ from time import time
 import leds
 import time
 sys.path.append("../spotify")
-from spotify import get_audio_analysis, get_playback_position
 import spotify
 import image_color_helper
 import numpy as np
@@ -265,18 +264,8 @@ def main(lights):
         album_hue = 0
         if spotify.is_playing():
             if adjust_hue:
-                url = spotify.get_album_image()
-                if url is not None and url != "" and url != last_url:
-                    last_url = url
-                    # print(url)
-                    image_bytes = BytesIO(
-                        urllib.request.urlopen(url).read())
-                    image = np.array(Image.open(image_bytes))
-                    helper = image_color_helper.SpotifyBackgroundColor(
-                        image, image_processing_size=(100, 100))
-                    new_color = helper.best_color()
-                    hsv = lights.rgb_to_hsv(new_color)
-                    album_hue = hsv[0]
+                hsv = spotify.get_color()
+                album_hue = hsv[0]
 
             track = spotify.get_audio_features()[0]["id"]
             min_loudness = 0

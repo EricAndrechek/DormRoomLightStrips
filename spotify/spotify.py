@@ -53,7 +53,7 @@ class Spotify_helper:
         try:
             response = requests.get("http://192.168.2.242:8060/query/media-player", timeout=3.1)
             if response.status_code == 200:
-                
+                return False # come back to this once I have time to figure out how to get the roku to send the data
         except:
             return False
 
@@ -127,6 +127,8 @@ class Spotify_helper:
         return False
     def is_being_used(self, val):
         self.used = val
+    def is_playing(self):
+        return self.is_playing
 
 
 
