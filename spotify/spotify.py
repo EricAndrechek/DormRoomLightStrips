@@ -142,7 +142,6 @@ class Spotify_helper:
         self.used = val
     def is_playing(self):
         self.general_update()
-        print(self.is_playing)
         return self.is_playing
 
 

@@ -263,7 +263,9 @@ def main(lights):
     while True:
         url = ""
         album_hue = 0
-        if spotty.is_playing():
+        is_playing = spotty.is_playing()
+        print(is_playing)
+        if is_playing:
             if adjust_hue:
                 hsv = spotty.get_color()
                 album_hue = hsv[0]
