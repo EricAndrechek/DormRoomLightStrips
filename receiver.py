@@ -12,9 +12,9 @@ def update():
     lights.update()
     return "updated"
 
-@app.route('/pixel/<int:n>/<s>')
-def pixel(n, s):
-    lights.set_pixel(n, s)
+@app.route('/pixel/<int:n>/<g>/<b>/<r>')
+def pixel(n, g, b, r):
+    lights.set_pixel(n, (g, b, r))
     return "set"
 
 

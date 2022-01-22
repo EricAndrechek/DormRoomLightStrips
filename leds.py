@@ -186,7 +186,8 @@ class light_strip:
         self.update()
 
     def set_pixel(self, pixel, hsv):
-        requests.get("{}/pixel/{}/{}".format(self.receiver_url, pixel, self.hsv_to_gbr(self.correct_color(hsv))))
+        new_color = self.hsv_to_gbr(self.correct_color(hsv))
+        requests.get("{}/pixel/{}/{}/{}/{}".format(self.receiver_url, pixel, new_color[0], new_color[1], new_color[2]))
 
     def ceiling_set_pixel(self, pixel, hsv, direction="r"):
         if (direction == "r"):
