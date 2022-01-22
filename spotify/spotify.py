@@ -111,7 +111,7 @@ class Spotify_helper:
             color = response.text
             if 'rgb' in color:
                 rgb = color.split('rgb(')[1].split(')')[0]
-                hsv = colorsys.rgb_to_hsv(rgb[0] / 256, rgb[1] / 256, rgb[2] / 256)
+                hsv = colorsys.rgb_to_hsv(int(rgb[0]) / 256, int(rgb[1]) / 256, int(rgb[2]) / 256)
                 return hsv
             elif '#' in color:
                 hex = color.split('#')[1]
