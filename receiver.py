@@ -12,7 +12,7 @@ def update():
     lights.update()
     return "updated"
 
-@app.route('/pixel/<int:n>/<g>/<b>/<r>')
+@app.route('/pixel/<int:n>/<int:g>/<int:b>/<int:r>')
 def pixel(n, g, b, r):
     lights.set_pixel(n, (g, b, r))
     return "set"
