@@ -171,7 +171,7 @@ class light_strip:
         return hsv
 
     def update(self):
-        self.pixels.update()
+        requests.get(self.receiver_url + "update")
 
     def homebridge_push(self, region, status):
         requests.post(self.homebridge_url + region, json={
@@ -186,7 +186,8 @@ class light_strip:
         self.update()
 
     def set_pixel(self, pixel, hsv):
-        self.pixels[pixel] = self.hsv_to_gbr(self.correct_color(hsv))
+        new_color = self.hsv_to_gbr(self.correct_color(hsv))
+        requests.get("{}pixel/{}/{}/{}/{}".format(self.receiver_url, pixel, int(new_color[0]), int(new_color[1]), int(new_color[2])))
 
     def ceiling_set_pixel(self, pixel, hsv, direction="r"):
         if (direction == "r"):
