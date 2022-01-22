@@ -26,7 +26,7 @@ class Spotify_helper:
         self.track_duration = None
         self.track_position = None
         self.current_track_data = None
-        self.is_playing = False
+        self.is_playing_bool = False
 
         # bool to see if update should be running or not.
         # if bool is true, update as follows:
@@ -46,7 +46,7 @@ class Spotify_helper:
         self.track_id = ct['item']['id']
         self.track_duration = ct['item']['duration_ms'] / 1000
         self.track_position = ct['progress_ms'] / 1000
-        self.is_playing = ct['is_playing']
+        self.is_playing_bool = ct['is_playing']
         self.current_track_data = ct
     def roku_data(self):
         # check roku to see if it is spotify and is playing
@@ -61,15 +61,15 @@ class Spotify_helper:
     def current_track(self):
         self.general_update()
         # checks if playing and returns current track data
-        return self.current_track_data if self.is_playing else False
+        return self.current_track_data if self.is_playing_bool else False
     def get_track_id(self):
         self.general_update()
         # returns the track id of the current track if something is playing, otherwise returns false
-        return self.track_id if self.is_playing else False
+        return self.track_id if self.is_playing_bool else False
     def get_album_image(self):
         self.general_update()
         # returns the url to the smallest image of the album
-        if self.is_playing:
+        if self.is_playing_bool:
             last_item = len(self.current_track_data['item']['album']['images']) - 1
             album_image = self.current_track_data['item']['album']['images'][last_item]['url']
             return album_image
@@ -78,18 +78,18 @@ class Spotify_helper:
     def get_playback_position(self):
         self.general_update()
         # returns the current playback position in milliseconds
-        return self.track_position if self.is_playing else False
+        return self.track_position if self.is_playing_bool else False
     def get_song_duration(self):
         self.general_update()
         # returns the duration of the current track in milliseconds
-        return self.track_duration / 1000 if self.is_playing else False
+        return self.track_duration / 1000 if self.is_playing_bool else False
     def get_audio_features(self):
         self.general_update()
         # return audio features of the current track
-        return self.sp.audio_features(self.track_id) if self.is_playing else False
+        return self.sp.audio_features(self.track_id) if self.is_playing_bool else False
     def get_audio_analysis(self):
         self.general_update()
-        return self.sp.audio_analysis(self.track_id) if self.is_playing else False
+        return self.sp.audio_analysis(self.track_id) if self.is_playing_bool else False
     def private_get_image_color(self):
         self.general_update()
         # need to offload this to something else
@@ -128,7 +128,7 @@ class Spotify_helper:
             return self.private_get_image_color()
     def get_color(self):
         self.general_update()
-        if self.is_playing:
+        if self.is_playing_bool:
             color = index.get_indexed(self.get_album_image())
             if color is False:
                 color = self.private_get_lyrics_color()
@@ -142,7 +142,7 @@ class Spotify_helper:
         self.used = val
     def is_playing(self):
         self.general_update()
-        return self.is_playing
+        return self.is_playing_bool
 
 
 
