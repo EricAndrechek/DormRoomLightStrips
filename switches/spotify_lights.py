@@ -323,5 +323,5 @@ def main(lights):
 
 
 if __name__ == '__main__':
-    lights = leds.light_strip()
+    lights = leds.light_strip(is_transmitter=True)
     main(lights)

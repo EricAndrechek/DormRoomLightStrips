@@ -4,7 +4,7 @@ import time
 
 app = Flask(__name__)
 
-lights = leds.light_strip()
+lights = leds.light_strip(is_receiver=True)
 
 
 @app.route('/status')

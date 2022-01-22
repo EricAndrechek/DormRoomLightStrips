@@ -1,10 +1,10 @@
 from flask import Flask, request
-import raw_led_handler
+import leds
 import time
 
 app = Flask(__name__)
 
-lights = raw_led_handler.raw_leds()
+lights = leds.light_strip(is_receiver=True)
 
 
 @app.route('/update')

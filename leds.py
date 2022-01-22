@@ -8,11 +8,14 @@ import requests
 
 
 class light_strip:
-    def __init__(self):
-        self.pixels = neopixel.NeoPixel(
+    def __init__(self, is_receiver=False, is_transmitter=False):
+        if is_receiver:
+            self.pixels = neopixel.NeoPixel(
             board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
         self.homebridge_url = "http://192.168.2.16:8001/"
         self.receiver_url = "http://192.168.2.97:8000/"
+        self.is_receiver = is_receiver
+        self.is_transmitter = is_transmitter
         self.states = {
             # small sections:
             "tv_section": {
@@ -171,7 +174,10 @@ class light_strip:
         return hsv
 
     def update(self):
-        self.pixels.show()
+        if self.is_receiver:
+            self.pixels.show()
+        else:
+            requests.get(self.receiver_url + "update")
 
     def homebridge_push(self, region, status):
         requests.post(self.homebridge_url + region, json={
@@ -185,15 +191,20 @@ class light_strip:
         self.region_fill(0, 118, (0, 0, 0))
         self.update()
 
-    def set_pixel(self, pixel, hsv):
-        self.pixels[pixel] = self.hsv_to_gbr(self.correct_color(hsv))
+    def set_pixel(self, pixel, color, gbr=True):
+        if gbr is False:
+            color = self.hsv_to_gbr(self.correct_color(color))
+        if self.is_receiver:
+            self.pixels[pixel] = color
+        else:
+            requests.get("{}pixel/{}/{}/{}/{}".format(self.receiver_url, pixel, color[0], color[1], color[2]))
 
     def ceiling_set_pixel(self, pixel, hsv, direction="r"):
         if (direction == "r"):
             pixel = 104 + pixel % 87
             if (pixel > 117):
                 pixel = pixel - 87
-            self.set_pixel(pixel, hsv)
+            self.set_pixel(pixel, hsv, gbr=False)
         if (direction == "l"):
             self.ceiling_set_pixel(-pixel - 1, hsv, "r")
 
