@@ -38,6 +38,7 @@ class Spotify_helper:
         # if roku is not on spotify or isnt working, run general update code every second or so to see what is happening
         # if bool is false, nothing is currently using spotify, so run general update code every 2 minutes to just get some data ready for a fast boot if spotify button is pressed
         self.used = True
+        self.general_update()
     def general_update(self):
         # checks if music is currently playing and updates values
         # look into adding roku api to here so we can get lots of updates without rate limiting
@@ -58,12 +59,15 @@ class Spotify_helper:
             return False
 
     def current_track(self):
+        self.general_update()
         # checks if playing and returns current track data
         return self.current_track_data if self.is_playing else False
     def get_track_id(self):
+        self.general_update()
         # returns the track id of the current track if something is playing, otherwise returns false
         return self.track_id if self.is_playing else False
     def get_album_image(self):
+        self.general_update()
         # returns the url to the smallest image of the album
         if self.is_playing:
             last_item = len(self.current_track_data['item']['album']['images']) - 1
@@ -72,17 +76,22 @@ class Spotify_helper:
         else:
             return False
     def get_playback_position(self):
+        self.general_update()
         # returns the current playback position in milliseconds
         return self.track_position if self.is_playing else False
     def get_song_duration(self):
+        self.general_update()
         # returns the duration of the current track in milliseconds
         return self.track_duration / 1000 if self.is_playing else False
     def get_audio_features(self):
+        self.general_update()
         # return audio features of the current track
         return self.sp.audio_features(self.track_id) if self.is_playing else False
     def get_audio_analysis(self):
+        self.general_update()
         return self.sp.audio_analysis(self.track_id) if self.is_playing else False
     def private_get_image_color(self):
+        self.general_update()
         # need to offload this to something else
         url = self.get_album_image()
         if url is not None and url != "" and url is not False:
@@ -96,6 +105,7 @@ class Spotify_helper:
             return new_color
         return False
     def private_get_lyrics_color(self):
+        self.general_update()
         response = requests.get("https://spotify-color.andrechek.com/get_color")
         if response.status_code == 200:
             color = response.text
@@ -117,6 +127,7 @@ class Spotify_helper:
             print("Error on /get_color request: " + response.text)
             return self.private_get_image_color()
     def get_color(self):
+        self.general_update()
         if self.is_playing:
             color = index.get_indexed(self.get_album_image())
             if color is False:
@@ -127,8 +138,10 @@ class Spotify_helper:
             return color
         return False
     def is_being_used(self, val):
+        self.general_update()
         self.used = val
     def is_playing(self):
+        self.general_update()
         return self.is_playing
 
 
