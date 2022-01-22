@@ -13,7 +13,7 @@ from PIL import Image
 from cmath import sin, cos, phase, pi
 import random
 
-spotty = spotify.Spotify()
+spotty = spotify.Spotify_helper()
 
 def circular_average(inputs):
     sum = 0
