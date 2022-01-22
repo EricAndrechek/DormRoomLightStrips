@@ -3,11 +3,11 @@ from spotipy.oauth2 import SpotifyOAuth
 import requests
 import json
 import index
-import image_color_helper
-import numpy as np
-from io import BytesIO
-import urllib.request
-from PIL import Image
+# import image_color_helper
+# import numpy as np
+# from io import BytesIO
+# import urllib.request
+# from PIL import Image
 import colorsys
 
 class Spotify_helper:
@@ -83,7 +83,8 @@ class Spotify_helper:
     def get_audio_analysis(self):
         return self.sp.audio_analysis(self.track_id) if self.is_playing else False
     def private_get_image_color(self):
-        url = self.get_album_image()
+        # need to offload this to something else
+        """ url = self.get_album_image()
         if url is not None and url != "" and url is not False:
             image_bytes = BytesIO(urllib.request.urlopen(url).read())
             image = np.array(Image.open(image_bytes))
@@ -93,6 +94,7 @@ class Spotify_helper:
             except ValueError:
                 return False
             return new_color
+        return False """
         return False
     def private_get_lyrics_color(self):
         response = requests.get("https://spotify-color.andrechek.com/get_color")
