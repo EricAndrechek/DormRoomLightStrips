@@ -171,7 +171,7 @@ class light_strip:
         return hsv
 
     def update(self):
-        self.pixels.update()
+        self.pixels.show()
 
     def homebridge_push(self, region, status):
         requests.post(self.homebridge_url + region, json={
