@@ -13,6 +13,7 @@ from PIL import Image
 from cmath import sin, cos, phase, pi
 import random
 
+spotty = spotify.Spotify()
 
 def circular_average(inputs):
     sum = 0
@@ -22,7 +23,7 @@ def circular_average(inputs):
 
 
 def get_beats_info(division):
-    analysis = get_audio_analysis()
+    analysis = spotty.get_audio_analysis()
     if division == "tatum":
         beats = analysis["tatums"]
     else:
@@ -262,12 +263,12 @@ def main(lights):
     while True:
         url = ""
         album_hue = 0
-        if spotify.is_playing():
+        if spotty.is_playing():
             if adjust_hue:
-                hsv = spotify.get_color()
+                hsv = spotty.get_color()
                 album_hue = hsv[0]
 
-            track = spotify.get_audio_features()[0]["id"]
+            track = spotty.get_audio_features()[0]["id"]
             min_loudness = 0
             max_loudness = 0
             hues = []
@@ -283,7 +284,7 @@ def main(lights):
                 hue_shift = album_hue - avg_hue
             else:
                 hue_shift = 0
-            start_time = time.time() - get_playback_position() + 0.3
+            start_time = time.time() - spotty.get_playback_position() + 0.3
             index = -1
             for beat in beats:
                 index = index + 1
@@ -295,13 +296,13 @@ def main(lights):
                 print("Beat " + str(index) + ": " + str(beat["start"]))
                 """ if index % 10 == 0:
                     stopped = False
-                    while not spotify.is_playing():
+                    while not spotty.is_playing():
                         time.sleep(0.5)
                         stopped = True
                     if stopped:
                         start_time = time.time() - get_playback_position() + 0.3
                 if index % 10 == 5:
-                    if spotify.get_audio_features()[0]["id"] != track:
+                    if spotty.get_audio_features()[0]["id"] != track:
                         break """
                 duration = start_time + \
                     beat["start"] + beat["duration"] - time.time()
@@ -314,8 +315,8 @@ def main(lights):
                                   min_loudness, max_loudness, hue_shift, int(pattern))
                 else:
                     print("skip")
-        while(spotify.get_audio_features()[0]["id"] == track):
-            if (spotify.get_playback_position() < time.time() - start_time - 5):
+        while(spotty.get_audio_features()[0]["id"] == track):
+            if (spotty.get_playback_position() < time.time() - start_time - 5):
                 break
             continue
 
