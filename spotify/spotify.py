@@ -84,7 +84,7 @@ class Spotify_helper:
         return self.sp.audio_analysis(self.track_id) if self.is_playing else False
     def private_get_image_color(self):
         # need to offload this to something else
-        """ url = self.get_album_image()
+        url = self.get_album_image()
         if url is not None and url != "" and url is not False:
             image_bytes = BytesIO(urllib.request.urlopen(url).read())
             image = np.array(Image.open(image_bytes))
@@ -94,7 +94,6 @@ class Spotify_helper:
             except ValueError:
                 return False
             return new_color
-        return False """
         return False
     def private_get_lyrics_color(self):
         response = requests.get("https://spotify-color.andrechek.com/get_color")

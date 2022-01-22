@@ -12,6 +12,7 @@ class light_strip:
         self.pixels = neopixel.NeoPixel(
             board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
         self.homebridge_url = "http://192.168.2.16:8001/"
+        self.receiver_url = "http://192.168.2.97:8000/"
         self.states = {
             # small sections:
             "tv_section": {
@@ -170,7 +171,7 @@ class light_strip:
         return hsv
 
     def update(self):
-        self.pixels.show()
+        requests.get(self.receiver_url + "/update")
 
     def homebridge_push(self, region, status):
         requests.post(self.homebridge_url + region, json={
@@ -185,7 +186,7 @@ class light_strip:
         self.update()
 
     def set_pixel(self, pixel, hsv):
-        self.pixels[pixel] = self.hsv_to_gbr(self.correct_color(hsv))
+        requests.get("{}/pixel/{}/{}".format(self.receiver_url, pixel, self.hsv_to_gbr(self.correct_color(hsv))))
 
     def ceiling_set_pixel(self, pixel, hsv, direction="r"):
         if (direction == "r"):
@@ -248,8 +249,8 @@ class light_strip:
         if (end != 118):
             for i in range(start, end):
                 try:
-                    self.pixels[i] = (0, 0, 0)
-                    self.pixels[i] = self.hsv_to_gbr(hsv)
+                    self.set_pixel(i, (0, 0, 0))
+                    self.set_pixel(i, self.hsv_to_gbr(hsv))
                 except IndexError:
                     print("Index Error: Skipped pixel at index " + str(i))
                 except TypeError:
@@ -257,13 +258,13 @@ class light_strip:
         else:
             for i in range(start, 117):
                 try:
-                    self.pixels[i] = (0, 0, 0)
-                    self.pixels[i] = self.hsv_to_gbr(hsv)
+                    self.set_pixel(i, (0, 0, 0))
+                    self.set_pixel(i, self.hsv_to_gbr(hsv))
                 except IndexError:
                     print("Index Error: Skipped pixel at index " + str(i))
                 except TypeError:
                     print("Type Error: Skipped pixel at index " + str(i))
-            self.pixels[117] = self.hsv_to_gbr(hsv)
+            self.set_pixel(117, self.hsv_to_gbr(hsv))
 
     def ceiling_region_fill(self, start, end, hsv, direction="r"):
         if (direction == "r"):
