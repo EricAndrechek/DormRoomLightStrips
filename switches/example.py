@@ -1,7 +1,6 @@
 # Friendly name: Example # this is what will show up in homekit
 # Internal name: example # this is the name of the file
 # Brightness slider: True # if False, the brightness slider will not show up
-# Brightness slider min: 0 # the minimum brightness value
 # Brightness slider max: 255 # the maximum brightness value
 # RGB: True # if False, the RGB wheel will not show up
 # Description: This is an example of how to create a new switch - it provides no functionality

@@ -1,3 +1,10 @@
+# Friendly name: UM Colors
+# Internal name: umich_colors
+# Brightness slider: False
+# Brightness slider max: 100
+# RGB: False
+# Description: go blueee
+
 import sys
 sys.path.append("../")
 import time
@@ -22,5 +29,6 @@ def main(lights):
 
 
 if __name__ == '__main__':
-    lights = leds.light_strip()
+    arguments = sys.argv
+    lights = leds.light_strip(is_receiver=True)
     main(lights)
