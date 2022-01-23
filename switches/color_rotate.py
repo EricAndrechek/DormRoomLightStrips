@@ -15,6 +15,8 @@ import leds
 
 def main(lights, brightness, rgb=False):
     hue = 0
+    if brightness == 0:
+        brightness = 1
     wait_time = 1 / brightness / 5
     while True:
         i = 0

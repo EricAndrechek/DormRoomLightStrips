@@ -398,8 +398,6 @@ class light_strip:
 
     def kill_thread(self, thread):
         if thread is not None:
-            output = self.thread.communicate()[0]
-            print(output)
             thread.kill()
             self.thread = None
 
