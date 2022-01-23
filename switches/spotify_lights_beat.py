@@ -15,7 +15,7 @@ import spotify
 from cmath import sin, cos, phase, pi
 import random
 
-spotty = spotify.Spotify_helper()
+spotty = spotify.spotify.Spotify_helper()
 
 
 def circular_average(inputs):
