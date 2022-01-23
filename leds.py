@@ -397,6 +397,7 @@ class light_strip:
         return self.states[region]["brightness"]
 
     def kill_thread(self, thread):
-        thread.kill()
-        self.thread = None
+        if thread is not None:
+            thread.kill()
+            self.thread = None
 
