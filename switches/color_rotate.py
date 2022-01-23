@@ -7,6 +7,7 @@
 
 import sys
 sys.path.append("../")
+sys.path.append("/home/pi/DormRoomLightStrips/")
 import time
 import random
 import leds
