@@ -411,7 +411,7 @@ class light_strip:
     
     def run_thread(self, switch, brightness, color):
         self.kill_thread(self.thread)
-        command = 'nohup sudo python3 switches/{}.py {} {} {} {}'.format(switch, str(brightness))
+        command = 'nohup sudo python3 switches/{}.py {} {} {} {}'.format(switch, str(brightness), str(color[0]), str(color[1]), str(color[2]))
         cmd = command.split(" ")
         with subprocess.Popen(cmd) as thread:
             self.thread_pi = thread.pid
