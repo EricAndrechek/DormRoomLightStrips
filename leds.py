@@ -2,15 +2,12 @@ from types import resolve_bases
 import board
 import neopixel
 import colorsys
-import time
-import math
 import requests
 import json
-from threading import Thread
-import ctypes
 import sys
 sys.path.append("switches")
 from switches import *
+import subprocess 
 
 
 class light_strip:
@@ -388,8 +385,7 @@ class light_strip:
             brightness = int(brightness)
             self.states[switch]["brightness"] = brightness
         self.states[switch]["state"] = 1
-        self.thread = Thread(target=eval(switch + ".main"), args=(lights, brightness, color))
-        self.thread.start()
+        self.thread = subprocess.Popen([sys.executable, f'switches/{switch}.py', brightness], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     
     def switch_off(self, switch):
         # stop thread process running switch_on
@@ -401,14 +397,6 @@ class light_strip:
         return self.states[region]["brightness"]
 
     def kill_thread(self, thread):
-        """
-        thread: a threading.Thread object
-        """
-        if thread is not None:
-            thread.do_run = False
-            """ thread_id = thread.ident
-            res = ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, ctypes.py_object(SystemExit))
-            if res > 1:
-                ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, 0)
-                print('Exception raise failure') """
+        thread.kill()
+        self.thread = None
 

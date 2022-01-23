@@ -10,14 +10,12 @@ sys.path.append("../")
 import time
 import random
 import leds
-import threading
 
 
 def main(lights, brightness, rgb=False):
-    t = threading.currentThread()
     hue = 0
     wait_time = 1 / brightness / 5
-    while getattr(t, "do_run", True):
+    while True:
         i = 0
         while i < 87:
             lights.ceiling_set_pixel(i, ((hue + i / 87) % 1, 0.99, 0.9))
