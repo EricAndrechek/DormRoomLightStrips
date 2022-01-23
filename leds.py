@@ -132,18 +132,19 @@ class light_strip:
             }
         }
         # get all switches from switches.json
-        with open("switches.json") as f:
-            self.switches = json.load(f)
-        for switch in self.switches:
-            self.states[switch["internal_name"]] = {}
-            self.states[switch["internal_name"]]["state"] = 0
-            if switch["is_rgb"]:
-                self.states[switch["internal_name"]]["hsv"] = (0, 0, 0.99)
-            if switch["is_brightness_slider"]:
-                self.states[switch["internal_name"]]["brightness"] = 0
-                self.states[switch["internal_name"]]["brightness_max"] = switch["brightness_slider_max"]
+        if server is not None:
+            with open("switches.json") as f:
+                self.switches = json.load(f)
+            for switch in self.switches:
+                self.states[switch["internal_name"]] = {}
+                self.states[switch["internal_name"]]["state"] = 0
+                if switch["is_rgb"]:
+                    self.states[switch["internal_name"]]["hsv"] = (0, 0, 0.99)
+                if switch["is_brightness_slider"]:
+                    self.states[switch["internal_name"]]["brightness"] = 0
+                    self.states[switch["internal_name"]]["brightness_max"] = switch["brightness_slider_max"]
         
-        self.immune = [server, os.getpid()]
+            self.immune = [server, os.getpid()]
         print("server initialized with pid {}".format(os.getpid()))
 
     def correct_color(self, hsv):
