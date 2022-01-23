@@ -376,6 +376,7 @@ class light_strip:
         return self.states[region]
 
     def switch_on(self, switch, lights, brightness=None, color=None):
+        self.all_off()
         if color is not None or "hsv" in self.states[switch]:
             if color is not None:
                 color = self.hex_to_hsv(color)
@@ -387,7 +388,6 @@ class light_strip:
                 brightness = self.states[switch]["brightness"]
             brightness = int(brightness)
             self.states[switch]["brightness"] = brightness
-        self.all_off()
         self.states[switch]["state"] = 1
         self.states[switch]["thread"] = Thread(target=eval(switch + ".main"), args=(lights, brightness, color))
         self.states[switch]["thread"].start()
