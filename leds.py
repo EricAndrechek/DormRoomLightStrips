@@ -134,14 +134,13 @@ class light_strip:
         with open("switches.json") as f:
             self.switches = json.load(f)
         for switch in self.switches:
-            print(switch)
             self.states[switch["internal_name"]] = {}
             self.states[switch["internal_name"]]["state"] = 0
             if switch["is_rgb"]:
                 self.states[switch["name"]]["hsv"] = (0, 0, 0.99)
-            if switch["is_brightness"]:
+            if switch["is_brightness_slider"]:
                 self.states[switch["name"]]["brightness"] = 0
-                self.states[switch["name"]]["brightness_max"] = switch["brightness_max"]
+                self.states[switch["name"]]["brightness_max"] = switch["brightness_slider_max"]
 
     def correct_color(self, hsv):
         red = 0
