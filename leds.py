@@ -385,7 +385,7 @@ class light_strip:
             brightness = int(brightness)
             self.states[switch]["brightness"] = brightness
         self.states[switch]["state"] = 1
-        self.thread = subprocess.Popen([sys.executable, f'switches/{switch}.py', brightness], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        self.thread = subprocess.Popen([sys.executable, f'switches/{switch}.py', str(brightness)], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     
     def switch_off(self, switch):
         # stop thread process running switch_on
