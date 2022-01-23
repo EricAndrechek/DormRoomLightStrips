@@ -2,13 +2,7 @@
 
 
 
-pids = $(sudo pgrep -fl python3)
-
-for pid in pids; do
-    if [[ $1 !=~ pid ]] || [[ $2 !=~ pid ]]; then
-        sudo kill -9 $pid
-    fi
-done
+sudo pgrep -fl python3 | awk '!/{$1}/{print $1}' | awk '!/{$2}/{print $1}' | sudo xargs kill -9
 
 SESSION_NAME='switch'
 sudo screen -ls "$SESSION_NAME" | (
