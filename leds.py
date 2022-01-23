@@ -134,6 +134,7 @@ class light_strip:
         with open("switches.json") as f:
             self.switches = json.load(f)
         for switch in self.switches:
+            print(switch)
             self.states[switch["internal_name"]] = {}
             self.states[switch["internal_name"]]["state"] = 0
             if switch["is_rgb"]:
