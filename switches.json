@@ -3,7 +3,7 @@
         "name": "Cycle Colors",
         "internal_name": "color_cycle",
         "is_brightness_slider": true,
-        "brightness_slider_max": 100,
+        "brightness_slider_max": 99,
         "is_rgb": false,
         "description": "Cycles full ceiling through RGB colors"
     },
@@ -11,7 +11,7 @@
         "name": "Color Rotate Overlap",
         "internal_name": "color_overlap",
         "is_brightness_slider": true,
-        "brightness_slider_max": 100,
+        "brightness_slider_max": 99,
         "is_rgb": false,
         "description": "Rotates and overlaps"
     },
@@ -19,7 +19,7 @@
         "name": "Color Strobe",
         "internal_name": "color_strobe",
         "is_brightness_slider": false,
-        "brightness_slider_max": 100,
+        "brightness_slider_max": 99,
         "is_rgb": false,
         "description": "strobes color"
     },
@@ -27,7 +27,7 @@
         "name": "Random Wave",
         "internal_name": "random_wave",
         "is_brightness_slider": true,
-        "brightness_slider_max": 100,
+        "brightness_slider_max": 99,
         "is_rgb": false,
         "description": "Waves random"
     },
@@ -35,7 +35,7 @@
         "name": "UM Colors",
         "internal_name": "umich_colors",
         "is_brightness_slider": false,
-        "brightness_slider_max": 100,
+        "brightness_slider_max": 99,
         "is_rgb": false,
         "description": "go blueee"
     },
@@ -43,7 +43,7 @@
         "name": "Strobe",
         "internal_name": "strobe",
         "is_brightness_slider": false,
-        "brightness_slider_max": 100,
+        "brightness_slider_max": 99,
         "is_rgb": false,
         "description": "strobe"
     },
@@ -51,7 +51,7 @@
         "name": "Tatum Spotify Lights",
         "internal_name": "spotify_lights_tatum",
         "is_brightness_slider": true,
-        "brightness_slider_max": 100,
+        "brightness_slider_max": 99,
         "is_rgb": false,
         "description": "spotify lights by tatum"
     },
@@ -59,7 +59,7 @@
         "name": "Color Rotate",
         "internal_name": "color_rotate",
         "is_brightness_slider": true,
-        "brightness_slider_max": 100,
+        "brightness_slider_max": 99,
         "is_rgb": false,
         "description": "Rotates"
     },
@@ -75,7 +75,7 @@
         "name": "Beat Spotify Lights",
         "internal_name": "spotify_lights_beat",
         "is_brightness_slider": true,
-        "brightness_slider_max": 100,
+        "brightness_slider_max": 99,
         "is_rgb": false,
         "description": "spotify lights by beat"
     },
@@ -83,7 +83,7 @@
         "name": "Snakes",
         "internal_name": "snakes",
         "is_brightness_slider": false,
-        "brightness_slider_max": 100,
+        "brightness_slider_max": 99,
         "is_rgb": false,
         "description": "snakey snakes"
     }

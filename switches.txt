@@ -2,13 +2,13 @@ Switch name: Cycle Colors
 Description: Cycles full ceiling through RGB colors
 File name: color_cycle.py
 Brightness slider
-Max brightness: 100
+Max brightness: 99
 
 Switch name: Color Rotate Overlap
 Description: Rotates and overlaps
 File name: color_overlap.py
 Brightness slider
-Max brightness: 100
+Max brightness: 99
 
 Switch name: Color Strobe
 Description: strobes color
@@ -18,7 +18,7 @@ Switch name: Random Wave
 Description: Waves random
 File name: random_wave.py
 Brightness slider
-Max brightness: 100
+Max brightness: 99
 
 Switch name: UM Colors
 Description: go blueee
@@ -32,13 +32,13 @@ Switch name: Tatum Spotify Lights
 Description: spotify lights by tatum
 File name: spotify_lights_tatum.py
 Brightness slider
-Max brightness: 100
+Max brightness: 99
 
 Switch name: Color Rotate
 Description: Rotates
 File name: color_rotate.py
 Brightness slider
-Max brightness: 100
+Max brightness: 99
 
 Switch name: Match Spotify Color
 Description: Matches all lights to spotify background
@@ -48,7 +48,7 @@ Switch name: Beat Spotify Lights
 Description: spotify lights by beat
 File name: spotify_lights_beat.py
 Brightness slider
-Max brightness: 100
+Max brightness: 99
 
 Switch name: Snakes
 Description: snakey snakes
