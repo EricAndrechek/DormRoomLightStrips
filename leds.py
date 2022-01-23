@@ -10,7 +10,7 @@ from threading import Thread
 import ctypes
 import sys
 sys.path.append("switches")
-from switches import .
+from switches import *
 
 
 class light_strip:
