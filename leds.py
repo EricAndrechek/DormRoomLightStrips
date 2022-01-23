@@ -387,9 +387,8 @@ class light_strip:
         self.states[switch]["state"] = 1
         command = 'nohup sudo python3 switches/{}.py {} & '.format(switch, str(brightness))
         cmd = command.split(" ")
-        thread = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        self.thread = thread.stdout
-        print(thread)
+        with subprocess.Popen(cmd) as thread:
+            self.thread = thread.pid
         print(self.thread)
         return self.thread
     def switch_off(self, switch):
