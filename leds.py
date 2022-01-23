@@ -132,13 +132,13 @@ class light_strip:
                 "included_in": []
             }
         }
+        self.thread = None
         # get all switches from switches.json
         with open("switches.json") as f:
             self.switches = json.load(f)
         for switch in self.switches:
             self.states[switch["internal_name"]] = {}
             self.states[switch["internal_name"]]["state"] = 0
-            self.states[switch["internal_name"]]["thread"] = None
             if switch["is_rgb"]:
                 self.states[switch["internal_name"]]["hsv"] = (0, 0, 0.99)
             if switch["is_brightness_slider"]:
@@ -206,14 +206,13 @@ class light_strip:
         })
 
     def all_off(self):
+        self.kill_thread(self.thread)
         for region in self.states:
             if self.states[region]["state"] == 1:
                 if "includes" in self.states[region]:
                     self.region_off(region)
                 else:
                     self.states[region]["state"] = 0
-                    if self.states[region]["thread"] is not None:
-                        self.kill_thread(self.states[region]["thread"])
                     self.homebridge_push(region, False)
         self.region_fill(0, 118, (0, 0, 0))
         self.update()
@@ -376,7 +375,6 @@ class light_strip:
         return self.states[region]
 
     def switch_on(self, switch, lights, brightness=None, color=None):
-        self.kill_thread(self.states[switch]["thread"])
         self.all_off()
         if color is not None or "hsv" in self.states[switch]:
             if color is not None:
@@ -390,12 +388,12 @@ class light_strip:
             brightness = int(brightness)
             self.states[switch]["brightness"] = brightness
         self.states[switch]["state"] = 1
-        self.states[switch]["thread"] = Thread(target=eval(switch + ".main"), args=(lights, brightness, color))
-        self.states[switch]["thread"].start()
+        self.thread = Thread(target=eval(switch + ".main"), args=(lights, brightness, color))
+        self.thread.start()
     
     def switch_off(self, switch):
         # stop thread process running switch_on
-        self.kill_thread(self.states[switch]["thread"])
+        self.kill_thread(self.thread)
         self.states[switch]["state"] = 0
         self.all_off()
     
