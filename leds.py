@@ -8,6 +8,7 @@ import sys
 sys.path.append("switches")
 from switches import *
 import subprocess 
+import multiprocessing
 
 
 class light_strip:
@@ -130,6 +131,7 @@ class light_strip:
             }
         }
         self.thread = None
+        self.thread_pid = None
         # get all switches from switches.json
         with open("switches.json") as f:
             self.switches = json.load(f)
@@ -379,18 +381,20 @@ class light_strip:
             else:
                 color = self.states[switch]["hsv"]
             self.states[switch]["hsv"] = color
+        else:
+            color = (0, 0, 0)
         if brightness is not None or "brightness" in self.states[switch]:
             if brightness is None:
                 brightness = self.states[switch]["brightness"]
             brightness = int(brightness)
             self.states[switch]["brightness"] = brightness
+        else:
+            brightness = 100
         self.states[switch]["state"] = 1
-        command = 'nohup sudo python3 switches/{}.py {}'.format(switch, str(brightness))
-        cmd = command.split(" ")
-        with subprocess.Popen(cmd) as thread:
-            self.thread = thread.pid
-        print(self.thread)
-        return self.thread
+        proc = multiprocessing.Process(target=self.run_thread, args=(switch, brightness, color))
+        proc.start()
+        self.thread = proc
+        return 'on/set'
     def switch_off(self, switch):
         # stop thread process running switch_on
         self.kill_thread(self.thread)
@@ -404,4 +408,12 @@ class light_strip:
         if thread is not None:
             thread.terminate()
             self.thread = None
+    
+    def run_thread(self, switch, brightness, color):
+        self.kill_thread(self.thread)
+        command = 'nohup sudo python3 switches/{}.py {} {} {} {}'.format(switch, str(brightness))
+        cmd = command.split(" ")
+        with subprocess.Popen(cmd) as thread:
+            self.thread_pi = thread.pid
+
 
