@@ -20,7 +20,7 @@ def main(lights, brightness):
         lights.ceiling_set_pixel(spot, (hue, 0.99, 0.99))
         hue = hue + 0.0001 % 1
         spot = (spot + 1) % 87
-        time.sleep(speed)
+        time.sleep(wait_time)
         lights.update()
 
 
