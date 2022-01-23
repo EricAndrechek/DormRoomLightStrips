@@ -1,10 +1,11 @@
 from flask import Flask, request
 import leds
 import time
+import os
 
 app = Flask(__name__)
 
-lights = leds.light_strip(is_receiver=True)
+lights = leds.light_strip(server=os.getpid(), is_receiver=True)
 
 
 @app.route('/status')

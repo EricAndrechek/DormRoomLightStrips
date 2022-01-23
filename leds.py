@@ -13,7 +13,7 @@ import os
 
 
 class light_strip:
-    def __init__(self, is_receiver=False, is_transmitter=False):
+    def __init__(self, is_receiver=False, is_transmitter=False, server=None):
         if is_receiver:
             self.pixels = neopixel.NeoPixel(
             board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
@@ -142,6 +142,8 @@ class light_strip:
             if switch["is_brightness_slider"]:
                 self.states[switch["internal_name"]]["brightness"] = 0
                 self.states[switch["internal_name"]]["brightness_max"] = switch["brightness_slider_max"]
+        
+        self.immune = [server, os.getpid()]
 
     def correct_color(self, hsv):
         red = 0
@@ -402,11 +404,12 @@ class light_strip:
         return self.states[region]["brightness"]
 
     def kill_thread(self):
-        command = 'sudo ./thread_killer.sh'
+        command = 'sudo ./thread_killer.sh {} {}'.format(self.immune[0], self.immune[1])
         os.system(command)
+        pid = os.getpid()
     
     def run_thread(self, switch, brightness, color):
-        command = 'sudo ./thread_runner.sh {} {} {} {} {}'.format(switch, str(brightness), str(color[0]), str(color[1]), str(color[2]))
+        command = 'sudo ./thread_runner.sh {} {} {} {} {} {} {}'.format(switch, str(brightness), str(color[0]), str(color[1]), str(color[2], self.immune[0], self.immune[1]))
         os.system(command)
 
 
