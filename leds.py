@@ -136,6 +136,7 @@ class light_strip:
         for switch in self.switches:
             self.states[switch["internal_name"]] = {}
             self.states[switch["internal_name"]]["state"] = 0
+            self.states[switch["internal_name"]]["thread"] = None
             if switch["is_rgb"]:
                 self.states[switch["internal_name"]]["hsv"] = (0, 0, 0.99)
             if switch["is_brightness_slider"]:
@@ -209,6 +210,8 @@ class light_strip:
                     self.region_off(region)
                 else:
                     self.states[region]["state"] = 0
+                    if self.states[region]["thread"] is not None:
+                        self.kill_thread(self.states[region]["thread"])
                     self.homebridge_push(region, False)
         self.region_fill(0, 118, (0, 0, 0))
         self.update()

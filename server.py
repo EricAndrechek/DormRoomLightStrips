@@ -58,23 +58,27 @@ def brightness():
 
 
 @app.route('/custom/<switch>')
-def example(switch):
+def custom(switch):
     todo = request.args.get('r')
     data = request.args.get('s')
     if todo == 'status':
-        lights.status(switch)
+        return str(lights.status(switch))
     elif todo == 'on':
         lights.switch_on(switch, lights)
+        return 'on'
     elif todo == 'off':
         lights.switch_off(switch)
+        return 'off'
     elif todo == 'color':
-        lights.get_hex(switch)
+        return lights.get_hex(switch)
     elif todo == 'bright':
-        lights.switch_brightness(switch)
+        return str(lights.switch_brightness(switch))
     elif todo == 'cset':
         lights.switch_on(switch, lights, color=data)
+        return 'set'
     elif todo == 'bset':
         lights.switch_on(switch, lights, brightness=data)
+        return 'set'
 
 
 
