@@ -27,6 +27,7 @@ def main(lights, brightness, rgb=False):
 
 if __name__ == '__main__':
     arguments = sys.argv
+    print(arguments)
     brightness = int(arguments[1])
     lights = leds.light_strip(is_receiver=True)
     main(lights, brightness)
