@@ -12,11 +12,6 @@ import leds
 import time
 sys.path.append("../spotify")
 import spotify
-import image_color_helper
-import numpy as np
-from io import BytesIO
-import urllib.request
-from PIL import Image
 from cmath import sin, cos, phase, pi
 import random
 
