@@ -9,6 +9,7 @@ sys.path.append("switches")
 from switches import *
 import subprocess 
 import multiprocessing
+import os
 
 
 class light_strip:
@@ -412,9 +413,6 @@ class light_strip:
     def run_thread(self, switch, brightness, color):
         self.kill_thread(self.thread)
         command = 'sudo python3 switches/{}.py {} {} {} {}'.format(switch, str(brightness), str(color[0]), str(color[1]), str(color[2]))
-        cmd = command.split(" ")
-        with subprocess.Popen(cmd) as thread:
-            self.thread_pid = thread.pid
-
+        os.system(command)
 
 
