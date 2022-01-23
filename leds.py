@@ -374,13 +374,13 @@ class light_strip:
         return self.states[region]
 
     def switch_on(self, switch, lights, brightness=None, color=None):
-        if color is not None or self.states[switch]["hsv"] is not None:
+        if color is not None or "hsv" in self.states[switch]:
             if color is not None:
                 color = self.hex_to_hsv(color)
             else:
                 color = self.states[switch]["hsv"]
             self.states[switch]["hsv"] = color
-        if brightness is not None or self.states[switch]["brightness"] is not None:
+        if brightness is not None or "brightness" in self.states[switch]:
             if brightness is None:
                 brightness = self.states[switch]["brightness"]
             self.states[switch]["brightness"] = int(brightness)
