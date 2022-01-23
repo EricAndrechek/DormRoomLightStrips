@@ -12,7 +12,7 @@ import spotify
 import time
 
 
-def main(lights):
+def main(lights, brightness=False, rgb=False):
     last_hsv = (0, 0, 0)
     last_url = ""
     while True:

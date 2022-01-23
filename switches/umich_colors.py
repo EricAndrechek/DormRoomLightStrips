@@ -1,7 +1,7 @@
 # Friendly name: UM Colors
 # Internal name: umich_colors
 # Brightness slider: False
-# Brightness slider max: 100
+# Brightness slider max: 99
 # RGB: False
 # Description: go blueee
 
@@ -12,7 +12,7 @@ import random
 import leds
 
 
-def main(lights):
+def main(lights, brightness=False, rgb=False):
     blue = (0.583, 0.99, 0.4)
     maize = (0.18, 0.98, 0.99)
     while True:

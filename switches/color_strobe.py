@@ -1,7 +1,7 @@
 # Friendly name: Color Strobe
 # Internal name: color_strobe
 # Brightness slider: False
-# Brightness slider max: 100
+# Brightness slider max: 99
 # RGB: False
 # Description: strobes color
 
@@ -12,7 +12,7 @@ import time
 import random
 
 
-def main(lights):
+def main(lights, brightness=False, rgb=False):
     while (True):
         hue = random.random()
         lights.all_off()

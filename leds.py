@@ -5,6 +5,10 @@ import colorsys
 import time
 import math
 import requests
+import json
+from threading import Thread
+from switches import *
+import ctypes 
 
 
 class light_strip:
@@ -126,6 +130,16 @@ class light_strip:
                 "included_in": []
             }
         }
+        # get all switches from switches.json
+        with open("switches.json") as f:
+            self.switches = json.load(f)
+        for switch in self.switches:
+            self.states[switch["internal_name"]]["state"] = 0
+            if switch["is_rgb"]:
+                self.states[switch["name"]]["hsv"] = (0, 0, 0.99)
+            if switch["is_brightness"]:
+                self.states[switch["name"]]["brightness"] = 0
+                self.states[switch["name"]]["brightness_max"] = switch["brightness_max"]
 
     def correct_color(self, hsv):
         red = 0
@@ -188,6 +202,13 @@ class light_strip:
         })
 
     def all_off(self):
+        for region in self.states:
+            if self.states[region]["state"] == 1:
+                if "includes" in self.states[region]:
+                    self.region_off(region)
+                else:
+                    self.states[region]["state"] = 0
+                    self.homebridge_push(region, False)
         self.region_fill(0, 118, (0, 0, 0))
         self.update()
 
@@ -347,3 +368,39 @@ class light_strip:
 
     def get_region_dict(self, region):
         return self.states[region]
+
+    def switch_on(self, switch, lights, brightness=None, color=None):
+        if color is not None or self.states[switch]["hsv"] is not None:
+            if color is not None:
+                color = self.hex_to_hsv(color)
+            else:
+                color = self.states[switch]["hsv"]
+            self.states[switch]["hsv"] = color
+        if brightness is not None or self.states[switch]["brightness"] is not None:
+            if brightness is None:
+                brightness = self.states[switch]["brightness"]
+            self.states[switch]["brightness"] = int(brightness)
+        self.all_off()
+        self.states[switch]["state"] = 1
+        self.states[switch]["thread"] = Thread(target=switch, args=(lights, brightness, color))
+        self.states[switch]["thread"].start()
+    
+    def switch_off(self, switch):
+        # stop thread process running switch_on
+        self.kill_thread(self.states[switch]["thread"])
+        self.states[switch]["state"] = 0
+        self.all_off()
+    
+    def switch_brightness(self, region):
+        return self.states[region]["brightness"]
+
+    def kill_thread(self, thread):
+        """
+        thread: a threading.Thread object
+        """
+        thread_id = thread.ident
+        res = ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, ctypes.py_object(SystemExit))
+        if res > 1:
+            ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, 0)
+            print('Exception raise failure')
+

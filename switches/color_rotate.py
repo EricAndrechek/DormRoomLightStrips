@@ -1,7 +1,7 @@
 # Friendly name: Color Rotate
 # Internal name: color_rotate
 # Brightness slider: True
-# Brightness slider max: 100
+# Brightness slider max: 99
 # RGB: False
 # Description: Rotates
 
@@ -12,7 +12,7 @@ import random
 import leds
 
 
-def main(lights, brightness):
+def main(lights, brightness, rgb=False):
     hue = 0
     wait_time = 1 / brightness / 5
     while True:

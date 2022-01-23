@@ -1,7 +1,7 @@
 # Friendly name: Tatum Spotify Lights
 # Internal name: spotify_lights_tatum
 # Brightness slider: True
-# Brightness slider max: 100
+# Brightness slider max: 99
 # RGB: False
 # Description: spotify lights by tatum
 
@@ -262,7 +262,7 @@ def light_pattern(lights, beat, start_time, duration, min_loudness, max_loudness
                  min_loudness, max_loudness, hue_shift)
 
 
-def main(lights, brightness):
+def main(lights, brightness, rgb=False):
     track = ""
     adjust_hue = True
     last_url = ""

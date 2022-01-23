@@ -1,7 +1,7 @@
 # Friendly name: Strobe
 # Internal name: strobe
 # Brightness slider: False
-# Brightness slider max: 100
+# Brightness slider max: 99
 # RGB: False
 # Description: strobe
 
@@ -13,7 +13,7 @@ import os
 import sys
 
 
-def main(lights):
+def main(lights, brightness=False, rgb=False):
     while True:
         lights.off()
         time.sleep(0.12)

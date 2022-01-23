@@ -257,14 +257,14 @@
         "service": "Light",
         "switch": {
             "notificationID": "color_cycle",
-            "status": "http://192.168.2.97:8000/status?r=color_cycle",
-            "powerOn": "http://192.168.2.97:8000/on?r=color_cycle",
-            "powerOff": "http://192.168.2.97:8000/off?r=color_cycle"
+            "status": "http://192.168.2.97:8000/color_cycle?r=status",
+            "powerOn": "http://192.168.2.97:8000/color_cycle?r=on",
+            "powerOff": "http://192.168.2.97:8000/color_cycle?r=off"
         },
         "brightness": {
             "max": 100,
-            "status": "http://192.168.2.97:8000/bright?r=color_cycle",
-            "url": "http://192.168.2.97:8000/bset/%s?r=color_cycle"
+            "status": "http://192.168.2.97:8000/color_cycle?r=bright",
+            "url": "http://192.168.2.97:8000/color_cycle?r=bset&s=%s"
         }
     },
     {
@@ -273,14 +273,14 @@
         "service": "Light",
         "switch": {
             "notificationID": "color_overlap",
-            "status": "http://192.168.2.97:8000/status?r=color_overlap",
-            "powerOn": "http://192.168.2.97:8000/on?r=color_overlap",
-            "powerOff": "http://192.168.2.97:8000/off?r=color_overlap"
+            "status": "http://192.168.2.97:8000/color_overlap?r=status",
+            "powerOn": "http://192.168.2.97:8000/color_overlap?r=on",
+            "powerOff": "http://192.168.2.97:8000/color_overlap?r=off"
         },
         "brightness": {
             "max": 100,
-            "status": "http://192.168.2.97:8000/bright?r=color_overlap",
-            "url": "http://192.168.2.97:8000/bset/%s?r=color_overlap"
+            "status": "http://192.168.2.97:8000/color_overlap?r=bright",
+            "url": "http://192.168.2.97:8000/color_overlap?r=bset&s=%s"
         }
     },
     {
@@ -289,9 +289,9 @@
         "service": "Light",
         "switch": {
             "notificationID": "color_strobe",
-            "status": "http://192.168.2.97:8000/status?r=color_strobe",
-            "powerOn": "http://192.168.2.97:8000/on?r=color_strobe",
-            "powerOff": "http://192.168.2.97:8000/off?r=color_strobe"
+            "status": "http://192.168.2.97:8000/color_strobe?r=status",
+            "powerOn": "http://192.168.2.97:8000/color_strobe?r=on",
+            "powerOff": "http://192.168.2.97:8000/color_strobe?r=off"
         }
     },
     {
@@ -300,14 +300,14 @@
         "service": "Light",
         "switch": {
             "notificationID": "random_wave",
-            "status": "http://192.168.2.97:8000/status?r=random_wave",
-            "powerOn": "http://192.168.2.97:8000/on?r=random_wave",
-            "powerOff": "http://192.168.2.97:8000/off?r=random_wave"
+            "status": "http://192.168.2.97:8000/random_wave?r=status",
+            "powerOn": "http://192.168.2.97:8000/random_wave?r=on",
+            "powerOff": "http://192.168.2.97:8000/random_wave?r=off"
         },
         "brightness": {
             "max": 100,
-            "status": "http://192.168.2.97:8000/bright?r=random_wave",
-            "url": "http://192.168.2.97:8000/bset/%s?r=random_wave"
+            "status": "http://192.168.2.97:8000/random_wave?r=bright",
+            "url": "http://192.168.2.97:8000/random_wave?r=bset&s=%s"
         }
     },
     {
@@ -316,9 +316,9 @@
         "service": "Light",
         "switch": {
             "notificationID": "umich_colors",
-            "status": "http://192.168.2.97:8000/status?r=umich_colors",
-            "powerOn": "http://192.168.2.97:8000/on?r=umich_colors",
-            "powerOff": "http://192.168.2.97:8000/off?r=umich_colors"
+            "status": "http://192.168.2.97:8000/umich_colors?r=status",
+            "powerOn": "http://192.168.2.97:8000/umich_colors?r=on",
+            "powerOff": "http://192.168.2.97:8000/umich_colors?r=off"
         }
     },
     {
@@ -327,9 +327,9 @@
         "service": "Light",
         "switch": {
             "notificationID": "strobe",
-            "status": "http://192.168.2.97:8000/status?r=strobe",
-            "powerOn": "http://192.168.2.97:8000/on?r=strobe",
-            "powerOff": "http://192.168.2.97:8000/off?r=strobe"
+            "status": "http://192.168.2.97:8000/strobe?r=status",
+            "powerOn": "http://192.168.2.97:8000/strobe?r=on",
+            "powerOff": "http://192.168.2.97:8000/strobe?r=off"
         }
     },
     {
@@ -338,14 +338,14 @@
         "service": "Light",
         "switch": {
             "notificationID": "spotify_lights_tatum",
-            "status": "http://192.168.2.97:8000/status?r=spotify_lights_tatum",
-            "powerOn": "http://192.168.2.97:8000/on?r=spotify_lights_tatum",
-            "powerOff": "http://192.168.2.97:8000/off?r=spotify_lights_tatum"
+            "status": "http://192.168.2.97:8000/spotify_lights_tatum?r=status",
+            "powerOn": "http://192.168.2.97:8000/spotify_lights_tatum?r=on",
+            "powerOff": "http://192.168.2.97:8000/spotify_lights_tatum?r=off"
         },
         "brightness": {
             "max": 100,
-            "status": "http://192.168.2.97:8000/bright?r=spotify_lights_tatum",
-            "url": "http://192.168.2.97:8000/bset/%s?r=spotify_lights_tatum"
+            "status": "http://192.168.2.97:8000/spotify_lights_tatum?r=bright",
+            "url": "http://192.168.2.97:8000/spotify_lights_tatum?r=bset&s=%s"
         }
     },
     {
@@ -354,14 +354,14 @@
         "service": "Light",
         "switch": {
             "notificationID": "color_rotate",
-            "status": "http://192.168.2.97:8000/status?r=color_rotate",
-            "powerOn": "http://192.168.2.97:8000/on?r=color_rotate",
-            "powerOff": "http://192.168.2.97:8000/off?r=color_rotate"
+            "status": "http://192.168.2.97:8000/color_rotate?r=status",
+            "powerOn": "http://192.168.2.97:8000/color_rotate?r=on",
+            "powerOff": "http://192.168.2.97:8000/color_rotate?r=off"
         },
         "brightness": {
             "max": 100,
-            "status": "http://192.168.2.97:8000/bright?r=color_rotate",
-            "url": "http://192.168.2.97:8000/bset/%s?r=color_rotate"
+            "status": "http://192.168.2.97:8000/color_rotate?r=bright",
+            "url": "http://192.168.2.97:8000/color_rotate?r=bset&s=%s"
         }
     },
     {
@@ -370,9 +370,9 @@
         "service": "Light",
         "switch": {
             "notificationID": "spotify_background",
-            "status": "http://192.168.2.97:8000/status?r=spotify_background",
-            "powerOn": "http://192.168.2.97:8000/on?r=spotify_background",
-            "powerOff": "http://192.168.2.97:8000/off?r=spotify_background"
+            "status": "http://192.168.2.97:8000/spotify_background?r=status",
+            "powerOn": "http://192.168.2.97:8000/spotify_background?r=on",
+            "powerOff": "http://192.168.2.97:8000/spotify_background?r=off"
         }
     },
     {
@@ -381,14 +381,14 @@
         "service": "Light",
         "switch": {
             "notificationID": "spotify_lights_beat",
-            "status": "http://192.168.2.97:8000/status?r=spotify_lights_beat",
-            "powerOn": "http://192.168.2.97:8000/on?r=spotify_lights_beat",
-            "powerOff": "http://192.168.2.97:8000/off?r=spotify_lights_beat"
+            "status": "http://192.168.2.97:8000/spotify_lights_beat?r=status",
+            "powerOn": "http://192.168.2.97:8000/spotify_lights_beat?r=on",
+            "powerOff": "http://192.168.2.97:8000/spotify_lights_beat?r=off"
         },
         "brightness": {
             "max": 100,
-            "status": "http://192.168.2.97:8000/bright?r=spotify_lights_beat",
-            "url": "http://192.168.2.97:8000/bset/%s?r=spotify_lights_beat"
+            "status": "http://192.168.2.97:8000/spotify_lights_beat?r=bright",
+            "url": "http://192.168.2.97:8000/spotify_lights_beat?r=bset&s=%s"
         }
     },
     {
@@ -397,9 +397,9 @@
         "service": "Light",
         "switch": {
             "notificationID": "snakes",
-            "status": "http://192.168.2.97:8000/status?r=snakes",
-            "powerOn": "http://192.168.2.97:8000/on?r=snakes",
-            "powerOff": "http://192.168.2.97:8000/off?r=snakes"
+            "status": "http://192.168.2.97:8000/snakes?r=status",
+            "powerOn": "http://192.168.2.97:8000/snakes?r=on",
+            "powerOff": "http://192.168.2.97:8000/snakes?r=off"
         }
     }
 ]

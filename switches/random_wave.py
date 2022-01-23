@@ -1,7 +1,7 @@
 # Friendly name: Random Wave
 # Internal name: random_wave
 # Brightness slider: True
-# Brightness slider max: 100
+# Brightness slider max: 99
 # RGB: False
 # Description: Waves random
 
@@ -12,7 +12,7 @@ import random
 import leds
 
 
-def main(lights, brightness):
+def main(lights, brightness, rgb=False):
     wait_time = 1 / brightness * 2
     hue = 0
     start = 0

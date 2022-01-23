@@ -1,7 +1,7 @@
 # Friendly name: Snakes
 # Internal name: snakes
 # Brightness slider: False
-# Brightness slider max: 100
+# Brightness slider max: 99
 # RGB: False
 # Description: snakey snakes
 
@@ -11,7 +11,7 @@ import leds
 import time
 
 
-def main(lights):
+def main(lights, brightness=False, rgb=False):
     count = 0
     while True:
         firsts = []

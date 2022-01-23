@@ -1,7 +1,7 @@
 # Friendly name: Cycle Colors
 # Internal name: color_cycle
 # Brightness slider: True
-# Brightness slider max: 100
+# Brightness slider max: 99
 # RGB: False
 # Description: Cycles full ceiling through RGB colors
 
@@ -12,7 +12,7 @@ import time
 import colorsys
 
 
-def main(lights, brightness):
+def main(lights, brightness, rgb=False):
     hsv = (0, 0.999, 0.9)
     wait_time = 1 / (brightness * brightness)
     while(True):

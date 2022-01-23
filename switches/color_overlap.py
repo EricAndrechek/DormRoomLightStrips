@@ -1,7 +1,7 @@
 # Friendly name: Color Rotate Overlap
 # Internal name: color_overlap
 # Brightness slider: True
-# Brightness slider max: 100
+# Brightness slider max: 99
 # RGB: False
 # Description: Rotates and overlaps
 
@@ -12,7 +12,7 @@ import random
 import leds
 
 
-def main(lights, brightness):
+def main(lights, brightness, rgb=False):
     wait_time = 1 / brightness / 2
     hue = 0
     spot = 0
