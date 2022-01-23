@@ -376,6 +376,7 @@ class light_strip:
         return self.states[region]
 
     def switch_on(self, switch, lights, brightness=None, color=None):
+        self.kill_thread(self.states[switch]["thread"])
         self.all_off()
         if color is not None or "hsv" in self.states[switch]:
             if color is not None:
