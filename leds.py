@@ -404,12 +404,15 @@ class light_strip:
         return self.states[region]["brightness"]
 
     def kill_thread(self):
-        command = 'sudo ./thread_killer.sh {} {}'.format(self.immune[0], self.immune[1])
+        command = 'sudo ./thread_killer.sh'
         os.system(command)
-        pid = os.getpid()
+        running = subprocess.check_output('sudo pgrep -fl python3'.split())
+        for line in running:
+            if line.split()[0] != self.immune[0] and line.split()[0] != self.immune[1]:
+                os.system('sudo kill -9 ' + line.split()[0])
     
     def run_thread(self, switch, brightness, color):
-        command = 'sudo ./thread_runner.sh {} {} {} {} {} {} {}'.format(switch, str(brightness), str(color[0]), str(color[1]), str(color[2], self.immune[0], self.immune[1]))
+        command = 'sudo ./thread_runner.sh {} {} {} {} {}'.format(switch, str(brightness), str(color[0]), str(color[1]), str(color[2]))
         os.system(command)
 
 
