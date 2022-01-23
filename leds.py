@@ -385,7 +385,8 @@ class light_strip:
         if brightness is not None or "brightness" in self.states[switch]:
             if brightness is None:
                 brightness = self.states[switch]["brightness"]
-            self.states[switch]["brightness"] = int(brightness)
+            brightness = int(brightness)
+            self.states[switch]["brightness"] = brightness
         self.all_off()
         self.states[switch]["state"] = 1
         self.states[switch]["thread"] = Thread(target=eval(switch + ".main"), args=(lights, brightness, color))
