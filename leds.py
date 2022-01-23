@@ -144,6 +144,7 @@ class light_strip:
                 self.states[switch["internal_name"]]["brightness_max"] = switch["brightness_slider_max"]
         
         self.immune = [server, os.getpid()]
+        print("server initialized with pid {}".format(os.getpid()))
 
     def correct_color(self, hsv):
         red = 0
@@ -408,7 +409,9 @@ class light_strip:
         os.system(command)
         running = subprocess.check_output('sudo pgrep -fl python3'.split()).decode("utf-8") 
         for line in running.split('\n'):
-            if abs(int(line.split()[0]) - int(self.immune[0])) > 2:
+            pid = int(line.split()[0])
+            immune = int(self.immune[0])
+            if abs(pid - immune) > 2:
                 os.system('sudo kill -9 ' + line.split()[0])
     
     def run_thread(self, switch, brightness, color):
