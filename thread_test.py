@@ -1,46 +1,53 @@
-# Python program raising
-# exceptions in a python
-# thread
+# Python program using
+# traces to kill threads
 
+import sys
+import trace
 import threading
-import ctypes
 import time
 import os
+class thread_with_trace(threading.Thread):
+    def __init__(self, *args, **keywords):
+        threading.Thread.__init__(self, *args, **keywords)
+        self.killed = False
 
-class thread_with_exception(threading.Thread):
-    def __init__(self, name):
-        threading.Thread.__init__(self)
-        self.name = name
-            
-    def run(self):
-        command = "sudo python3 switches/color_rotate.py 100 0 0 0"
-        os.system(command)
-        # target function of the thread class
-        try:
-            while True:
-                print('running ' + self.name)
-        finally:
-            print('ended')
-        
-    def get_id(self):
+    def start(self):
+        self.__run_backup = self.run
+        self.run = self.__run    
+        threading.Thread.start(self)
 
-        # returns id of the respective thread
-        if hasattr(self, '_thread_id'):
-            return self._thread_id
-        for id, thread in threading._active.items():
-            if thread is self:
-                return id
+    def __run(self):
+        sys.settrace(self.globaltrace)
+        self.__run_backup()
+        self.run = self.__run_backup
 
-    def raise_exception(self):
-        thread_id = self.get_id()
-        res = ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id,
-            ctypes.py_object(SystemExit))
-        if res > 1:
-            ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, 0)
-            print('Exception raise failure')
-    
-t1 = thread_with_exception('Thread 1')
+    def globaltrace(self, frame, event, arg):
+        if event == 'call':
+            return self.localtrace
+        else:
+            return None
+
+    def localtrace(self, frame, event, arg):
+        if self.killed:
+            if event == 'line':
+                raise SystemExit()
+        return self.localtrace
+
+    def kill(self):
+        self.killed = True
+
+    def func():
+        while True:
+            print('thread running')
+
+def func():
+    command = "sudo python3 switches/color_rotate.py 100 0 0 0"
+    os.system(command)
+
+t1 = thread_with_trace(target = func)
 t1.start()
 time.sleep(10)
-t1.raise_exception()
+t1.kill()
 t1.join()
+if not t1.isAlive():
+    print('thread killed')
