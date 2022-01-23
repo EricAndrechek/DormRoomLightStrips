@@ -46,9 +46,20 @@ def list(search):
 @cli.command()
 @click.pass_context
 @click.option('--dry-run', help='Run the code without actually executing it', is_flag=True, default=False)
-def build_server(ctx, dry_run):
+def build_init(ctx, dry_run):
     dry_run = dry_run or ctx.obj['dry_run']
-    pass
+    # add all internal names to a list and write list to switches/__init__.py
+    with open('switches.json') as switches:
+        switches = json.load(switches)
+        switchlist = []
+        for switch in switches:
+            switchlist.append(switch['internal_name'])
+        write_buffer = "__all__ = [" + ", ".join(f'"{switch}"' for switch in switchlist) + "]"
+        if not dry_run:
+            with open('switches/__init__.py', 'w') as init:
+                init.write(write_buffer)
+        else:
+            print(write_buffer)
 
 
 @cli.command()
@@ -112,7 +123,7 @@ def compile(ctx, dry_run):
     files = os.listdir("switches")
     switches = []
     for file in files:
-        if file.endswith(".py"):
+        if file.endswith(".py") and not file.startswith("__"):
             with open("switches/" + file, "r") as f:
                 # get the first 5 lines
                 lines = f.readlines()[0:6]

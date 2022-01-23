@@ -7,8 +7,10 @@ import math
 import requests
 import json
 from threading import Thread
-from switches import *
-import ctypes 
+import ctypes
+import sys
+sys.path.append("switches")
+from switches import .
 
 
 class light_strip:
