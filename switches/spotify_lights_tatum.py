@@ -1,3 +1,10 @@
+# Friendly name: Tatum Spotify Lights
+# Internal name: spotify_lights_tatum
+# Brightness slider: True
+# Brightness slider max: 100
+# RGB: False
+# Description: spotify lights by tatum
+
 import sys
 sys.path.append("../")
 from time import time
@@ -14,6 +21,7 @@ from cmath import sin, cos, phase, pi
 import random
 
 spotty = spotify.Spotify_helper()
+
 
 def circular_average(inputs):
     sum = 0
@@ -254,12 +262,12 @@ def light_pattern(lights, beat, start_time, duration, min_loudness, max_loudness
                  min_loudness, max_loudness, hue_shift)
 
 
-def main(lights):
+def main(lights, brightness):
     track = ""
     adjust_hue = True
     last_url = ""
-    division = input("Division: ")
-    pattern = input("Pattern: ")
+    division = "tatum"
+    pattern = int(brightness / 20 + 1)
     while True:
         url = ""
         album_hue = 0
@@ -323,5 +331,7 @@ def main(lights):
 
 
 if __name__ == '__main__':
-    lights = leds.light_strip(is_transmitter=True)
-    main(lights)
+    arguments = sys.argv
+    brightness = int(arguments[1])
+    lights = leds.light_strip(is_receiver=True)
+    main(lights, brightness)

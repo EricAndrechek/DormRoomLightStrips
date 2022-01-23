@@ -1,12 +1,16 @@
+# Friendly name: Strobe
+# Internal name: strobe
+# Brightness slider: False
+# Brightness slider max: 100
+# RGB: False
+# Description: strobe
+
 import sys
 sys.path.append("../")
 import time
 import leds
 import os
 import sys
-
-p = os.path.abspath('.')
-sys.path.insert(1, p)
 
 
 def main(lights):
@@ -18,5 +22,6 @@ def main(lights):
 
 
 if __name__ == '__main__':
-    lights = leds.light_strip()
+    arguments = sys.argv
+    lights = leds.light_strip(is_receiver=True)
     main(lights)

@@ -3,7 +3,7 @@
 # Brightness slider: True
 # Brightness slider max: 100
 # RGB: False
-# Description: Matches all lights to spotify background
+# Description: Cycles full ceiling through RGB colors
 
 import sys
 sys.path.append("../")
@@ -25,7 +25,6 @@ def main(lights, brightness):
 if __name__ == '__main__':
     arguments = sys.argv
     brightness = int(arguments[1])
-    # change to is_transmitter=True if you want to be a transmitter
     lights = leds.light_strip(is_receiver=True)
     print(brightness)
     main(lights, brightness)

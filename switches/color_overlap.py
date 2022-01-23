@@ -1,3 +1,10 @@
+# Friendly name: Color Rotate Overlap
+# Internal name: color_overlap
+# Brightness slider: True
+# Brightness slider max: 100
+# RGB: False
+# Description: Rotates and overlaps
+
 import sys
 sys.path.append("../")
 import time
@@ -5,7 +12,8 @@ import random
 import leds
 
 
-def main(lights, speed=0.1):
+def main(lights, brightness):
+    wait_time = 1 / brightness / 2
     hue = 0
     spot = 0
     while True:
@@ -17,6 +25,7 @@ def main(lights, speed=0.1):
 
 
 if __name__ == '__main__':
-    lights = leds.light_strip()
-    speed = float(input("Speed: "))
-    main(lights, speed)
+    arguments = sys.argv
+    brightness = int(arguments[1])
+    lights = leds.light_strip(is_receiver=True)
+    main(lights, brightness)

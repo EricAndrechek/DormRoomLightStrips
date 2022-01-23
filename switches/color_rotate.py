@@ -1,3 +1,10 @@
+# Friendly name: Color Rotate
+# Internal name: color_rotate
+# Brightness slider: True
+# Brightness slider max: 100
+# RGB: False
+# Description: Rotates
+
 import sys
 sys.path.append("../")
 import time
@@ -5,20 +12,21 @@ import random
 import leds
 
 
-def main(lights, speed=0.1):
+def main(lights, brightness):
     hue = 0
+    wait_time = 1 / brightness / 5
     while True:
         i = 0
         while i < 87:
             lights.ceiling_set_pixel(i, ((hue + i / 87) % 1, 0.99, 0.9))
             i = i + 1
         lights.update()
-        time.sleep(speed if speed >= 0.001 else 0.001)
-        num_at_time = 1 if speed >= 0.001 else 3.1
-        hue = (hue + num_at_time / 87) % 1
+        time.sleep(wait_time)
+        hue = (hue + 1 / 87) % 1
 
 
 if __name__ == '__main__':
-    lights = leds.light_strip()
-    speed = float(input("Speed: "))
-    main(lights, speed)
+    arguments = sys.argv
+    brightness = int(arguments[1])
+    lights = leds.light_strip(is_receiver=True)
+    main(lights, brightness)

@@ -1,3 +1,10 @@
+# Friendly name: Color Strobe
+# Internal name: color_strobe
+# Brightness slider: False
+# Brightness slider max: 100
+# RGB: False
+# Description: strobes color
+
 import sys
 sys.path.append("../")
 import leds
@@ -16,5 +23,6 @@ def main(lights):
 
 
 if __name__ == '__main__':
-    lights = leds.light_strip()
+    arguments = sys.argv
+    lights = leds.light_strip(is_receiver=True)
     main(lights)

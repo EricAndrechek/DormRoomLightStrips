@@ -1,7 +1,15 @@
+# Friendly name: Snakes
+# Internal name: snakes
+# Brightness slider: False
+# Brightness slider max: 100
+# RGB: False
+# Description: snakey snakes
+
 import sys
 sys.path.append("../")
 import leds
 import time
+
 
 def main(lights):
     count = 0
@@ -24,5 +32,6 @@ def main(lights):
 
 
 if __name__ == '__main__':
-    lights = leds.light_strip()
+    arguments = sys.argv
+    lights = leds.light_strip(is_receiver=True)
     main(lights)
