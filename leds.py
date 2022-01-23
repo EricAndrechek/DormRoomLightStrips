@@ -385,7 +385,7 @@ class light_strip:
             brightness = int(brightness)
             self.states[switch]["brightness"] = brightness
         self.states[switch]["state"] = 1
-        command = 'nohup sudo python3 switches/{}.py {} & '.format(switch, str(brightness))
+        command = 'nohup sudo python3 switches/{}.py {}'.format(switch, str(brightness))
         cmd = command.split(" ")
         with subprocess.Popen(cmd) as thread:
             self.thread = thread.pid
