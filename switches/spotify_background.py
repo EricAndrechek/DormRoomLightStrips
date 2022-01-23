@@ -1,7 +1,6 @@
 # Friendly name: Match Spotify Color
 # Internal name: spotify_background
 # Brightness slider: False
-# Brightness slider min: 0
 # Brightness slider max: 255
 # RGB: False
 # Description: Matches all lights to spotify background
