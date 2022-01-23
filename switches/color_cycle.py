@@ -1,3 +1,11 @@
+# Friendly name: Cycle Colors
+# Internal name: color_cycle
+# Brightness slider: True
+# Brightness slider min: 0
+# Brightness slider max: 100
+# RGB: False
+# Description: Matches all lights to spotify background
+
 import sys
 sys.path.append("../")
 import leds
@@ -5,7 +13,7 @@ import time
 import colorsys
 
 
-def main(lights):
+def main(lights, brightness):
     hsv = (0, 0.999, 0.9)
     while(True):
         hsv = (hsv[0] + 0.001, hsv[1], hsv[2])
@@ -15,5 +23,8 @@ def main(lights):
 
 
 if __name__ == '__main__':
-    lights = leds.light_strip()
-    main(lights)
+    arguments = sys.argv
+    brightness = int(arguments[1])
+    # change to is_transmitter=True if you want to be a transmitter
+    lights = leds.light_strip(is_receiver=True)
+    main(lights, brightness)

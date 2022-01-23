@@ -1,3 +1,11 @@
+# Friendly name: Match Spotify Color
+# Internal name: spotify_background
+# Brightness slider: False
+# Brightness slider min: 0
+# Brightness slider max: 255
+# RGB: False
+# Description: Matches all lights to spotify background
+
 import sys
 sys.path.append("../")
 import leds
@@ -6,7 +14,7 @@ import time
 
 
 def main(lights):
-    last_hsv = (0,0,0)
+    last_hsv = (0, 0, 0)
     last_url = ""
     while True:
         url = spotify.get_current_track_url()
@@ -20,5 +28,5 @@ def main(lights):
 
 
 if __name__ == '__main__':
-    lights = leds.light_strip()
+    lights = leds.light_strip(is_receiver=True)
     main(lights)
