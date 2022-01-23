@@ -391,6 +391,7 @@ class light_strip:
         self.thread = thread.stdout
         print(thread)
         print(self.thread)
+        return self.thread
     def switch_off(self, switch):
         # stop thread process running switch_on
         self.kill_thread(self.thread)

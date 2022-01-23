@@ -64,8 +64,7 @@ def custom(switch):
     if todo == 'status':
         return str(lights.status(switch))
     elif todo == 'on':
-        lights.switch_on(switch, lights)
-        return 'on'
+        return str(lights.switch_on(switch, lights))
     elif todo == 'off':
         lights.switch_off(switch)
         return 'off'
@@ -74,11 +73,9 @@ def custom(switch):
     elif todo == 'bright':
         return str(lights.switch_brightness(switch))
     elif todo == 'cset':
-        lights.switch_on(switch, lights, color=data)
-        return 'set'
+        return str(lights.switch_on(switch, lights, color=data))
     elif todo == 'bset':
-        lights.switch_on(switch, lights, brightness=data)
-        return 'set'
+        return str(lights.switch_on(switch, lights, brightness=data))
 
 
 
