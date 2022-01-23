@@ -1,4 +1,3 @@
 #!/bin/bash
 
-v=$(cat process.txt)
-sudo kill -9 $v
+sudo screen -XS switch quit
