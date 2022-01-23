@@ -406,9 +406,8 @@ class light_strip:
     def kill_thread(self):
         command = 'sudo ./thread_killer.sh'
         os.system(command)
-        running = subprocess.check_output('sudo pgrep -fl python3'.split())
-        print(running)
-        for line in running:
+        running = subprocess.check_output('sudo pgrep -fl python3'.split()).decode("utf-8") 
+        for line in running.split('\n'):
             if line.split()[0] != self.immune[0] and line.split()[0] != self.immune[1]:
                 os.system('sudo kill -9 ' + line.split()[0])
     
