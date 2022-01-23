@@ -134,6 +134,7 @@ class light_strip:
         with open("switches.json") as f:
             self.switches = json.load(f)
         for switch in self.switches:
+            self.states[switch["internal_name"]] = {}
             self.states[switch["internal_name"]]["state"] = 0
             if switch["is_rgb"]:
                 self.states[switch["name"]]["hsv"] = (0, 0, 0.99)
@@ -382,7 +383,7 @@ class light_strip:
             self.states[switch]["brightness"] = int(brightness)
         self.all_off()
         self.states[switch]["state"] = 1
-        self.states[switch]["thread"] = Thread(target=switch, args=(lights, brightness, color))
+        self.states[switch]["thread"] = Thread(target=eval(switch + ".main"), args=(lights, brightness, color))
         self.states[switch]["thread"].start()
     
     def switch_off(self, switch):
