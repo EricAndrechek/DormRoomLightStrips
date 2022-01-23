@@ -131,8 +131,6 @@ class light_strip:
                 "included_in": []
             }
         }
-        self.thread = None
-        self.thread_pid = None
         # get all switches from switches.json
         with open("switches.json") as f:
             self.switches = json.load(f)
@@ -206,7 +204,7 @@ class light_strip:
         })
 
     def all_off(self):
-        self.kill_thread(self.thread)
+        self.kill_thread()
         for region in self.states:
             if self.states[region]["state"] == 1:
                 if "includes" in self.states[region]:
@@ -392,27 +390,23 @@ class light_strip:
         else:
             brightness = 100
         self.states[switch]["state"] = 1
-        proc = multiprocessing.Process(target=self.run_thread, args=(switch, brightness, color))
-        proc.start()
-        self.thread = proc
+        self.run_thread(switch, brightness, color)
         return 'on/set'
     def switch_off(self, switch):
         # stop thread process running switch_on
-        self.kill_thread(self.thread)
+        self.kill_thread()
         self.states[switch]["state"] = 0
         self.all_off()
     
     def switch_brightness(self, region):
         return self.states[region]["brightness"]
 
-    def kill_thread(self, thread):
-        if thread is not None:
-            thread.terminate()
-            self.thread = None
+    def kill_thread(self):
+        command = 'sudo ./thread_killer.sh'
+        os.system(command)
     
     def run_thread(self, switch, brightness, color):
-        self.kill_thread(self.thread)
-        command = 'sudo python3 switches/{}.py {} {} {} {}'.format(switch, str(brightness), str(color[0]), str(color[1]), str(color[2]))
+        command = 'sudo ./thread_runner.sh {} {} {} {} {}'.format(switch, str(brightness), str(color[0]), str(color[1]), str(color[2]))
         os.system(command)
 
 
