@@ -1,0 +1,405 @@
+[
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Light Strip",
+        "service": "Light",
+        "switch": {
+            "notificationID": "main",
+            "status": "http://192.168.2.97:8000/status?r=main",
+            "powerOn": "http://192.168.2.97:8000/on?r=main",
+            "powerOff": "http://192.168.2.97:8000/off?r=main"
+        },
+        "color": {
+            "status": "http://192.168.2.97:8000/color?r=main",
+            "url": "http://192.168.2.97:8000/cset/%s?r=main",
+            "brightness": false
+        },
+        "brightness": {
+            "max": 99,
+            "status": "http://192.168.2.97:8000/bright?r=main",
+            "url": "http://192.168.2.97:8000/bset/%s?r=main"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Jayden Lamp",
+        "service": "Light",
+        "switch": {
+            "notificationID": "jayden_lamp",
+            "status": "http://192.168.2.97:8000/status?r=jayden_lamp",
+            "powerOn": "http://192.168.2.97:8000/on?r=jayden_lamp",
+            "powerOff": "http://192.168.2.97:8000/off?r=jayden_lamp"
+        },
+        "color": {
+            "status": "http://192.168.2.97:8000/color?r=jayden_lamp",
+            "url": "http://192.168.2.97:8000/cset/%s?r=jayden_lamp",
+            "brightness": false
+        },
+        "brightness": {
+            "max": 99,
+            "status": "http://192.168.2.97:8000/bright?r=jayden_lamp",
+            "url": "http://192.168.2.97:8000/bset/%s?r=jayden_lamp"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Window Section",
+        "service": "Light",
+        "switch": {
+            "notificationID": "window_section",
+            "status": "http://192.168.2.97:8000/status?r=window_section",
+            "powerOn": "http://192.168.2.97:8000/on?r=window_section",
+            "powerOff": "http://192.168.2.97:8000/off?r=window_section"
+        },
+        "color": {
+            "status": "http://192.168.2.97:8000/color?r=window_section",
+            "url": "http://192.168.2.97:8000/cset/%s?r=window_section",
+            "brightness": false
+        },
+        "brightness": {
+            "max": 99,
+            "status": "http://192.168.2.97:8000/bright?r=window_section",
+            "url": "http://192.168.2.97:8000/bset/%s?r=window_section"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Jayden's Bed",
+        "service": "Light",
+        "switch": {
+            "notificationID": "jayden_bed",
+            "status": "http://192.168.2.97:8000/status?r=jayden_bed",
+            "powerOn": "http://192.168.2.97:8000/on?r=jayden_bed",
+            "powerOff": "http://192.168.2.97:8000/off?r=jayden_bed"
+        },
+        "color": {
+            "status": "http://192.168.2.97:8000/color?r=jayden_bed",
+            "url": "http://192.168.2.97:8000/cset/%s?r=jayden_bed",
+            "brightness": false
+        },
+        "brightness": {
+            "max": 99,
+            "status": "http://192.168.2.97:8000/bright?r=jayden_bed",
+            "url": "http://192.168.2.97:8000/bset/%s?r=jayden_bed"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Eric's Bed",
+        "service": "Light",
+        "switch": {
+            "notificationID": "eric_bed",
+            "status": "http://192.168.2.97:8000/status?r=eric_bed",
+            "powerOn": "http://192.168.2.97:8000/on?r=eric_bed",
+            "powerOff": "http://192.168.2.97:8000/off?r=eric_bed"
+        },
+        "color": {
+            "status": "http://192.168.2.97:8000/color?r=eric_bed",
+            "url": "http://192.168.2.97:8000/cset/%s?r=eric_bed",
+            "brightness": false
+        },
+        "brightness": {
+            "max": 99,
+            "status": "http://192.168.2.97:8000/bright?r=eric_bed",
+            "url": "http://192.168.2.97:8000/bset/%s?r=eric_bed"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Door Section",
+        "service": "Light",
+        "switch": {
+            "notificationID": "door_section",
+            "status": "http://192.168.2.97:8000/status?r=door_section",
+            "powerOn": "http://192.168.2.97:8000/on?r=door_section",
+            "powerOff": "http://192.168.2.97:8000/off?r=door_section"
+        },
+        "color": {
+            "status": "http://192.168.2.97:8000/color?r=door_section",
+            "url": "http://192.168.2.97:8000/cset/%s?r=door_section",
+            "brightness": false
+        },
+        "brightness": {
+            "max": 99,
+            "status": "http://192.168.2.97:8000/bright?r=door_section",
+            "url": "http://192.168.2.97:8000/bset/%s?r=door_section"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Eric's Desk",
+        "service": "Light",
+        "switch": {
+            "notificationID": "eric_desk",
+            "status": "http://192.168.2.97:8000/status?r=eric_desk",
+            "powerOn": "http://192.168.2.97:8000/on?r=eric_desk",
+            "powerOff": "http://192.168.2.97:8000/off?r=eric_desk"
+        },
+        "color": {
+            "status": "http://192.168.2.97:8000/color?r=eric_desk",
+            "url": "http://192.168.2.97:8000/cset/%s?r=eric_desk",
+            "brightness": false
+        },
+        "brightness": {
+            "max": 99,
+            "status": "http://192.168.2.97:8000/bright?r=eric_desk",
+            "url": "http://192.168.2.97:8000/bset/%s?r=eric_desk"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Jayden's Desk",
+        "service": "Light",
+        "switch": {
+            "notificationID": "jayden_desk",
+            "status": "http://192.168.2.97:8000/status?r=jayden_desk",
+            "powerOn": "http://192.168.2.97:8000/on?r=jayden_desk",
+            "powerOff": "http://192.168.2.97:8000/off?r=jayden_desk"
+        },
+        "color": {
+            "status": "http://192.168.2.97:8000/color?r=jayden_desk",
+            "url": "http://192.168.2.97:8000/cset/%s?r=jayden_desk",
+            "brightness": false
+        },
+        "brightness": {
+            "max": 99,
+            "status": "http://192.168.2.97:8000/bright?r=jayden_desk",
+            "url": "http://192.168.2.97:8000/bset/%s?r=jayden_desk"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "TV Wall",
+        "service": "Light",
+        "switch": {
+            "notificationID": "tv_wall",
+            "status": "http://192.168.2.97:8000/status?r=tv_wall",
+            "powerOn": "http://192.168.2.97:8000/on?r=tv_wall",
+            "powerOff": "http://192.168.2.97:8000/off?r=tv_wall"
+        },
+        "color": {
+            "status": "http://192.168.2.97:8000/color?r=tv_wall",
+            "url": "http://192.168.2.97:8000/cset/%s?r=tv_wall",
+            "brightness": false
+        },
+        "brightness": {
+            "max": 99,
+            "status": "http://192.168.2.97:8000/bright?r=tv_wall",
+            "url": "http://192.168.2.97:8000/bset/%s?r=tv_wall"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Bed Wall",
+        "service": "Light",
+        "switch": {
+            "notificationID": "bed_wall",
+            "status": "http://192.168.2.97:8000/status?r=bed_wall",
+            "powerOn": "http://192.168.2.97:8000/on?r=bed_wall",
+            "powerOff": "http://192.168.2.97:8000/off?r=bed_wall"
+        },
+        "color": {
+            "status": "http://192.168.2.97:8000/color?r=bed_wall",
+            "url": "http://192.168.2.97:8000/cset/%s?r=bed_wall",
+            "brightness": false
+        },
+        "brightness": {
+            "max": 99,
+            "status": "http://192.168.2.97:8000/bright?r=bed_wall",
+            "url": "http://192.168.2.97:8000/bset/%s?r=bed_wall"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Jayden's Side",
+        "service": "Light",
+        "switch": {
+            "notificationID": "jayden_half",
+            "status": "http://192.168.2.97:8000/status?r=jayden_half",
+            "powerOn": "http://192.168.2.97:8000/on?r=jayden_half",
+            "powerOff": "http://192.168.2.97:8000/off?r=jayden_half"
+        },
+        "color": {
+            "status": "http://192.168.2.97:8000/color?r=jayden_half",
+            "url": "http://192.168.2.97:8000/cset/%s?r=jayden_half",
+            "brightness": false
+        },
+        "brightness": {
+            "max": 99,
+            "status": "http://192.168.2.97:8000/bright?r=jayden_half",
+            "url": "http://192.168.2.97:8000/bset/%s?r=jayden_half"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Eric's Side",
+        "service": "Light",
+        "switch": {
+            "notificationID": "eric_half",
+            "status": "http://192.168.2.97:8000/status?r=eric_half",
+            "powerOn": "http://192.168.2.97:8000/on?r=eric_half",
+            "powerOff": "http://192.168.2.97:8000/off?r=eric_half"
+        },
+        "color": {
+            "status": "http://192.168.2.97:8000/color?r=eric_half",
+            "url": "http://192.168.2.97:8000/cset/%s?r=eric_half",
+            "brightness": false
+        },
+        "brightness": {
+            "max": 99,
+            "status": "http://192.168.2.97:8000/bright?r=eric_half",
+            "url": "http://192.168.2.97:8000/bset/%s?r=eric_half"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Cycle Colors",
+        "service": "Light",
+        "switch": {
+            "notificationID": "color_cycle",
+            "status": "http://192.168.2.97:8000/status?r=color_cycle",
+            "powerOn": "http://192.168.2.97:8000/on?r=color_cycle",
+            "powerOff": "http://192.168.2.97:8000/off?r=color_cycle"
+        },
+        "brightness": {
+            "max": 100,
+            "status": "http://192.168.2.97:8000/bright?r=color_cycle",
+            "url": "http://192.168.2.97:8000/bset/%s?r=color_cycle"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Color Rotate Overlap",
+        "service": "Light",
+        "switch": {
+            "notificationID": "color_overlap",
+            "status": "http://192.168.2.97:8000/status?r=color_overlap",
+            "powerOn": "http://192.168.2.97:8000/on?r=color_overlap",
+            "powerOff": "http://192.168.2.97:8000/off?r=color_overlap"
+        },
+        "brightness": {
+            "max": 100,
+            "status": "http://192.168.2.97:8000/bright?r=color_overlap",
+            "url": "http://192.168.2.97:8000/bset/%s?r=color_overlap"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Color Strobe",
+        "service": "Light",
+        "switch": {
+            "notificationID": "color_strobe",
+            "status": "http://192.168.2.97:8000/status?r=color_strobe",
+            "powerOn": "http://192.168.2.97:8000/on?r=color_strobe",
+            "powerOff": "http://192.168.2.97:8000/off?r=color_strobe"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Random Wave",
+        "service": "Light",
+        "switch": {
+            "notificationID": "random_wave",
+            "status": "http://192.168.2.97:8000/status?r=random_wave",
+            "powerOn": "http://192.168.2.97:8000/on?r=random_wave",
+            "powerOff": "http://192.168.2.97:8000/off?r=random_wave"
+        },
+        "brightness": {
+            "max": 100,
+            "status": "http://192.168.2.97:8000/bright?r=random_wave",
+            "url": "http://192.168.2.97:8000/bset/%s?r=random_wave"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "UM Colors",
+        "service": "Light",
+        "switch": {
+            "notificationID": "umich_colors",
+            "status": "http://192.168.2.97:8000/status?r=umich_colors",
+            "powerOn": "http://192.168.2.97:8000/on?r=umich_colors",
+            "powerOff": "http://192.168.2.97:8000/off?r=umich_colors"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Strobe",
+        "service": "Light",
+        "switch": {
+            "notificationID": "strobe",
+            "status": "http://192.168.2.97:8000/status?r=strobe",
+            "powerOn": "http://192.168.2.97:8000/on?r=strobe",
+            "powerOff": "http://192.168.2.97:8000/off?r=strobe"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Tatum Spotify Lights",
+        "service": "Light",
+        "switch": {
+            "notificationID": "spotify_lights_tatum",
+            "status": "http://192.168.2.97:8000/status?r=spotify_lights_tatum",
+            "powerOn": "http://192.168.2.97:8000/on?r=spotify_lights_tatum",
+            "powerOff": "http://192.168.2.97:8000/off?r=spotify_lights_tatum"
+        },
+        "brightness": {
+            "max": 100,
+            "status": "http://192.168.2.97:8000/bright?r=spotify_lights_tatum",
+            "url": "http://192.168.2.97:8000/bset/%s?r=spotify_lights_tatum"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Color Rotate",
+        "service": "Light",
+        "switch": {
+            "notificationID": "color_rotate",
+            "status": "http://192.168.2.97:8000/status?r=color_rotate",
+            "powerOn": "http://192.168.2.97:8000/on?r=color_rotate",
+            "powerOff": "http://192.168.2.97:8000/off?r=color_rotate"
+        },
+        "brightness": {
+            "max": 100,
+            "status": "http://192.168.2.97:8000/bright?r=color_rotate",
+            "url": "http://192.168.2.97:8000/bset/%s?r=color_rotate"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Match Spotify Color",
+        "service": "Light",
+        "switch": {
+            "notificationID": "spotify_background",
+            "status": "http://192.168.2.97:8000/status?r=spotify_background",
+            "powerOn": "http://192.168.2.97:8000/on?r=spotify_background",
+            "powerOff": "http://192.168.2.97:8000/off?r=spotify_background"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Beat Spotify Lights",
+        "service": "Light",
+        "switch": {
+            "notificationID": "spotify_lights_beat",
+            "status": "http://192.168.2.97:8000/status?r=spotify_lights_beat",
+            "powerOn": "http://192.168.2.97:8000/on?r=spotify_lights_beat",
+            "powerOff": "http://192.168.2.97:8000/off?r=spotify_lights_beat"
+        },
+        "brightness": {
+            "max": 100,
+            "status": "http://192.168.2.97:8000/bright?r=spotify_lights_beat",
+            "url": "http://192.168.2.97:8000/bset/%s?r=spotify_lights_beat"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Snakes",
+        "service": "Light",
+        "switch": {
+            "notificationID": "snakes",
+            "status": "http://192.168.2.97:8000/status?r=snakes",
+            "powerOn": "http://192.168.2.97:8000/on?r=snakes",
+            "powerOff": "http://192.168.2.97:8000/off?r=snakes"
+        }
+    }
+]
