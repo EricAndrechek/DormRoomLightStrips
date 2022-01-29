@@ -411,8 +411,12 @@ class light_strip:
         running = subprocess.check_output('sudo pgrep -fl python3'.split()).decode("utf-8") 
         for line in running.split('\n'):
             print(line + '\n\n')
-            pid = int(line.split(" ")[0])
             immune = int(self.immune[0])
+            pid = immune
+            try:
+                pid = int(line.split(" ")[0])
+            except ValueError:
+                continue
             if abs(pid - immune) > 2:
                 os.system('sudo kill -9 ' + line.split()[0])
     
