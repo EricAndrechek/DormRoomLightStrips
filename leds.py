@@ -410,7 +410,7 @@ class light_strip:
         os.system(command)
         running = subprocess.check_output('sudo pgrep -fl python3'.split()).decode("utf-8") 
         for line in running.split('\n'):
-            print(line)
+            print(line + '\n\n')
             pid = int(line.split()[0])
             immune = int(self.immune[0])
             if abs(pid - immune) > 2:
