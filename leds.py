@@ -409,8 +409,8 @@ class light_strip:
         command = 'sudo ./thread_killer.sh'
         os.system(command)
         running = subprocess.check_output('sudo pgrep -fl python3'.split()).decode("utf-8") 
+        print("Killing running processes: " + running)
         for line in running.split('\n'):
-            print(line + '\n\n')
             immune = int(self.immune[0])
             pid = immune
             try:
@@ -418,6 +418,7 @@ class light_strip:
             except ValueError:
                 continue
             if abs(pid - immune) > 2:
+                print("Killing " + str(pid))
                 os.system('sudo kill -9 ' + line.split()[0])
     
     def run_thread(self, switch, brightness, color):
