@@ -18,7 +18,7 @@ def main(lights, brightness=False, rgb=False):
     if brightness == 0:
         brightness = 1
     wait_time = 1 / brightness / 5
-    while lights.kill_thread == False:
+    while lights.kill_thread:
         i = 0
         while i < 87:
             lights.ceiling_set_pixel(i, ((hue + i / 87) % 1, 0.99, 0.9))
