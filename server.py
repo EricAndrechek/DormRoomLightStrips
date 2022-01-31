@@ -18,7 +18,7 @@ def status():
 
 @app.route('/on')
 def on():
-    lights.log.debug("request endpoint:" + request.endpoint)
+    lights.log.debug("request headers:" + request.headers)
     region = request.args.get('r')
     lights.region_on(region)
     lights.update()
