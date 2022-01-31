@@ -15,11 +15,12 @@ import colorsys
 def main(lights, brightness=False, rgb=False):
     hsv = (0, 0.999, 0.9)
     wait_time = 1 / (brightness * brightness)
-    while lights.kill_thread:
+    while not lights.kill_thread:
         hsv = (hsv[0] + 0.001, hsv[1], hsv[2])
         lights.ceiling_region_fill(0, 87, hsv)
         lights.update()
         time.sleep(wait_time)
+    lights.states[lights.thread]["state"] = 0
     lights.thread = None
 
 
