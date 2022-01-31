@@ -2,14 +2,13 @@ from flask import Flask, request
 import leds
 import time
 import os
-import log.debugging
+import logging
 
 app = Flask(__name__)
 
 lights = leds.light_strip(server=os.getpid(), is_receiver=True)
 
-log.debugging.getlog.debugger("werkzeug").setLevel(log.debugging.ERROR)
-
+logging.getLogger("werkzeug").setLevel(logging.ERROR)
 
 @app.route('/status')
 def status():
