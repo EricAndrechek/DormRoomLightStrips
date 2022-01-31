@@ -27,6 +27,8 @@ def main(lights, brightness, rgb=False):
             lights.ceiling_set_pixel(start - i, (hue, 0.9, 0.9))
             lights.update()
             time.sleep(wait_time)
+            if lights.thread_kill:
+                break
     lights.thread_end("random_wave")
 
 
