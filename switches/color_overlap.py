@@ -23,9 +23,7 @@ def main(lights, brightness=False, rgb=False):
         spot = (spot + 1) % 87
         time.sleep(wait_time)
         lights.update()
-    lights.states["color_overlap"]["state"] = 0
-    lights.log.debug("color_overlap has stopped")
-    lights.thread = None
+    lights.thread_end("color_overlap")
 
 
 if __name__ == '__main__':

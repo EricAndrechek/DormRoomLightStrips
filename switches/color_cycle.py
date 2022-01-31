@@ -23,9 +23,7 @@ def main(lights, brightness=False, rgb=False):
         lights.ceiling_region_fill(0, 87, hsv)
         lights.update()
         time.sleep(wait_time)
-    lights.states["color_cycle"]["state"] = 0
-    lights.log.debug("color_cycle has stopped")
-    lights.thread = None
+    lights.thread_end("color_cycle")
 
 
 if __name__ == '__main__':

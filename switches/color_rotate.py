@@ -27,9 +27,7 @@ def main(lights, brightness=False, rgb=False):
         lights.update()
         time.sleep(wait_time)
         hue = (hue + 1 / 87) % 1
-    lights.states["color_rotate"]["state"] = 0
-    lights.log.debug("color_rotate has stopped")
-    lights.thread = None
+    lights.thread_end("color_rotate")
 
 if __name__ == '__main__':
     arguments = sys.argv

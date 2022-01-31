@@ -22,9 +22,7 @@ def main(lights, brightness=False, rgb=False):
         # do whatever you want to put here
         pass
 
-    lights.states["example"]["state"] = 0
-    lights.log.debug("example has stopped")
-    lights.thread = None
+    lights.thread_end("example")
 
 if __name__ == '__main__':
     arguments = sys.argv

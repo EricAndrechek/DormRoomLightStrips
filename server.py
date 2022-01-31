@@ -1,3 +1,4 @@
+from concurrent.futures import process
 from flask import Flask, request
 import leds
 import time
@@ -84,4 +85,4 @@ def custom(switch):
 
 if __name__ == '__main__':
     lights.all_off()
-    app.run(host="0.0.0.0", port=8000, debug=False)
+    app.run(host="0.0.0.0", port=8000, debug=False, threaded=False, processes=1)

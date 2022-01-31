@@ -423,5 +423,11 @@ class light_strip:
         while self.thread is not None and self.thread.is_alive():
             time.sleep(0.1)
         self.thread_kill = False
+    
+    def thread_end(self, name):
+        self.states[name]["state"] = 0
+        self.homebridge_push(name, False)
+        self.log.debug(name + " has stopped")
+        self.thread = None
 
 
