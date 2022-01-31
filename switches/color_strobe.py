@@ -16,10 +16,10 @@ def main(lights, brightness=False, rgb=False):
     lights.log.debug("color_strobe is now running")
     while not lights.thread_kill:
         hue = random.random()
-        lights.fill_region_by_name("main", (0, 0, 0))
+        lights.ceiling_fill_all((0, 0, 0))
         lights.update()
         time.sleep(0.12)
-        lights.fill_region_by_name("main", (hue, 0.99, 0.99))
+        lights.ceiling_fill_all((hue, 0.99, 0.99))
         lights.update()
         time.sleep(0.005)
     lights.thread_end("color_strobe")
