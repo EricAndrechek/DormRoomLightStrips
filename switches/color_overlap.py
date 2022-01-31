@@ -19,7 +19,7 @@ def main(lights, brightness=False, rgb=False):
     lights.log.debug("color_overlap is now running")
     while not lights.thread_kill:
         lights.ceiling_set_pixel(spot, (hue, 0.99, 0.99))
-        hue = hue + 0.0001 % 1
+        hue = hue + 0.001 % 1
         spot = (spot + 1) % 87
         time.sleep(wait_time)
         lights.update()
