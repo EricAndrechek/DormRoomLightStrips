@@ -15,7 +15,7 @@ import logging
 
 class light_strip:
     def __init__(self, is_receiver=False, is_transmitter=False, server=None):
-        logging.basicConfig(format='%(asctime)s-%(levelname)s: %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+        logging.basicConfig(format='%(asctime)s-%(levelname)s: %(message)s', datefmt='%d/%b/%y %H:%M:%S')
         self.log = logging.getLogger()
         self.log.setLevel(logging.DEBUG)
         if is_receiver:
