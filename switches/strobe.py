@@ -17,8 +17,10 @@ def main(lights, brightness=False, rgb=False):
     lights.log.debug("strobe is now running")
     while not lights.thread_kill:
         lights.off()
+        lights.update()
         time.sleep(0.12)
         lights.on()
+        lights.update()
         time.sleep(0.005)
     lights.thread_end("strobe")
 
