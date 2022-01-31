@@ -15,12 +15,16 @@ sys.path.append("../")
 import leds
 
 
-def main(lights, brightness, rgb):
-    # do whatever you want to put here
-    print("lights set to brightness: " +
-          str(brightness) + " and rgb: " + str(rgb))
-    pass
+def main(lights, brightness=False, rgb=False):
+    lights.log.debug("example is now running")
 
+    while not lights.thread_kill:
+        # do whatever you want to put here
+        pass
+
+    lights.states["example"]["state"] = 0
+    lights.log.debug("example has stopped")
+    lights.thread = None
 
 if __name__ == '__main__':
     arguments = sys.argv
