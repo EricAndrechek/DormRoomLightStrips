@@ -415,13 +415,12 @@ class light_strip:
     def run_thread(self, switch, brightness, color):
         targ = switch + ".main"
         self.kill_thread()
-        self.thread = switch
-        switch_thread = threading.Thread(target=color_cycle.main, args=(self, brightness, color), daemon=True)
-        switch_thread.start()
+        self.thread = threading.Thread(target=color_cycle.main, args=(self, brightness, color), daemon=True)
+        self.thread.start()
 
     def kill_thread(self):
         self.thread_kill = True
-        while self.thread is not None:
+        while self.thread is not None and self.thread.is_alive():
             time.sleep(0.1)
         self.thread_kill = False
 
