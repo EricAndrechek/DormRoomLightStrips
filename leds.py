@@ -416,7 +416,7 @@ class light_strip:
         targ = switch + ".main"
         self.kill_thread()
         self.thread = switch
-        threading.Thread(target=eval(targ), args=(self, brightness, color))
+        threading.Thread(target=color_cycle.main, args=(self, brightness, color))
 
     def kill_thread(self):
         self.thread_kill = True
