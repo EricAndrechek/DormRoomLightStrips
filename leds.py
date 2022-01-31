@@ -10,10 +10,13 @@ from switches import *
 import os
 import threading
 import time
+import logging
 
 
 class light_strip:
     def __init__(self, is_receiver=False, is_transmitter=False, server=None):
+        logging.basicConfig(format='%(asctime)s - %(process)d - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+        self.log = logging.getLogger(__name__)
         if is_receiver:
             self.pixels = neopixel.NeoPixel(
             board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
@@ -148,7 +151,7 @@ class light_strip:
         
             self.immune = [server, os.getpid()]
             # if it is a server, we should start the spotify thread in the background too
-            print("server initialized with pid {}".format(os.getpid()))
+            self.log.debug("server initialized with pid {}".format(os.getpid()))
 
     def correct_color(self, hsv):
         red = 0
@@ -295,18 +298,18 @@ class light_strip:
                     self.set_pixel(i, (0, 0, 0))
                     self.set_pixel(i, self.hsv_to_gbr(hsv))
                 except IndexError:
-                    print("Index Error: Skipped pixel at index " + str(i))
+                    self.log.warn("Index Error: Skipped pixel at index " + str(i))
                 except TypeError:
-                    print("Type Error: Skipped pixel at index " + str(i))
+                    self.log.warn("Type Error: Skipped pixel at index " + str(i))
         else:
             for i in range(start, 117):
                 try:
                     self.set_pixel(i, (0, 0, 0))
                     self.set_pixel(i, self.hsv_to_gbr(hsv))
                 except IndexError:
-                    print("Index Error: Skipped pixel at index " + str(i))
+                    self.log.warn("Index Error: Skipped pixel at index " + str(i))
                 except TypeError:
-                    print("Type Error: Skipped pixel at index " + str(i))
+                    self.log.warn("Type Error: Skipped pixel at index " + str(i))
             self.set_pixel(117, self.hsv_to_gbr(hsv))
 
     def ceiling_region_fill(self, start, end, hsv, direction="r"):
