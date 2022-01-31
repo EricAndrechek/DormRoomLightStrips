@@ -16,7 +16,7 @@ import sys
 def main(lights, brightness=False, rgb=False):
     lights.log.debug("strobe is now running")
     while not lights.thread_kill:
-        lights.off()
+        lights.ceiling_off()
         lights.update()
         time.sleep(0.12)
         lights.ceiling_region_fill(0, 87, (0, 0, 0.99))

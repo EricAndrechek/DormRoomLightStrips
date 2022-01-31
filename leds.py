@@ -15,12 +15,13 @@ import logging
 
 class light_strip:
     def __init__(self, is_receiver=False, is_transmitter=False, server=None):
-        logging.basicConfig(format='[%(asctime)s] [%(levelname)s]: %(message)s', datefmt='%d/%b/%y %H:%M:%S')
+        logging.basicConfig(
+            format='[%(asctime)s] [%(levelname)s]: %(message)s', datefmt='%d/%b/%y %H:%M:%S')
         self.log = logging.getLogger("lights")
         self.log.setLevel(logging.DEBUG)
         if is_receiver:
             self.pixels = neopixel.NeoPixel(
-            board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
+                board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
         self.homebridge_url = "http://192.168.2.16:8001/"
         self.receiver_url = "http://192.168.2.97:8000/"
         self.is_receiver = is_receiver
@@ -148,11 +149,13 @@ class light_strip:
                     self.states[switch["internal_name"]]["hsv"] = (0, 0, 0.99)
                 if switch["is_brightness_slider"]:
                     self.states[switch["internal_name"]]["brightness"] = 0
-                    self.states[switch["internal_name"]]["brightness_max"] = switch["brightness_slider_max"]
-        
+                    self.states[switch["internal_name"]
+                                ]["brightness_max"] = switch["brightness_slider_max"]
+
             self.immune = [server, os.getpid()]
             # if it is a server, we should start the spotify thread in the background too
-            self.log.debug("server initialized with pid {}".format(os.getpid()))
+            self.log.debug(
+                "server initialized with pid {}".format(os.getpid()))
 
     def correct_color(self, hsv):
         red = 0
@@ -233,7 +236,8 @@ class light_strip:
         if self.is_receiver:
             self.pixels[pixel] = color
         else:
-            requests.get("{}pixel/{}/{}/{}/{}".format(self.receiver_url, pixel, color[0], color[1], color[2]))
+            requests.get("{}pixel/{}/{}/{}/{}".format(self.receiver_url,
+                         pixel, color[0], color[1], color[2]))
 
     def ceiling_set_pixel(self, pixel, hsv, direction="r"):
         if (direction == "r"):
@@ -300,18 +304,22 @@ class light_strip:
                     self.set_pixel(i, (0, 0, 0))
                     self.set_pixel(i, self.hsv_to_gbr(hsv))
                 except IndexError:
-                    self.log.warn("Index Error: Skipped pixel at index " + str(i))
+                    self.log.warn(
+                        "Index Error: Skipped pixel at index " + str(i))
                 except TypeError:
-                    self.log.warn("Type Error: Skipped pixel at index " + str(i))
+                    self.log.warn(
+                        "Type Error: Skipped pixel at index " + str(i))
         else:
             for i in range(start, 117):
                 try:
                     self.set_pixel(i, (0, 0, 0))
                     self.set_pixel(i, self.hsv_to_gbr(hsv))
                 except IndexError:
-                    self.log.warn("Index Error: Skipped pixel at index " + str(i))
+                    self.log.warn(
+                        "Index Error: Skipped pixel at index " + str(i))
                 except TypeError:
-                    self.log.warn("Type Error: Skipped pixel at index " + str(i))
+                    self.log.warn(
+                        "Type Error: Skipped pixel at index " + str(i))
             self.set_pixel(117, self.hsv_to_gbr(hsv))
 
     def ceiling_region_fill(self, start, end, hsv, direction="r"):
@@ -337,6 +345,9 @@ class light_strip:
             if (start < 31):
                 start = start + 87
             return start
+
+    def ceiling_off(self):
+        self.ceiling_region_fill(0, 87, (0, 0, 0))
 
     def smooth_transition(self, start, end, old_hsv, new_hsv, transition_time):
         # start and end for ceiling, time in s
@@ -405,17 +416,19 @@ class light_strip:
         self.states[switch]["state"] = 1
         self.run_thread(switch, brightness, color)
         return 'on/set'
+
     def switch_off(self, switch):
         # stop thread process running switch_on
         self.all_off()
-    
+
     def switch_brightness(self, region):
         return self.states[region]["brightness"]
 
     def run_thread(self, switch, brightness, color):
         targ = switch + ".main"
         self.kill_thread()
-        self.thread = threading.Thread(target=eval(targ), args=(self, brightness, color), daemon=True)
+        self.thread = threading.Thread(target=eval(
+            targ), args=(self, brightness, color), daemon=True)
         self.thread.start()
 
     def kill_thread(self):
@@ -423,11 +436,9 @@ class light_strip:
         while self.thread is not None and self.thread.is_alive():
             time.sleep(0.1)
         self.thread_kill = False
-    
+
     def thread_end(self, name):
         self.states[name]["state"] = 0
         self.homebridge_push(name, False)
         self.log.debug(name + " has stopped")
         self.thread = None
-
-
