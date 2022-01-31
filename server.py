@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 lights = leds.light_strip(server=os.getpid(), is_receiver=True)
 
-logging.getLogger("werkzeug").setLevel(logging.ERROR)
+logging.getLogger("werkzeug").setLevel(logging.INFO)
 
 @app.route('/status')
 def status():
@@ -18,7 +18,6 @@ def status():
 
 @app.route('/on')
 def on():
-    lights.log.debug(request.headers)
     region = request.args.get('r')
     lights.region_on(region)
     lights.update()
@@ -27,7 +26,6 @@ def on():
 
 @app.route('/off')
 def off():
-    lights.log.debug(request.endpoint)
     region = request.args.get('r')
     lights.region_off(region)
     lights.update()
@@ -42,7 +40,6 @@ def color():
 
 @app.route('/cset/<s>')
 def cset(s):
-    lights.log.debug(request.endpoint)
     region = request.args.get('r')
     lights.region_color(region, s)
     lights.update()
@@ -51,7 +48,6 @@ def cset(s):
 
 @app.route('/bset/<s>')
 def bset(s):
-    lights.log.debug(request.endpoint)
     region = request.args.get('r')
     lights.set_brightness(region, s)
     lights.update()
@@ -71,10 +67,8 @@ def custom(switch):
     if todo == 'status':
         return str(lights.status(switch))
     elif todo == 'on':
-        lights.log.debug(request.endpoint)
         return str(lights.switch_on(switch))
     elif todo == 'off':
-        lights.log.debug(request.endpoint)
         lights.switch_off(switch)
         return 'off'
     elif todo == 'color':
@@ -82,10 +76,8 @@ def custom(switch):
     elif todo == 'bright':
         return str(lights.switch_brightness(switch))
     elif todo == 'cset':
-        lights.log.debug(request.endpoint)
         return str(lights.switch_on(switch, color=data))
     elif todo == 'bset':
-        lights.log.debug(request.endpoint)
         return str(lights.switch_on(switch, brightness=data))
 
 
