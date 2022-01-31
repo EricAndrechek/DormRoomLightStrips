@@ -263,7 +263,8 @@ def main(lights, brightness, rgb=False):
     last_url = ""
     division = "beat"
     pattern = int(brightness / 20 + 1)
-    while True:
+    lights.log.debug("spotify_lights_beat now running")
+    while not lights.thread_kill:
         url = ""
         album_hue = 0
         is_playing = spotty.is_playing()
@@ -323,6 +324,7 @@ def main(lights, brightness, rgb=False):
             if (spotty.get_playback_position() < time.time() - start_time - 5):
                 break
             continue
+    lights.thread_end("spotify_lights_beat")
 
 
 if __name__ == '__main__':

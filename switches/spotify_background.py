@@ -15,7 +15,8 @@ import time
 def main(lights, brightness=False, rgb=False):
     last_hsv = (0, 0, 0)
     last_url = ""
-    while True:
+    lights.log.debug("spotify_background is now running")
+    while not lights.thread_kill:
         url = spotify.spotify.get_current_track_url()
         if spotify.spotify.is_playing() and url != last_url:
             new_color = spotify.spotify.get_color()
@@ -24,6 +25,7 @@ def main(lights, brightness=False, rgb=False):
             last_url = url
             last_hsv = hsv
         time.sleep(2)
+    lights.thread_end("spotify_background")
 
 
 if __name__ == '__main__':

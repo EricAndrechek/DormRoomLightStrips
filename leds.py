@@ -257,6 +257,7 @@ class light_strip:
                 self.states[included]["state"] = 0
                 # push update to homebridge here
                 self.homebridge_push(included, False)
+        self.kill_thread()
         ceiling = []
         try:
             ceiling = self.states[region]["ceiling"]

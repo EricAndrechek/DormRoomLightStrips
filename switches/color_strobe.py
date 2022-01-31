@@ -13,13 +13,15 @@ import random
 
 
 def main(lights, brightness=False, rgb=False):
-    while (True):
+    lights.log.debug("color_strobe is now running")
+    while not lights.thread_kill:
         hue = random.random()
         lights.all_off()
         time.sleep(0.12)
         lights.fill_region_by_name("main", (hue, 0.99, 0.99))
         lights.update()
         time.sleep(0.005)
+    lights.thread_end("color_strobe")
 
 
 if __name__ == '__main__':

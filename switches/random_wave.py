@@ -13,10 +13,13 @@ import leds
 
 
 def main(lights, brightness, rgb=False):
+    if brightness == 0:
+        brightness = 1
     wait_time = 1 / brightness * 2
     hue = 0
     start = 0
-    while True:
+    lights.log.debug("random_wave is now running")
+    while not lights.thread_kill:
         hue = (hue + 0.1 + 0.8 * random.random()) % 1
         start = round(87 * random.random())
         for i in range(0, 44):
@@ -24,6 +27,7 @@ def main(lights, brightness, rgb=False):
             lights.ceiling_set_pixel(start - i, (hue, 0.9, 0.9))
             lights.update()
             time.sleep(wait_time)
+    lights.thread_end("random_wave")
 
 
 if __name__ == '__main__':

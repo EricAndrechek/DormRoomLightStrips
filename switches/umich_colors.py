@@ -15,7 +15,8 @@ import leds
 def main(lights, brightness=False, rgb=False):
     blue = (0.583, 0.99, 0.4)
     maize = (0.18, 0.98, 0.99)
-    while True:
+    lights.log.debug("umich_colors is now running")
+    while not lights.thread_kill:
         i = 0
         while True:
             for j in range(0, 87):
@@ -26,6 +27,7 @@ def main(lights, brightness=False, rgb=False):
             lights.update()
             time.sleep(0.1)
             i = i + 1
+    lights.thread_end("umich_colors")
 
 
 if __name__ == '__main__':

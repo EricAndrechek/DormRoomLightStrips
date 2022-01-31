@@ -13,7 +13,8 @@ import time
 
 def main(lights, brightness=False, rgb=False):
     count = 0
-    while True:
+    lights.log.debug("snakes is now running")
+    while not lights.thread_kill:
         firsts = []
         firsts.append(lights.ceiling_region_fill(
             count, count + 4, (0, 0.9, 0.9), "r"))
@@ -29,6 +30,7 @@ def main(lights, brightness=False, rgb=False):
         lights.update()
         time.sleep(0.02)
         count = count + 1
+    lights.thread_end("snakes")
 
 
 if __name__ == '__main__':
