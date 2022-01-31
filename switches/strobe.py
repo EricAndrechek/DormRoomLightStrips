@@ -19,7 +19,7 @@ def main(lights, brightness=False, rgb=False):
         lights.off()
         lights.update()
         time.sleep(0.12)
-        lights.on()
+        lights.ceiling_region_fill(0, 87, (0, 0, 0.99))
         lights.update()
         time.sleep(0.005)
     lights.thread_end("strobe")
