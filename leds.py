@@ -16,7 +16,8 @@ import logging
 class light_strip:
     def __init__(self, is_receiver=False, is_transmitter=False, server=None):
         logging.basicConfig(format='%(asctime)s - %(process)d - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
-        self.log = logging.getLogger(__name__)
+        self.log = logging.getLogger()
+        self.log.setLevel(logging.DEBUG)
         if is_receiver:
             self.pixels = neopixel.NeoPixel(
             board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
