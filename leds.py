@@ -408,7 +408,6 @@ class light_strip:
     def switch_off(self, switch):
         # stop thread process running switch_on
         self.all_off()
-        self.states[switch]["state"] = 0
     
     def switch_brightness(self, region):
         return self.states[region]["brightness"]
