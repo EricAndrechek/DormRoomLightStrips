@@ -346,9 +346,6 @@ class light_strip:
                 start = start + 87
             return start
 
-    def ceiling_off(self):
-        self.ceiling_region_fill(0, 87, (0, 0, 0))
-
     def smooth_transition(self, start, end, old_hsv, new_hsv, transition_time):
         # start and end for ceiling, time in s
         old_rgb = colorsys.hsv_to_rgb(old_hsv[0], old_hsv[1], old_hsv[2])
