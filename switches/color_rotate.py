@@ -13,12 +13,12 @@ import random
 import leds
 
 
-def main(lights, brightness, rgb=False):
+def main(lights, brightness=False, rgb=False):
     hue = 0
     if brightness == 0:
         brightness = 1
     wait_time = 1 / brightness / 5
-    while True:
+    while lights.kill_thread == False:
         i = 0
         while i < 87:
             lights.ceiling_set_pixel(i, ((hue + i / 87) % 1, 0.99, 0.9))
@@ -26,6 +26,7 @@ def main(lights, brightness, rgb=False):
         lights.update()
         time.sleep(wait_time)
         hue = (hue + 1 / 87) % 1
+    lights.thread = None
 
 
 if __name__ == '__main__':

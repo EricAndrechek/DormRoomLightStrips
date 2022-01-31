@@ -7,9 +7,9 @@ import json
 import sys
 sys.path.append("switches")
 from switches import *
-import subprocess 
-import multiprocessing
 import os
+import threading
+import time
 
 
 class light_strip:
@@ -21,6 +21,8 @@ class light_strip:
         self.receiver_url = "http://192.168.2.97:8000/"
         self.is_receiver = is_receiver
         self.is_transmitter = is_transmitter
+        self.thread = None
+        self.thread_kill = False
         self.states = {
             # small sections:
             "tv_section": {
@@ -145,7 +147,8 @@ class light_strip:
                     self.states[switch["internal_name"]]["brightness_max"] = switch["brightness_slider_max"]
         
             self.immune = [server, os.getpid()]
-        print("server initialized with pid {}".format(os.getpid()))
+            # if it is a server, we should start the spotify thread in the background too
+            print("server initialized with pid {}".format(os.getpid()))
 
     def correct_color(self, hsv):
         red = 0
@@ -214,6 +217,7 @@ class light_strip:
                 if "includes" in self.states[region]:
                     self.region_off(region)
                 else:
+                    # alteranative to region_off for switches
                     self.states[region]["state"] = 0
                     self.homebridge_push(region, False)
         self.region_fill(0, 118, (0, 0, 0))
@@ -376,7 +380,7 @@ class light_strip:
     def get_region_dict(self, region):
         return self.states[region]
 
-    def switch_on(self, switch, lights, brightness=None, color=None):
+    def switch_on(self, switch, brightness=None, color=None):
         self.all_off()
         if color is not None or "hsv" in self.states[switch]:
             if color is not None:
@@ -398,31 +402,20 @@ class light_strip:
         return 'on/set'
     def switch_off(self, switch):
         # stop thread process running switch_on
-        self.kill_thread()
-        self.states[switch]["state"] = 0
         self.all_off()
+        self.states[switch]["state"] = 0
     
     def switch_brightness(self, region):
         return self.states[region]["brightness"]
 
-    def kill_thread(self):
-        command = 'sudo ./thread_killer.sh'
-        os.system(command)
-        running = subprocess.check_output('sudo pgrep -fl python3'.split()).decode("utf-8") 
-        print("Killing running processes: " + running)
-        for line in running.split('\n'):
-            immune = int(self.immune[0])
-            pid = immune
-            try:
-                pid = int(line.split(" ")[0])
-            except ValueError:
-                continue
-            if abs(pid - immune) > 2:
-                print("Killing " + str(pid))
-                os.system('sudo kill -9 ' + line.split()[0])
-    
     def run_thread(self, switch, brightness, color):
-        command = 'sudo ./thread_runner.sh {} {} {} {} {}'.format(switch, str(brightness), str(color[0]), str(color[1]), str(color[2]))
-        os.system(command)
+        self.kill_thread()
+        self.thread = threading.Thread(target=switch, args=(self, brightness, color))
+
+    def kill_thread(self):
+        self.thread_kill = True
+        while self.thread is not None:
+            time.sleep(0.1)
+        self.thread_kill = False
 
 
