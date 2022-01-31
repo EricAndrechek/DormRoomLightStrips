@@ -15,7 +15,7 @@ import logging
 
 class light_strip:
     def __init__(self, is_receiver=False, is_transmitter=False, server=None):
-        logging.basicConfig(format='%(asctime)s - %(process)d - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+        logging.basicConfig(format='%(asctime)s-%(levelname)s: %(message)s', datefmt='%d-%b-%y %H:%M:%S')
         self.log = logging.getLogger()
         self.log.setLevel(logging.DEBUG)
         if is_receiver:
@@ -413,9 +413,10 @@ class light_strip:
         return self.states[region]["brightness"]
 
     def run_thread(self, switch, brightness, color):
+        targ = switch + ".main"
         self.kill_thread()
         self.thread = switch
-        threading.Thread(target=switch, args=(self, brightness, color))
+        threading.Thread(target=targ, args=(self, brightness, color))
 
     def kill_thread(self):
         self.thread_kill = True
