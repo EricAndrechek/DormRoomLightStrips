@@ -13,19 +13,20 @@ import time
 
 def main(lights, brightness=False, rgb=False, spotify=False):
     last_hsv = (0, 0, 0)
-    last_url = ""
+    last_track = ""
     lights.log.debug("spotify_background is now running")
     while not lights.thread_kill:
-        new_url = spotify.get_album_image()
-        if new_url != last_url:
+        new_track = spotify.get_track_id()
+        if (new_track != last_track or last_hsv == (0,0,0)) and spotify.is_playing() :
             new_hsv = spotify.get_color()
-            if new_hsv != last_hsv:
-                lights.log.debug("spotify_background color update: {} - hsv: {}".format(spotify.get_track_title(), new_hsv))
-                lights.smooth_transition(0, 87, last_hsv, new_hsv, 0.3)
-                last_hsv = new_hsv
-            last_url = new_url
-        if not new_url:
+            lights.log.debug("spotify_background: {} - hsv: {}".format(spotify.get_track_title(), new_hsv))
+            lights.smooth_transition(0, 87, last_hsv, new_hsv, 0.3)
+            last_hsv = new_hsv
+            last_track = new_track
+        if not spotify.is_playing():
+            lights.log.debug("spotify_background: Nothing playing - hsv: (0, 0, 0)")
             lights.smooth_transition(0, 87, last_hsv, (0, 0, 0), 0.3)
+            last_hsv = (0, 0, 0)
         time.sleep(0.1)
     lights.thread_end("spotify_background")
 

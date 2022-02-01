@@ -56,8 +56,8 @@ class Spotify_helper:
         self.real_update_time = time.time()
         try:
             self.is_playing_bool = ct['is_playing']
-        except KeyError:
-            self.log.debug(ct)
+        except TypeError:
+            self.is_playing_bool = False
         # self.log.debug("Spotify is playing: " + str(self.is_playing_bool))
         if self.is_playing_bool:
             self.track_id = ct['item']['id']
@@ -115,10 +115,11 @@ class Spotify_helper:
         return self.track_duration / 1000 if self.is_playing_bool else False
 
     def get_audio_features(self):
-        # return audio features of the current track
+        # return audio features of the current track (only run on new track, not constantly. this will rate limit)
         return self.sp.audio_features(self.track_id) if self.is_playing_bool else False
 
     def get_audio_analysis(self):
+        # return audio analysis of the current track (only run on new track, not constantly. this will rate limit)
         return self.sp.audio_analysis(self.track_id) if self.is_playing_bool else False
     """ def private_get_image_color(self):
         # need to offload this to something else
