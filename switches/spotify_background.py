@@ -18,9 +18,8 @@ def main(lights, brightness=False, rgb=False, spotify=False):
     while not lights.thread_kill:
         new_url = spotify.get_album_image()
         if new_url != last_url:
-            rgb = spotify.get_color()
-            new_hsv = lights.rgb_to_hsv(rgb)
-            lights.log.debug("spotify_background: rgb: {} and hsv: {}".format(rgb, new_hsv))
+            new_hsv = spotify.get_color()
+            lights.log.debug("spotify_background: hsv: {}".format(new_hsv))
             if new_hsv != last_hsv:
                 lights.smooth_transition(0, 87, last_hsv, new_hsv, 0.3)
                 last_hsv = new_hsv
