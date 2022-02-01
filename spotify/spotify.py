@@ -126,10 +126,10 @@ class Spotify_helper:
                 hsv = colorsys.rgb_to_hsv(r / 256, g / 256, b / 256)
                 return hsv
             else:
-                print("Error on /get_color request: " + response.text)
+                self.log.error("Error on /get_color request: " + response.text)
                 return False # self.private_get_image_color()
         else:
-            print("Error on /get_color request: " + response.text)
+            self.log.error("Error on /get_color request: " + response.text)
             return False # self.private_get_image_color()
     def get_color(self):
         if self.is_playing_bool:

@@ -17,9 +17,11 @@ def main(lights, brightness=False, rgb=False, spotify=False):
     while not lights.thread_kill:
         new_hsv = spotify.get_color()
         new_hsv = lights.rgb_to_hsv(new_hsv)
-        lights.smooth_transition(0, 87, last_hsv, new_hsv, 0.3)
+        lights.log.debug("spotify_background: new_hsv: {}".format(new_hsv))
+        if new_hsv != last_hsv:
+            lights.smooth_transition(0, 87, last_hsv, new_hsv, 0.3)
         last_hsv = new_hsv
-        time.sleep(2)
+        time.sleep(0.1)
     lights.thread_end("spotify_background")
 
 
