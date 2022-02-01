@@ -11,7 +11,8 @@ import colorsys
 import time
 
 class Spotify_helper:
-    def __init__(self):
+    def __init__(self, log):
+        self.log = log
         data = open('/home/pi/DormRoomLightStrips/spotify/.spotify-credentials.json', 'r')
         creds = json.load(data)
 
@@ -47,6 +48,7 @@ class Spotify_helper:
         # checks if music is currently playing and updates values
         # look into adding roku api to here so we can get lots of updates without rate limiting
         ct = self.sp.current_user_playing_track()
+        self.log.debug(ct)
         self.is_playing_bool = ct['is_playing']
         if self.is_playing_bool:
             self.track_id = ct['item']['id']

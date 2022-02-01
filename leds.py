@@ -155,7 +155,7 @@ class light_strip:
 
             self.immune = [server, os.getpid()]
             # if it is a server, we should start the spotify thread in the background too
-            self.spotify = spotify.Spotify_helper()
+            self.spotify = spotify.Spotify_helper(log=self.log)
             spotify_thread = threading.Thread(target=self.spotify.update_daemon, daemon=True)
             spotify_thread.start()
             self.log.debug(
