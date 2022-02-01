@@ -17,7 +17,7 @@ def main(lights, brightness=False, rgb=False, spotify=False):
     lights.log.debug("spotify_background is now running")
     while not lights.thread_kill:
         new_track = spotify.get_track_id()
-        if new_track != last_track and spotify.is_playing():
+        if (new_track != last_track or last_hsv == (0,0,0)) and spotify.is_playing() :
             new_hsv = spotify.get_color()
             lights.log.debug("spotify_background: {} - hsv: {}".format(spotify.get_track_title(), new_hsv))
             lights.smooth_transition(0, 87, last_hsv, new_hsv, 0.3)
