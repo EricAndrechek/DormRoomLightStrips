@@ -50,7 +50,7 @@ class Spotify_helper:
         ct = self.sp.current_user_playing_track()
         try:
             self.is_playing_bool = ct['is_playing']
-        except KeyError:
+        except TypeError:
             self.log.debug(ct)
         # self.log.debug("Spotify is playing: " + str(self.is_playing_bool))
         if self.is_playing_bool:
