@@ -51,7 +51,7 @@ class Spotify_helper:
         try:
             self.is_playing_bool = ct['is_playing']
         except TypeError:
-            self.log.debug(ct)
+            self.is_playing_bool = False
         # self.log.debug("Spotify is playing: " + str(self.is_playing_bool))
         if self.is_playing_bool:
             self.track_id = ct['item']['id']
