@@ -1,1 +1,1 @@
-__all__ = ["color_cycle", "color_overlap", "color_strobe", "random_wave", "umich_colors", "strobe", "color_rotate", "snakes"]
+__all__ = ["color_cycle", "color_overlap", "color_strobe", "random_wave", "umich_colors", "strobe", "color_rotate", "spotify_background", "snakes"]

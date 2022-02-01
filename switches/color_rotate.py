@@ -13,7 +13,7 @@ import random
 import leds
 
 
-def main(lights, brightness=False, rgb=False):
+def main(lights, brightness=False, rgb=False, spotify=False):
     hue = 0
     if brightness == 0:
         brightness = 1

@@ -12,7 +12,7 @@ import time
 import random
 
 
-def main(lights, brightness=False, rgb=False):
+def main(lights, brightness=False, rgb=False, spotify=False):
     lights.log.debug("color_strobe is now running")
     while not lights.thread_kill:
         hue = random.random()

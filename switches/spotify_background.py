@@ -8,22 +8,17 @@
 import sys
 sys.path.append("../")
 import leds
-import spotify
 import time
 
 
-def main(lights, brightness=False, rgb=False):
+def main(lights, brightness=False, rgb=False, spotify=False):
     last_hsv = (0, 0, 0)
-    last_url = ""
     lights.log.debug("spotify_background is now running")
     while not lights.thread_kill:
-        url = spotify.spotify.get_current_track_url()
-        if spotify.spotify.is_playing() and url != last_url:
-            new_color = spotify.spotify.get_color()
-            hsv = lights.rgb_to_hsv(new_color)
-            lights.smooth_transition(0, 87, last_hsv, hsv, 0.3)
-            last_url = url
-            last_hsv = hsv
+        new_hsv = spotify.get_color()
+        new_hsv = lights.rgb_to_hsv(new_hsv)
+        lights.smooth_transition(0, 87, last_hsv, new_hsv, 0.3)
+        last_hsv = new_hsv
         time.sleep(2)
     lights.thread_end("spotify_background")
 

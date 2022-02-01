@@ -12,7 +12,7 @@ import random
 import leds
 
 
-def main(lights, brightness=False, rgb=False):
+def main(lights, brightness=False, rgb=False, spotify=False):
     blue = (0.583, 0.99, 0.4)
     maize = (0.18, 0.98, 0.99)
     lights.log.debug("umich_colors is now running")

@@ -11,6 +11,7 @@ import os
 import threading
 import time
 import logging
+from spotify import spotify
 
 
 class light_strip:
@@ -154,6 +155,9 @@ class light_strip:
 
             self.immune = [server, os.getpid()]
             # if it is a server, we should start the spotify thread in the background too
+            self.spotify = spotify.Spotify_helper()
+            spotify_thread = threading.Thread(target=self.spotify.update_daemon, daemon=True)
+            spotify_thread.start()
             self.log.debug(
                 "server initialized with pid {}".format(os.getpid()))
 
@@ -428,7 +432,7 @@ class light_strip:
         targ = switch + ".main"
         self.kill_thread()
         self.thread = threading.Thread(target=eval(
-            targ), args=(self, brightness, color), daemon=True)
+            targ), args=(self, brightness, color, self.spotify), daemon=True)
         self.thread.start()
 
     def kill_thread(self):

@@ -15,7 +15,7 @@ sys.path.append("../")
 import leds
 
 
-def main(lights, brightness=False, rgb=False):
+def main(lights, brightness=False, rgb=False, spotify=False):
     lights.log.debug("example is now running")
 
     while not lights.thread_kill:

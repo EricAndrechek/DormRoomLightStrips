@@ -12,7 +12,7 @@ import random
 import leds
 
 
-def main(lights, brightness=False, rgb=False):
+def main(lights, brightness=False, rgb=False, spotify=False):
     wait_time = 1 / brightness / 2
     hue = 0
     spot = 0

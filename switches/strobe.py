@@ -13,7 +13,7 @@ import os
 import sys
 
 
-def main(lights, brightness=False, rgb=False):
+def main(lights, brightness=False, rgb=False, spotify=False):
     lights.log.debug("strobe is now running")
     while not lights.thread_kill:
         lights.ceiling_fill_all((0, 0, 0))

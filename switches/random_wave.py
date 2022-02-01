@@ -12,7 +12,7 @@ import random
 import leds
 
 
-def main(lights, brightness, rgb=False):
+def main(lights, brightness=False, rgb=False, spotify=False):
     if brightness == 0:
         brightness = 1
     wait_time = 1 / brightness * 2

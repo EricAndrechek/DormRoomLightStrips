@@ -12,7 +12,7 @@ import time
 import colorsys
 
 
-def main(lights, brightness=False, rgb=False):
+def main(lights, brightness=False, rgb=False, spotify=False):
     hsv = (0, 0.999, 0.9)
     if brightness == 0:
         brightness = 1

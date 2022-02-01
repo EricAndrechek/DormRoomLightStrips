@@ -257,7 +257,7 @@ def light_pattern(lights, beat, start_time, duration, min_loudness, max_loudness
                  min_loudness, max_loudness, hue_shift)
 
 
-def main(lights, brightness, rgb=False):
+def main(lights, brightness=False, rgb=False, spotify=False):
     track = ""
     adjust_hue = True
     last_url = ""

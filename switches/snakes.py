@@ -11,7 +11,7 @@ import leds
 import time
 
 
-def main(lights, brightness=False, rgb=False):
+def main(lights, brightness=False, rgb=False, spotify=False):
     count = 0
     lights.log.debug("snakes is now running")
     while not lights.thread_kill:
