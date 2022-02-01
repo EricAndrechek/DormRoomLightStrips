@@ -19,11 +19,13 @@ def main(lights, brightness=False, rgb=False, spotify=False):
         new_url = spotify.get_album_image()
         if new_url != last_url:
             new_hsv = spotify.get_color()
-            lights.log.debug("spotify_background: hsv: {}".format(new_hsv))
             if new_hsv != last_hsv:
+                lights.log.debug("spotify_background color update: {} - hsv: {}".format(spotify.get_track_title(), new_hsv))
                 lights.smooth_transition(0, 87, last_hsv, new_hsv, 0.3)
                 last_hsv = new_hsv
             last_url = new_url
+        if not new_url:
+            lights.smooth_transition(0, 87, last_hsv, (0, 0, 0), 0.3)
         time.sleep(0.1)
     lights.thread_end("spotify_background")
 

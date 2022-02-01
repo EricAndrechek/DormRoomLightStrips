@@ -86,6 +86,9 @@ class Spotify_helper:
             return album_image
         else:
             return False
+    def get_track_title(self):
+        # returns the name of the current track
+        return self.current_track_data['item']['name'] if self.is_playing_bool else False
     def get_playback_position(self):
         # returns the current playback position in milliseconds
         return self.track_position if self.is_playing_bool else False
