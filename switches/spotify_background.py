@@ -26,6 +26,7 @@ def main(lights, brightness=False, rgb=False, spotify=False):
             last_url = new_url
         if not spotify.is_playing():
             if last_hsv != (0, 0, 0):
+                lights.log.debug("spotify_background color update: Nothing playing - hsv: (0, 0, 0)")
                 lights.smooth_transition(0, 87, last_hsv, (0, 0, 0), 0.3)
                 last_hsv = (0, 0, 0)
         time.sleep(0.1)
