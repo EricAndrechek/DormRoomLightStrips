@@ -96,9 +96,10 @@ class Spotify_helper:
         # returns the duration of the current track in milliseconds
         return self.track_duration / 1000 if self.is_playing_bool else False
     def get_audio_features(self):
-        # return audio features of the current track
+        # return audio features of the current track (only run on new track, not constantly. this will rate limit)
         return self.sp.audio_features(self.track_id) if self.is_playing_bool else False
     def get_audio_analysis(self):
+        # return audio analysis of the current track (only run on new track, not constantly. this will rate limit)
         return self.sp.audio_analysis(self.track_id) if self.is_playing_bool else False
     """ def private_get_image_color(self):
         # need to offload this to something else
