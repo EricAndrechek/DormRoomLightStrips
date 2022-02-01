@@ -2,7 +2,6 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import requests
 import json
-import index
 # import image_color_helper
 # import numpy as np
 # from io import BytesIO
