@@ -47,10 +47,15 @@ class Spotify_helper:
         # checks if music is currently playing and updates values
         # look into adding roku api to here so we can get lots of updates without rate limiting
         ct = self.sp.current_user_playing_track()
-        self.track_id = ct['item']['id']
-        self.track_duration = ct['item']['duration_ms'] / 1000
-        self.track_position = ct['progress_ms'] / 1000
         self.is_playing_bool = ct['is_playing']
+        if self.is_playing_bool:
+            self.track_id = ct['item']['id']
+            self.track_duration = ct['item']['duration_ms'] / 1000
+            self.track_position = ct['progress_ms'] / 1000
+        else:
+            self.track_id = False
+            self.track_duration = False
+            self.track_position = False
         self.current_track_data = ct
     def roku_data(self):
         # check roku to see if it is spotify and is playing
