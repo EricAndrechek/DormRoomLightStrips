@@ -52,7 +52,7 @@ class Spotify_helper:
             self.is_playing_bool = ct['is_playing']
         except KeyError:
             self.log.debug(ct)
-        self.log.debug("Spotify is playing: " + str(self.is_playing_bool))
+        # self.log.debug("Spotify is playing: " + str(self.is_playing_bool))
         if self.is_playing_bool:
             self.track_id = ct['item']['id']
             self.track_duration = ct['item']['duration_ms'] / 1000
