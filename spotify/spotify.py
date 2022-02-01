@@ -12,7 +12,7 @@ import time
 
 class Spotify_helper:
     def __init__(self):
-        data = open('/home/pi/DormRoomLightStrips/spotify/spotify-credentials.json', 'r')
+        data = open('/home/pi/DormRoomLightStrips/spotify/.spotify-credentials.json', 'r')
         creds = json.load(data)
 
         auth_manager = SpotifyOAuth(
