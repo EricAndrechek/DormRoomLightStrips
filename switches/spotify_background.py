@@ -23,7 +23,7 @@ def main(lights, brightness=False, rgb=False, spotify=False):
             lights.smooth_transition(0, 87, last_hsv, new_hsv, 0.3)
             last_hsv = new_hsv
             last_track = new_track
-        if not spotify.is_playing():
+        if not spotify.is_playing() and spotify.get_time_offset() > 30000:
             lights.log.debug("spotify_background: Nothing playing - hsv: (0, 0, 0)")
             lights.smooth_transition(0, 87, last_hsv, (0, 0, 0), 0.3)
             last_hsv = (0, 0, 0)
