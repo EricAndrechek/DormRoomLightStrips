@@ -48,9 +48,9 @@ class Spotify_helper:
         # checks if music is currently playing and updates values
         # look into adding roku api to here so we can get lots of updates without rate limiting
         ct = self.sp.current_user_playing_track()
-        try:
+        if ct is not None:
             self.is_playing_bool = ct['is_playing']
-        except TypeError:
+        else:
             self.is_playing_bool = False
         # self.log.debug("Spotify is playing: " + str(self.is_playing_bool))
         if self.is_playing_bool:
