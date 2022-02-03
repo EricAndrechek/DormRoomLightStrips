@@ -15,6 +15,7 @@ def main(lights, brightness=False, rgb=False, spotify=False):
     last_hsv = (0, 0, 0)
     last_track = ""
     lights.log.debug("spotify_background is now running")
+    last_off = time.time()
     while not lights.thread_kill:
         new_track = spotify.get_track_id()
         if (new_track != last_track or last_hsv == (0,0,0)) and spotify.is_playing() :
@@ -23,10 +24,12 @@ def main(lights, brightness=False, rgb=False, spotify=False):
             lights.smooth_transition(0, 87, last_hsv, new_hsv, 0.3)
             last_hsv = new_hsv
             last_track = new_track
-        if not spotify.is_playing() and spotify.get_time_offset() > 30000:
-            lights.log.debug("spotify_background: Nothing playing - hsv: (0, 0, 0)")
-            lights.smooth_transition(0, 87, last_hsv, (0, 0, 0), 0.3)
-            last_hsv = (0, 0, 0)
+        if not spotify.is_playing():
+            if (time.time()-last_off) > 30000 or last_hsv != (0,0,0):
+                lights.log.debug("spotify_background: Nothing playing - hsv: (0, 0, 0)")
+                lights.smooth_transition(0, 87, last_hsv, (0, 0, 0), 0.3)
+                last_hsv = (0, 0, 0)
+                last_off = time.time()
         time.sleep(0.1)
     lights.thread_end("spotify_background")
 
