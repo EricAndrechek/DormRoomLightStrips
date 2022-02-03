@@ -10,10 +10,12 @@ import json
 import colorsys
 import time
 
+
 class Spotify_helper:
     def __init__(self, log):
         self.log = log
-        data = open('/home/pi/DormRoomLightStrips/spotify/.spotify-credentials.json', 'r')
+        data = open(
+            '/home/pi/DormRoomLightStrips/spotify/.spotify-credentials.json', 'r')
         creds = json.load(data)
 
         auth_manager = SpotifyOAuth(
@@ -28,6 +30,7 @@ class Spotify_helper:
         self.track_position = None
         self.current_track_data = None
         self.is_playing_bool = False
+        self.real_update_time = False
 
         # bool to see if update should be running or not.
         # if bool is true, update as follows:
@@ -40,14 +43,17 @@ class Spotify_helper:
         # if bool is false, nothing is currently using spotify, so run general update code every 2 minutes to just get some data ready for a fast boot if spotify button is pressed
         self.used = True
         self.general_update()
+
     def update_daemon(self):
         while self.used:
             self.general_update()
             time.sleep(2)
+
     def general_update(self):
         # checks if music is currently playing and updates values
         # look into adding roku api to here so we can get lots of updates without rate limiting
         ct = self.sp.current_user_playing_track()
+        self.real_update_time = time.time()
         if ct is not None:
             self.is_playing_bool = ct['is_playing']
         else:
@@ -62,42 +68,56 @@ class Spotify_helper:
             self.track_duration = False
             self.track_position = False
         self.current_track_data = ct
+
     def roku_data(self):
         # check roku to see if it is spotify and is playing
         # get playback position and duration
         try:
-            response = requests.get("http://192.168.2.242:8060/query/media-player", timeout=3.1)
+            response = requests.get(
+                "http://192.168.2.242:8060/query/media-player", timeout=3.1)
             if response.status_code == 200:
-                return False # come back to this once I have time to figure out how to get the roku to send the data
+                return False  # come back to this once I have time to figure out how to get the roku to send the data
         except:
             return False
 
     def current_track(self):
         # checks if playing and returns current track data
         return self.current_track_data if self.is_playing_bool else False
+
+    def get_time_offset(self):
+        # returns number of milliseconds since data last updated
+        return time.time() - self.real_update_time
+
     def get_track_id(self):
         # returns the track id of the current track if something is playing, otherwise returns false
         return self.track_id if self.is_playing_bool else False
+
     def get_album_image(self):
         # returns the url to the smallest image of the album
         if self.is_playing_bool:
-            last_item = len(self.current_track_data['item']['album']['images']) - 1
+            last_item = len(
+                self.current_track_data['item']['album']['images']) - 1
             album_image = self.current_track_data['item']['album']['images'][last_item]['url']
             return album_image
         else:
             return False
+
     def get_track_title(self):
         # returns the name of the current track
         return self.current_track_data['item']['name'] if self.is_playing_bool else False
+
     def get_playback_position(self):
         # returns the current playback position in milliseconds
         return self.track_position if self.is_playing_bool else False
+
     def get_song_duration(self):
         # returns the duration of the current track in milliseconds
         return self.track_duration / 1000 if self.is_playing_bool else False
+
     def get_audio_features(self):
         # return audio features of the current track (only run on new track, not constantly. this will rate limit)
         return self.sp.audio_features(self.track_id) if self.is_playing_bool else False
+
     def get_audio_analysis(self):
         # return audio analysis of the current track (only run on new track, not constantly. this will rate limit)
         return self.sp.audio_analysis(self.track_id) if self.is_playing_bool else False
@@ -114,13 +134,16 @@ class Spotify_helper:
                 return False
             return new_color
         return False """
+
     def private_get_lyrics_color(self):
-        response = requests.get("https://spotify-color.andrechek.com/get_color")
+        response = requests.get(
+            "https://spotify-color.andrechek.com/get_color")
         if response.status_code == 200:
             color = response.text
             if 'rgb' in color:
                 rgb = color.split('rgb(')[1].split(')')[0].split(', ')
-                hsv = colorsys.rgb_to_hsv(int(rgb[0]) / 256, int(rgb[1]) / 256, int(rgb[2]) / 256)
+                hsv = colorsys.rgb_to_hsv(
+                    int(rgb[0]) / 256, int(rgb[1]) / 256, int(rgb[2]) / 256)
                 return hsv
             elif '#' in color:
                 hex = color.split('#')[1]
@@ -131,10 +154,11 @@ class Spotify_helper:
                 return hsv
             else:
                 self.log.error("Error on /get_color request: " + response.text)
-                return False # self.private_get_image_color()
+                return False  # self.private_get_image_color()
         else:
             self.log.error("Error on /get_color request: " + response.text)
-            return False # self.private_get_image_color()
+            return False  # self.private_get_image_color()
+
     def get_color(self):
         if self.is_playing_bool:
             color = self.private_get_lyrics_color()
@@ -143,11 +167,12 @@ class Spotify_helper:
                 color = (0, 0, .9)
             return color
         return (0, 0, 0)
+
     def is_being_used(self, val):
         self.used = val
+
     def is_playing(self):
         return self.is_playing_bool
-
 
 
 if __name__ == '__main__':
