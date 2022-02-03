@@ -85,7 +85,7 @@ class Spotify_helper:
         return self.current_track_data if self.is_playing_bool else False
 
     def get_time_offset(self):
-        # returns number of milliseconds since data last updated
+        # returns number of seconds since data last updated
         return time.time() - self.real_update_time
 
     def get_track_id(self):
