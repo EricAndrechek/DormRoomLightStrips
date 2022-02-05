@@ -225,13 +225,15 @@ class Spotify_patterns:
 
     def pattern5(self):
         hsv = ((self.current_beat["pitch"] + self.hue_shift) % 1, 0.99, 0.99)
-        for i in range(0, 1):
-            self.lights.ceiling_region_fill(0, 87, hsv)
-            self.lights.update()
-            time.sleep(self.duration / 80)
-            self.lights.ceiling_region_fill(0, 87, (0, 0, 0))
-            self.lights.update()
-            time.sleep(self.duration / 5)
+        self.lights.ceiling_region_fill(0, 87, hsv)
+        self.lights.update()
+
+        # on for an 80th of a second
+        time.sleep(self.duration / 80)
+
+        self.lights.ceiling_region_fill(0, 87, (0, 0, 0))
+        self.lights.update()
+        time.sleep(self.duration / 5)
 
     def update_info(self):
         self.current_track = self.spotify.get_track_id()
@@ -249,6 +251,10 @@ class Spotify_patterns:
     def runner(self):
         if self.pattern == 0:
             self.pattern = 1
+        # run the pattern specified in init
+        pattern_list = [self.pattern1, self.pattern2,
+                        self.pattern3, self.pattern4, self.pattern5]
+        current_pattern = pattern_list[self.pattern - 1]
         self.lights.log.debug("spotify_lights_beat now running")
         while not self.lights.thread_kill:
             if self.spotify.is_playing():
@@ -257,24 +263,28 @@ class Spotify_patterns:
                 for self.current_beat in self.beats:
                     if not self.spotify.is_playing() or self.current_track != self.spotify.get_track_id():
                         break
-                    start_time = time.time() - self.spotify.get_playback_position() - \
-                        self.spotify.get_time_offset()
+                    start_time = time.time() - self.spotify.get_playback_position() - self.spotify.get_time_offset()
+
+                    # wait until we've reached the beat
                     while time.time() < start_time + self.current_beat["start"]:
+                        # if we're not playing anymore, break
+                        # if thread_kill is not true, break
                         continue
+
+                    # if we are more than 0.3 seconds ahead of the beat, skip the beat
                     if time.time() - start_time - self.current_beat["start"] > 0.3:
                         continue
 
-                    self.duration = start_time + \
-                        self.current_beat["start"] + \
-                        self.current_beat["duration"] - time.time()
+                    # how much time is left in the beat
+                    self.duration = start_time + self.current_beat["start"] + self.current_beat["duration"] - time.time()
+
+                    # shouldn't be true, but here to handle errors
                     if self.duration > self.current_beat["duration"]:
                         self.duration = self.current_beat["duration"]
                     if self.duration < 0:
                         self.duration = 0
 
-                    pattern_list = [self.pattern1, self.pattern2,
-                                    self.pattern3, self.pattern4, self.pattern5]
-                    pattern_list[self.pattern - 1]()
+                    current_pattern()
             else:
-                time.sleep(250)
+                time.sleep(0.1)
         self.lights.thread_end("spotify_lights_beat")
