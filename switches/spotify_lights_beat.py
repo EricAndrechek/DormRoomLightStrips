@@ -15,8 +15,6 @@ import spotify
 from cmath import sin, cos, phase, pi
 import random
 
-spotty = spotify.spotify.Spotify_helper()
-
 
 def circular_average(inputs):
     sum = 0
@@ -295,7 +293,7 @@ def main(lights, brightness=1, rgb=False, spotify=False):
                     continue
                 if time.time() - start_time - beat["start"] > 0.3:
                     continue
-                
+
                 duration = start_time + \
                     beat["start"] + beat["duration"] - time.time()
                 if duration > beat["duration"]:
