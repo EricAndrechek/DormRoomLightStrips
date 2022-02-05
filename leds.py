@@ -20,12 +20,15 @@ class CustomFormatter(logging.Formatter):
     red = "\x1b[31;20m"
     bold_red = "\x1b[31;1m"
     reset = "\x1b[0m"
+    blue = "\033[94m"
+    light_blue = "\x1b[1;36m"
+    green = "\033[92m"
     format = "[%(asctime)s] [%(levelname)s]: %(message)s (%(filename)s:%(lineno)d)"
     datefmt='%d/%b/%y %H:%M:%S'
 
     FORMATS = {
-        logging.DEBUG: format,
-        logging.INFO: grey + format + reset,
+        logging.DEBUG: green + format + reset,
+        logging.INFO: light_blue + format + reset,
         logging.WARNING: yellow + format + reset,
         logging.ERROR: red + format + reset,
         logging.CRITICAL: bold_red + format + reset

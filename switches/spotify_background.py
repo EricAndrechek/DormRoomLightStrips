@@ -24,6 +24,7 @@ def main(lights, brightness=False, rgb=False, spotify=False):
             g, b, r = lights.hsv_to_gbr(new_hsv)
             hsv_text_block = bg(r, g, b) + "HSV: " + str(new_hsv) + bg.rs
             lights.log.debug("spotify_background: {} - {}".format(spotify.get_track_title(), hsv_text_block))
+            print(hsv_text_block)
             lights.smooth_transition(0, 87, last_hsv, new_hsv, 0.3)
             last_hsv = new_hsv
             last_track = new_track
