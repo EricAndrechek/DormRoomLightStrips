@@ -28,7 +28,7 @@ class CustomFormatter(logging.Formatter):
 
     FORMATS = {
         logging.DEBUG: green + format + reset,
-        logging.INFO: format,
+        logging.INFO: reset + format + reset,
         logging.WARNING: yellow + format + reset,
         logging.ERROR: red + format + reset,
         logging.CRITICAL: bold_red + format + reset
@@ -339,10 +339,10 @@ class light_strip:
                     self.set_pixel(i, self.hsv_to_grb(hsv))
                 except IndexError:
                     self.log.warn(
-                        "Index Error: Skipped pixel at index " + str(i))
+                        "Index Error: Skipped pixel at index " + str(i) + " with hsv: " + str(hsv))
                 except TypeError:
                     self.log.warn(
-                        "Type Error: Skipped pixel at index " + str(i))
+                        "Type Error: Skipped pixel at index " + str(i) + " with hsv: " + str(hsv))
         else:
             for i in range(start, 117):
                 try:
@@ -350,10 +350,10 @@ class light_strip:
                     self.set_pixel(i, self.hsv_to_grb(hsv))
                 except IndexError:
                     self.log.warn(
-                        "Index Error: Skipped pixel at index " + str(i))
+                        "Index Error: Skipped pixel at index " + str(i) + " with hsv: " + str(hsv))
                 except TypeError:
-                    self.log.warn(
-                        "Type Error: Skipped pixel at index " + str(i))
+                    self.log.warn(  
+                        "Type Error: Skipped pixel at index " + str(i) + " with hsv: " + str(hsv))
             self.set_pixel(117, self.hsv_to_grb(hsv))
 
     def ceiling_region_fill(self, start, end, hsv, direction="r"):
