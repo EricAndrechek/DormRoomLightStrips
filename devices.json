@@ -253,54 +253,6 @@
     },
     {
         "accessory": "HttpPushRgb",
-        "name": "Tatum Spotify Lights",
-        "service": "Light",
-        "switch": {
-            "notificationID": "spotify_lights_tatum",
-            "status": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=status",
-            "powerOn": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=on",
-            "powerOff": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=off"
-        },
-        "brightness": {
-            "max": 99,
-            "status": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=bright",
-            "url": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=bset&s=%s"
-        }
-    },
-    {
-        "accessory": "HttpPushRgb",
-        "name": "Cycle Colors",
-        "service": "Light",
-        "switch": {
-            "notificationID": "color_cycle",
-            "status": "http://192.168.2.97:8000/custom/color_cycle?r=status",
-            "powerOn": "http://192.168.2.97:8000/custom/color_cycle?r=on",
-            "powerOff": "http://192.168.2.97:8000/custom/color_cycle?r=off"
-        },
-        "brightness": {
-            "max": 99,
-            "status": "http://192.168.2.97:8000/custom/color_cycle?r=bright",
-            "url": "http://192.168.2.97:8000/custom/color_cycle?r=bset&s=%s"
-        }
-    },
-    {
-        "accessory": "HttpPushRgb",
-        "name": "Color Rotate Overlap",
-        "service": "Light",
-        "switch": {
-            "notificationID": "color_overlap",
-            "status": "http://192.168.2.97:8000/custom/color_overlap?r=status",
-            "powerOn": "http://192.168.2.97:8000/custom/color_overlap?r=on",
-            "powerOff": "http://192.168.2.97:8000/custom/color_overlap?r=off"
-        },
-        "brightness": {
-            "max": 99,
-            "status": "http://192.168.2.97:8000/custom/color_overlap?r=bright",
-            "url": "http://192.168.2.97:8000/custom/color_overlap?r=bset&s=%s"
-        }
-    },
-    {
-        "accessory": "HttpPushRgb",
         "name": "Color Strobe",
         "service": "Light",
         "switch": {
@@ -312,40 +264,13 @@
     },
     {
         "accessory": "HttpPushRgb",
-        "name": "Random Wave",
+        "name": "Match Spotify Color",
         "service": "Light",
         "switch": {
-            "notificationID": "random_wave",
-            "status": "http://192.168.2.97:8000/custom/random_wave?r=status",
-            "powerOn": "http://192.168.2.97:8000/custom/random_wave?r=on",
-            "powerOff": "http://192.168.2.97:8000/custom/random_wave?r=off"
-        },
-        "brightness": {
-            "max": 99,
-            "status": "http://192.168.2.97:8000/custom/random_wave?r=bright",
-            "url": "http://192.168.2.97:8000/custom/random_wave?r=bset&s=%s"
-        }
-    },
-    {
-        "accessory": "HttpPushRgb",
-        "name": "UM Colors",
-        "service": "Light",
-        "switch": {
-            "notificationID": "umich_colors",
-            "status": "http://192.168.2.97:8000/custom/umich_colors?r=status",
-            "powerOn": "http://192.168.2.97:8000/custom/umich_colors?r=on",
-            "powerOff": "http://192.168.2.97:8000/custom/umich_colors?r=off"
-        }
-    },
-    {
-        "accessory": "HttpPushRgb",
-        "name": "Strobe",
-        "service": "Light",
-        "switch": {
-            "notificationID": "strobe",
-            "status": "http://192.168.2.97:8000/custom/strobe?r=status",
-            "powerOn": "http://192.168.2.97:8000/custom/strobe?r=on",
-            "powerOff": "http://192.168.2.97:8000/custom/strobe?r=off"
+            "notificationID": "spotify_background",
+            "status": "http://192.168.2.97:8000/custom/spotify_background?r=status",
+            "powerOn": "http://192.168.2.97:8000/custom/spotify_background?r=on",
+            "powerOff": "http://192.168.2.97:8000/custom/spotify_background?r=off"
         }
     },
     {
@@ -366,13 +291,67 @@
     },
     {
         "accessory": "HttpPushRgb",
-        "name": "Match Spotify Color",
+        "name": "Random Wave",
         "service": "Light",
         "switch": {
-            "notificationID": "spotify_background",
-            "status": "http://192.168.2.97:8000/custom/spotify_background?r=status",
-            "powerOn": "http://192.168.2.97:8000/custom/spotify_background?r=on",
-            "powerOff": "http://192.168.2.97:8000/custom/spotify_background?r=off"
+            "notificationID": "random_wave",
+            "status": "http://192.168.2.97:8000/custom/random_wave?r=status",
+            "powerOn": "http://192.168.2.97:8000/custom/random_wave?r=on",
+            "powerOff": "http://192.168.2.97:8000/custom/random_wave?r=off"
+        },
+        "brightness": {
+            "max": 99,
+            "status": "http://192.168.2.97:8000/custom/random_wave?r=bright",
+            "url": "http://192.168.2.97:8000/custom/random_wave?r=bset&s=%s"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Cycle Colors",
+        "service": "Light",
+        "switch": {
+            "notificationID": "color_cycle",
+            "status": "http://192.168.2.97:8000/custom/color_cycle?r=status",
+            "powerOn": "http://192.168.2.97:8000/custom/color_cycle?r=on",
+            "powerOff": "http://192.168.2.97:8000/custom/color_cycle?r=off"
+        },
+        "brightness": {
+            "max": 99,
+            "status": "http://192.168.2.97:8000/custom/color_cycle?r=bright",
+            "url": "http://192.168.2.97:8000/custom/color_cycle?r=bset&s=%s"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Snakes",
+        "service": "Light",
+        "switch": {
+            "notificationID": "snakes",
+            "status": "http://192.168.2.97:8000/custom/snakes?r=status",
+            "powerOn": "http://192.168.2.97:8000/custom/snakes?r=on",
+            "powerOff": "http://192.168.2.97:8000/custom/snakes?r=off"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Strobe",
+        "service": "Light",
+        "switch": {
+            "notificationID": "strobe",
+            "status": "http://192.168.2.97:8000/custom/strobe?r=status",
+            "powerOn": "http://192.168.2.97:8000/custom/strobe?r=on",
+            "powerOff": "http://192.168.2.97:8000/custom/strobe?r=off"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "UM Colors",
+        "service": "Light",
+        "switch": {
+            "notificationID": "umich_colors",
+            "status": "http://192.168.2.97:8000/custom/umich_colors?r=status",
+            "powerOn": "http://192.168.2.97:8000/custom/umich_colors?r=on",
+            "powerOff": "http://192.168.2.97:8000/custom/umich_colors?r=off"
         }
     },
     {
@@ -393,13 +372,34 @@
     },
     {
         "accessory": "HttpPushRgb",
-        "name": "Snakes",
+        "name": "Tatum Spotify Lights",
         "service": "Light",
         "switch": {
-            "notificationID": "snakes",
-            "status": "http://192.168.2.97:8000/custom/snakes?r=status",
-            "powerOn": "http://192.168.2.97:8000/custom/snakes?r=on",
-            "powerOff": "http://192.168.2.97:8000/custom/snakes?r=off"
+            "notificationID": "spotify_lights_tatum",
+            "status": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=status",
+            "powerOn": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=on",
+            "powerOff": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=off"
+        },
+        "brightness": {
+            "max": 5,
+            "status": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=bright",
+            "url": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=bset&s=%s"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
+        "name": "Color Rotate Overlap",
+        "service": "Light",
+        "switch": {
+            "notificationID": "color_overlap",
+            "status": "http://192.168.2.97:8000/custom/color_overlap?r=status",
+            "powerOn": "http://192.168.2.97:8000/custom/color_overlap?r=on",
+            "powerOff": "http://192.168.2.97:8000/custom/color_overlap?r=off"
+        },
+        "brightness": {
+            "max": 99,
+            "status": "http://192.168.2.97:8000/custom/color_overlap?r=bright",
+            "url": "http://192.168.2.97:8000/custom/color_overlap?r=bset&s=%s"
         }
     }
 ]

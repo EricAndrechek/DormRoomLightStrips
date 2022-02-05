@@ -1,9 +1,9 @@
-# Friendly name: Beat Spotify Lights
-# Internal name: spotify_lights_beat
+# Friendly name: Tatum Spotify Lights
+# Internal name: spotify_lights_tatum
 # Brightness slider: True
 # Brightness slider max: 5
 # RGB: False
-# Description: spotify lights by beat
+# Description: spotify lights by tatum
 
 import sys
 
