@@ -1,9 +1,9 @@
-# Friendly name: Tatum Spotify Lights
-# Internal name: spotify_lights_tatum
+# Friendly name: Beat Spotify Lights
+# Internal name: spotify_lights_beat
 # Brightness slider: True
-# Brightness slider max: 99
+# Brightness slider max: 5
 # RGB: False
-# Description: spotify lights by tatum
+# Description: spotify lights by beat
 
 import sys
 sys.path.append("../")
@@ -15,8 +15,6 @@ import spotify
 from cmath import sin, cos, phase, pi
 import random
 
-spotty = spotify.spotify.Spotify_helper()
-
 
 def circular_average(inputs):
     sum = 0
@@ -26,7 +24,7 @@ def circular_average(inputs):
 
 
 def get_beats_info(division):
-    analysis = spotty.get_audio_analysis()
+    analysis = spotify.get_audio_analysis()
     if division == "tatum":
         beats = analysis["tatums"]
     else:
@@ -57,7 +55,7 @@ def get_beats_info(division):
     return beats
 
 
-def pattern1(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
+def pattern1(lights, beat, duration, min_loudness, max_loudness, hue_shift):
     loudness = (beat["loudness"] - min_loudness) / \
         (max_loudness - min_loudness)
     distance = int(loudness * 30)
@@ -71,7 +69,7 @@ def pattern1(lights, beat, start_time, duration, min_loudness, max_loudness, hue
         lights.update()
         time.sleep(duration / 8 / distance)
     for i in range(distance - 1, 2, -1):
-        if time.time() > start_time + beat["start"] + beat["duration"] - 0.2:
+        if duration < 0.2:
             lights.ceiling_region_fill(3, 84, (0, 0, 0))
             lights.update()
             break
@@ -120,7 +118,7 @@ def pattern2(lights, beat, start_time, duration, min_loudness, max_loudness, hue
 state3 = (0, (0, 0, 0))  # (center, hsv)
 
 
-def pattern3(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
+def pattern3(lights, beat, duration, min_loudness, max_loudness, hue_shift):
     global state3
     hsv = ((beat["pitch"] + hue_shift) % 1, 0.99, 0.99)
     prev_start = state3[0] - 10
@@ -155,7 +153,7 @@ def pattern3(lights, beat, start_time, duration, min_loudness, max_loudness, hue
 state4 = (0, 0, (0, 0, 0))   # (center, length, hsv)
 
 
-def pattern4(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift):
+def pattern4(lights, beat, duration, min_loudness, max_loudness, hue_shift):
     global state4
     loudness = (beat["loudness"] - min_loudness) / \
         (max_loudness - min_loudness)
@@ -239,92 +237,73 @@ def pattern5(lights, beat, start_time, duration, min_loudness, max_loudness, hue
         time.sleep(duration / 5)
 
 
-def light_pattern(lights, beat, start_time, duration, min_loudness, max_loudness, hue_shift, pattern):
+def light_pattern(lights, beat, duration, min_loudness, max_loudness, hue_shift, pattern):
     if pattern == 1:
-        pattern1(lights, beat, start_time, duration,
+        pattern1(lights, beat, duration,
                  min_loudness, max_loudness, hue_shift)
     elif pattern == 2:
-        pattern2(lights, beat, start_time, duration,
+        pattern2(lights, beat, duration,
                  min_loudness, max_loudness, hue_shift)
     elif pattern == 3:
-        pattern3(lights, beat, start_time, duration,
+        pattern3(lights, beat, duration,
                  min_loudness, max_loudness, hue_shift)
     elif pattern == 4:
-        pattern4(lights, beat, start_time, duration,
+        pattern4(lights, beat, duration,
                  min_loudness, max_loudness, hue_shift)
     elif pattern == 5:
-        pattern5(lights, beat, start_time, duration,
+        pattern5(lights, beat, duration,
                  min_loudness, max_loudness, hue_shift)
 
 
-def main(lights, brightness=False, rgb=False, spotify=False):
-    track = ""
-    adjust_hue = True
-    last_url = ""
-    division = "tatum"
-    pattern = int(brightness / 20 + 1)
-    lights.log.debug("spotify_lights_tatum has started")
-    while not lights.thread_kill:
-        url = ""
-        album_hue = 0
-        is_playing = spotty.is_playing()
-        if is_playing:
-            if adjust_hue:
-                hsv = spotty.get_color()
-                album_hue = hsv[0]
+current_track = ""
+hue_shift = 0
+min_loudness = 0
+max_loudness = 0
+beats = []
 
-            track = spotty.get_audio_features()[0]["id"]
-            min_loudness = 0
-            max_loudness = 0
-            hues = []
-            beats = get_beats_info(division)
+
+def update_info():
+    current_track = spotify.get_track_id()
+    beats = get_beats_info("tatum")
+    hues = []
+    for beat in beats:
+        if beat["loudness"] < min_loudness:
+            min_loudness = beat["loudness"]
+        if beat["loudness"] > max_loudness:
+            max_loudness = beat["loudness"]
+        hues.append(beat["pitch"])
+    hue_shift = spotify.get_color()[0] - circular_average(hues)
+
+
+def main(lights, brightness=1, rgb=False, spotify=False):
+    pattern = brightness
+    if pattern == 0:
+        pattern = 1
+    lights.log.debug("spotify_lights_beat now running")
+    while not lights.thread_kill:
+        if spotify.is_playing():
+            if current_track != spotify.get_track_id():
+                update_info()
             for beat in beats:
-                if beat["loudness"] < min_loudness:
-                    min_loudness = beat["loudness"]
-                if beat["loudness"] > max_loudness:
-                    max_loudness = beat["loudness"]
-                hues.append(beat["pitch"])
-            avg_hue = circular_average(hues)
-            if adjust_hue:
-                hue_shift = album_hue - avg_hue
-            else:
-                hue_shift = 0
-            start_time = time.time() - spotty.get_playback_position() + 0.3
-            index = -1
-            for beat in beats:
-                index = index + 1
+                if not spotify.is_playing() or current_track != spotify.get_track_id():
+                    break
+                start_time = time.time() - spotify.get_playback_position() - \
+                    spotify.get_time_offset()
                 while time.time() < start_time + beat["start"]:
                     continue
-                if time.time() - start_time - beat["start"] > 0.5:
-                    print("skip")
+                if time.time() - start_time - beat["start"] > 0.3:
                     continue
-                print("Beat " + str(index) + ": " + str(beat["start"]))
-                """ if index % 10 == 0:
-                    stopped = False
-                    while not spotty.is_playing():
-                        time.sleep(0.5)
-                        stopped = True
-                    if stopped:
-                        start_time = time.time() - get_playback_position() + 0.3
-                if index % 10 == 5:
-                    if spotty.get_audio_features()[0]["id"] != track:
-                        break """
+
                 duration = start_time + \
                     beat["start"] + beat["duration"] - time.time()
                 if duration > beat["duration"]:
                     duration = beat["duration"]
-                # print(time.time() - start_time - beat["start"])
-                # print(duration)
-                if duration > 0:
-                    light_pattern(lights, beat, start_time, duration,
-                                  min_loudness, max_loudness, hue_shift, int(pattern))
-                else:
-                    print("skip")
-        while(spotty.get_audio_features()[0]["id"] == track):
-            if (spotty.get_playback_position() < time.time() - start_time - 5):
-                break
-            continue
-    lights.thread_end("spotify_lights_tatum")
+                light_pattern(lights, beat, duration, min_loudness,
+                              max_loudness, hue_shift, pattern)
+        else:
+            time.sleep(250)
+
+    lights.thread_end("spotify_lights_beat")
 
 
 if __name__ == '__main__':
