@@ -22,6 +22,7 @@ def main(lights, brightness=False, rgb=False, spotify=False):
         if (new_track != last_track or last_hsv == (0,0,0)) and spotify.is_playing() :
             new_hsv = spotify.get_color()
             g, b, r = lights.hsv_to_gbr(new_hsv)
+            lights.log.debug(str(r) + " " + str(g) + " " + str(b))
             hsv_text_block = bg(r, g, b) + "HSV: " + str(new_hsv) + bg.rs
             lights.log.debug("spotify_background: {} - {}".format(spotify.get_track_title(), hsv_text_block))
             print(hsv_text_block)
