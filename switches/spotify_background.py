@@ -26,7 +26,7 @@ def main(lights, brightness=False, rgb=False, spotify=False):
             r = int(r)
             b = int(b)
 
-            hsv_text_block = fg.white + "spotify_background: " + spotify.get_track_title() + " - HSV: " + str(new_hsv) + " - RGB: (" + str(r) + ", " + str(g) + ", " + str(b) + ") - " + rs.bg + bg(r, g, b) + "  COLOR  " + rs.all
+            hsv_text_block = fg.white + "spotify_background: " + spotify.get_track_title() + " - RGB: (" + str(r) + ", " + str(g) + ", " + str(b) + ") - " + rs.all + fg(r, g, b) + "  COLOR  " + rs.all
 
             lights.log.info(hsv_text_block)
 
