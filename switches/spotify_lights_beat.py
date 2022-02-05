@@ -10,10 +10,10 @@ sys.path.append("../")
 from time import time
 import leds
 import time
-sys.path.append("../spotify")
-import spotify
 from cmath import sin, cos, phase, pi
 import random
+
+spotify = None
 
 
 def circular_average(inputs):
@@ -276,6 +276,7 @@ def update_info():
 
 
 def main(lights, brightness=1, rgb=False, spotify=False):
+    spotify = spotify
     pattern = brightness
     if pattern == 0:
         pattern = 1
