@@ -2,7 +2,6 @@ from time import time
 import leds
 import time
 from cmath import sin, cos, phase, pi
-from __future__ import match
 import random
 
 
@@ -270,17 +269,9 @@ class Spotify_patterns:
                     if self.duration > self.current_beat["duration"]:
                         self.duration = self.current_beat["duration"]
 
-                    match self.pattern:
-                        case 1:
-                            self.pattern1()
-                        case 2:
-                            self.pattern2()
-                        case 3:
-                            self.pattern3()
-                        case 4:
-                            self.pattern4()
-                        case 5:
-                            self.pattern5()
+                    pattern_list = [self.pattern1, self.pattern2,
+                                    self.pattern3, self.pattern4, self.pattern5]
+                    pattern_list[self.pattern - 1]()
             else:
                 time.sleep(250)
         self.lights.thread_end("spotify_lights_beat")
