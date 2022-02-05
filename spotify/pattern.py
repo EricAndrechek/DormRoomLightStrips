@@ -233,8 +233,8 @@ class Spotify_patterns:
             time.sleep(self.duration / 5)
 
     def update_info(self):
-        current_track = self.spotify.get_track_id()
-        beats = self.get_beats_info("beat")
+        self.current_track = self.spotify.get_track_id()
+        beats = self.get_beats_info()
         hues = []
         for beat in beats:
             if beat["loudness"] < self.min_loudness:
