@@ -58,10 +58,10 @@ class Spotify_patterns:
             beat["pitch"] = pitch
 
     def pattern1(self):
-        loudness = (self.beat["loudness"] - self.min_loudness) / \
+        loudness = (self.current_beat["loudness"] - self.min_loudness) / \
             (self.max_loudness - self.min_loudness)
         distance = int(loudness * 30)
-        hsv = ((self.beat["pitch"] + self.hue_shift) % 1, 0.99, 0.99)
+        hsv = ((self.current_beat["pitch"] + self.hue_shift) % 1, 0.99, 0.99)
         self.lights.ceiling_region_fill(0, 3, hsv, "r")
         self.lights.ceiling_region_fill(0, 3, hsv, "l")
         self.lights.update()
@@ -96,12 +96,12 @@ class Spotify_patterns:
         if self.state == None:
             self.state = []
 
-        loudness = (self.beat["loudness"] - self.min_loudness) / \
+        loudness = (self.current_beat["loudness"] - self.min_loudness) / \
             (self.max_loudness - self.min_loudness)
         if loudness != self.max_loudness:
             loudness = loudness ** 2
         length = 1 + int(loudness * 7)
-        hsv = ((self.beat["pitch"] + self.hue_shift) % 1, 0.99, 0.99)
+        hsv = ((self.current_beat["pitch"] + self.hue_shift) % 1, 0.99, 0.99)
         for i in range(0, length + 1):
             self.lights.ceiling_set_pixel(i, hsv, "r")
             self.lights.ceiling_set_pixel(i, hsv, "l")
@@ -118,10 +118,10 @@ class Spotify_patterns:
         if self.state == None:
             self.state = (0, (0, 0, 0))  # (center, hsv)
 
-        hsv = ((self.beat["pitch"] + self.hue_shift) % 1, 0.99, 0.99)
+        hsv = ((self.current_beat["pitch"] + self.hue_shift) % 1, 0.99, 0.99)
         prev_start = self.state[0] - 10
         prev_end = self.state[0] + 10
-        if self.beat["start"] == 0:
+        if self.current_beat["start"] == 0:
             center = random.randrange(0, 87)
         elif prev_start >= 0 and prev_end < 87:
             center = random.choice(
@@ -136,7 +136,7 @@ class Spotify_patterns:
         for i in range(1, 6):
             self.lights.ceiling_set_pixel(center + i, hsv)
             self.lights.ceiling_set_pixel(center - i, hsv)
-            if self.beat["start"] != 0:
+            if self.current_beat["start"] != 0:
                 self.lights.ceiling_set_pixel(self.state[0] - 6 + i, (0, 0, 0))
                 self.lights.ceiling_set_pixel(self.state[0] + 6 - i, (0, 0, 0))
                 self.lights.ceiling_region_fill(
@@ -151,13 +151,13 @@ class Spotify_patterns:
         if self.state == None:
             self.state = (0, 0, (0, 0, 0))  # (center, length, hsv)
 
-        loudness = (self.beat["loudness"] - self.min_loudness) / \
+        loudness = (self.current_beat["loudness"] - self.min_loudness) / \
             (self.max_loudness - self.min_loudness)
         if loudness != self.max_loudness:
             loudness = loudness ** 2
-        hsv = ((self.beat["pitch"] + self.hue_shift) % 1, 0.99, 0.99)
+        hsv = ((self.current_beat["pitch"] + self.hue_shift) % 1, 0.99, 0.99)
         length = int(2 + 4 * loudness)
-        if self.beat["start"] == 0:
+        if self.current_beat["start"] == 0:
             center = 0
         else:
             center = (self.state[0] + self.state[1] + length + 3) % 87
@@ -170,7 +170,7 @@ class Spotify_patterns:
                 self.lights.ceiling_set_pixel(center + i + 43, hsv)
                 self.lights.ceiling_set_pixel(center - i + 43, hsv)
 
-                if self.beat["start"] != 0 and i < self.state[1]:
+                if self.current_beat["start"] != 0 and i < self.state[1]:
                     self.lights.ceiling_set_pixel(
                         self.state[0] - self.state[1] + i, (0, 0, 0))
                     self.lights.ceiling_set_pixel(
@@ -200,7 +200,7 @@ class Spotify_patterns:
 
                     self.lights.ceiling_set_pixel(center + i + 43, hsv)
                     self.lights.ceiling_set_pixel(center - i + 43, hsv)
-                if self.beat["start"] != 0:
+                if self.current_beat["start"] != 0:
                     self.lights.ceiling_set_pixel(
                         self.state[0] - self.state[1] + i, (0, 0, 0))
                     self.lights.ceiling_set_pixel(
@@ -269,6 +269,8 @@ class Spotify_patterns:
                         self.current_beat["duration"] - time.time()
                     if self.duration > self.current_beat["duration"]:
                         self.duration = self.current_beat["duration"]
+                    if self.duration < 0:
+                        self.duration = 0
 
                     pattern_list = [self.pattern1, self.pattern2,
                                     self.pattern3, self.pattern4, self.pattern5]
