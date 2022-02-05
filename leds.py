@@ -54,7 +54,7 @@ class light_strip:
             self.pixels = neopixel.NeoPixel(
                 board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
         self.homebridge_url = "http://192.168.2.16:8001/"
-        self.receiver_url = "http://192.168.2.97:8000/"
+        self.receiver_url = "http://192.168.2.16:8000/"
         self.is_receiver = is_receiver
         self.is_transmitter = is_transmitter
         self.thread = None
@@ -400,6 +400,7 @@ class light_strip:
             self.update()
 
     def status(self, region):
+        # need to figure out a way of getting the status of a thread that ran but had a race condition with a killed thread of the same type
         return self.states[region]["state"]
 
     def get_hex(self, region):
