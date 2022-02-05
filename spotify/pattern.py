@@ -287,4 +287,5 @@ class Spotify_patterns:
                     current_pattern()
             else:
                 time.sleep(0.1)
+            self.lights.spotify_keep_alive()
         self.lights.thread_end("spotify_lights_beat")
