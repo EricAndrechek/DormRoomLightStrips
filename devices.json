@@ -253,6 +253,22 @@
     },
     {
         "accessory": "HttpPushRgb",
+        "name": "Tatum Spotify Lights",
+        "service": "Light",
+        "switch": {
+            "notificationID": "spotify_lights_tatum",
+            "status": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=status",
+            "powerOn": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=on",
+            "powerOff": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=off"
+        },
+        "brightness": {
+            "max": 99,
+            "status": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=bright",
+            "url": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=bset&s=%s"
+        }
+    },
+    {
+        "accessory": "HttpPushRgb",
         "name": "Cycle Colors",
         "service": "Light",
         "switch": {
@@ -334,22 +350,6 @@
     },
     {
         "accessory": "HttpPushRgb",
-        "name": "Tatum Spotify Lights",
-        "service": "Light",
-        "switch": {
-            "notificationID": "spotify_lights_tatum",
-            "status": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=status",
-            "powerOn": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=on",
-            "powerOff": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=off"
-        },
-        "brightness": {
-            "max": 99,
-            "status": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=bright",
-            "url": "http://192.168.2.97:8000/custom/spotify_lights_tatum?r=bset&s=%s"
-        }
-    },
-    {
-        "accessory": "HttpPushRgb",
         "name": "Color Rotate",
         "service": "Light",
         "switch": {
@@ -386,7 +386,7 @@
             "powerOff": "http://192.168.2.97:8000/custom/spotify_lights_beat?r=off"
         },
         "brightness": {
-            "max": 99,
+            "max": 5,
             "status": "http://192.168.2.97:8000/custom/spotify_lights_beat?r=bright",
             "url": "http://192.168.2.97:8000/custom/spotify_lights_beat?r=bset&s=%s"
         }

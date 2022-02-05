@@ -48,12 +48,12 @@
         "description": "strobe"
     },
     {
-        "name": "Tatum Spotify Lights",
-        "internal_name": "spotify_lights_tatum",
+        "name": "Beat Spotify Lights",
+        "internal_name": "spotify_lights_beat",
         "is_brightness_slider": true,
-        "brightness_slider_max": 99,
+        "brightness_slider_max": 5,
         "is_rgb": false,
-        "description": "spotify lights by tatum"
+        "description": "spotify lights by beat"
     },
     {
         "name": "Color Rotate",
@@ -75,7 +75,7 @@
         "name": "Beat Spotify Lights",
         "internal_name": "spotify_lights_beat",
         "is_brightness_slider": true,
-        "brightness_slider_max": 99,
+        "brightness_slider_max": 5,
         "is_rgb": false,
         "description": "spotify lights by beat"
     },
