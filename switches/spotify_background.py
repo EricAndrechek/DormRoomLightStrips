@@ -25,8 +25,9 @@ def main(lights, brightness=False, rgb=False, spotify=False):
             g = int(g)
             b = int(b)
             r = int(r)
-            hsv_text_block = "HSV: " + str(new_hsv) + " - RGB: (" + str(r) + ", " + str(g) + ", " + str(b) + ") - " + bg(r, g, b) + fg.white + "  COLOR  " + bg.rs + fg.rs
-            lights.log.info("spotify_background: {} - {}".format(spotify.get_track_title(), hsv_text_block))
+            hsv_text_block = "HSV: " + str(new_hsv) + " - RGB: (" + str(r) + ", " + str(g) + ", " + str(b) + ")"
+            lights.log.debug("spotify_background: {} - {}".format(spotify.get_track_title(), hsv_text_block))
+            print(bg(r, g, b) + fg.white + "  SPOTIFY COLOR  " + bg.rs + fg.rs)
             lights.smooth_transition(0, 87, last_hsv, new_hsv, 0.3)
             last_hsv = new_hsv
             last_track = new_track
