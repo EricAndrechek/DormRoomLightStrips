@@ -28,7 +28,7 @@ class CustomFormatter(logging.Formatter):
 
     FORMATS = {
         logging.DEBUG: green + format + reset,
-        logging.INFO: format,
+        logging.INFO: reset + format + reset,
         logging.WARNING: yellow + format + reset,
         logging.ERROR: red + format + reset,
         logging.CRITICAL: bold_red + format + reset
@@ -214,7 +214,7 @@ class light_strip:
             hue = (hue - 5 / 6) * 6 * (1 - magenta) + magenta
         return (hue, hsv[1] ** 0.2, hsv[2])
 
-    def hsv_to_gbr(self, hsv):
+    def hsv_to_grb(self, hsv):
         rgb = colorsys.hsv_to_rgb(hsv[0], hsv[1], hsv[2])
         grb = (256 * rgb[1], 256 * rgb[0], 256 * rgb[2])
         return grb
@@ -264,9 +264,9 @@ class light_strip:
         self.region_fill(0, 118, (0, 0, 0))
         self.update()
 
-    def set_pixel(self, pixel, color, gbr=True):
-        if gbr is False:
-            color = self.hsv_to_gbr(self.correct_color(color))
+    def set_pixel(self, pixel, color, grb=True):
+        if grb is False:
+            color = self.hsv_to_grb(self.correct_color(color))
         if self.is_receiver:
             self.pixels[pixel] = color
         else:
@@ -278,7 +278,7 @@ class light_strip:
             pixel = 104 + pixel % 87
             if (pixel > 117):
                 pixel = pixel - 87
-            self.set_pixel(pixel, hsv, gbr=False)
+            self.set_pixel(pixel, hsv, grb=False)
         if (direction == "l"):
             self.ceiling_set_pixel(-pixel - 1, hsv, "r")
 
@@ -336,25 +336,25 @@ class light_strip:
             for i in range(start, end):
                 try:
                     self.set_pixel(i, (0, 0, 0))
-                    self.set_pixel(i, self.hsv_to_gbr(hsv))
+                    self.set_pixel(i, hsv, grb=False)
                 except IndexError:
                     self.log.warn(
-                        "Index Error: Skipped pixel at index " + str(i))
+                        "Index Error: Skipped pixel at index " + str(i) + " with hsv: " + str(hsv))
                 except TypeError:
                     self.log.warn(
-                        "Type Error: Skipped pixel at index " + str(i))
+                        "Type Error: Skipped pixel at index " + str(i) + " with hsv: " + str(hsv))
         else:
             for i in range(start, 117):
                 try:
                     self.set_pixel(i, (0, 0, 0))
-                    self.set_pixel(i, self.hsv_to_gbr(hsv))
+                    self.set_pixel(i, hsv, grb=False)
                 except IndexError:
                     self.log.warn(
-                        "Index Error: Skipped pixel at index " + str(i))
+                        "Index Error: Skipped pixel at index " + str(i) + " with hsv: " + str(hsv))
                 except TypeError:
-                    self.log.warn(
-                        "Type Error: Skipped pixel at index " + str(i))
-            self.set_pixel(117, self.hsv_to_gbr(hsv))
+                    self.log.warn(  
+                        "Type Error: Skipped pixel at index " + str(i) + " with hsv: " + str(hsv))
+            self.set_pixel(117, hsv, grb=False)
 
     def ceiling_region_fill(self, start, end, hsv, direction="r"):
         if (direction == "r"):
