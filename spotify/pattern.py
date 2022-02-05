@@ -22,6 +22,7 @@ class Spotify_patterns:
         self.state = None
 
     def circular_average(self, inputs):
+        sum = 0
         for x in inputs:
             sum = sum + complex(cos(2 * pi * x), sin(2 * pi * x))
         return phase(sum) / (2 * pi)
