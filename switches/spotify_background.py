@@ -9,6 +9,7 @@ import sys
 sys.path.append("../")
 import leds
 import time
+from sty import fg, bg, ef, rs
 
 
 def main(lights, brightness=False, rgb=False, spotify=False):
@@ -20,7 +21,9 @@ def main(lights, brightness=False, rgb=False, spotify=False):
         new_track = spotify.get_track_id()
         if (new_track != last_track or last_hsv == (0,0,0)) and spotify.is_playing() :
             new_hsv = spotify.get_color()
-            lights.log.debug("spotify_background: {} - hsv: {}".format(spotify.get_track_title(), new_hsv))
+            g, b, r = lights.hsv_to_gbr(new_hsv)
+            hsv_text_block = bg(r, g, b) + "HSV: " + str(new_hsv) + bg.rs
+            lights.log.debug("spotify_background: {} - {}".format(spotify.get_track_title(), hsv_text_block))
             lights.smooth_transition(0, 87, last_hsv, new_hsv, 0.3)
             last_hsv = new_hsv
             last_track = new_track

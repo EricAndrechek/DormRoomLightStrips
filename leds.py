@@ -14,12 +14,39 @@ import logging
 from spotify import spotify
 
 
+class CustomFormatter(logging.Formatter):
+    grey = "\x1b[38;20m"
+    yellow = "\x1b[33;20m"
+    red = "\x1b[31;20m"
+    bold_red = "\x1b[31;1m"
+    reset = "\x1b[0m"
+    format = "[%(asctime)s] [%(levelname)s]: %(message)s (%(filename)s:%(lineno)d)"
+    datefmt='%d/%b/%y %H:%M:%S'
+
+    FORMATS = {
+        logging.DEBUG: format,
+        logging.INFO: grey + format + reset,
+        logging.WARNING: yellow + format + reset,
+        logging.ERROR: red + format + reset,
+        logging.CRITICAL: bold_red + format + reset
+    }
+
+    def format(self, record):
+        log_fmt = self.FORMATS.get(record.levelno)
+        formatter = logging.Formatter(log_fmt)
+        return formatter.format(record)
+
 class light_strip:
     def __init__(self, is_receiver=False, is_transmitter=False, server=None):
-        logging.basicConfig(
-            format='[%(asctime)s] [%(levelname)s]: %(message)s', datefmt='%d/%b/%y %H:%M:%S')
         self.log = logging.getLogger("lights")
         self.log.setLevel(logging.DEBUG)
+
+        # create console handler with a higher log level
+        ch = logging.StreamHandler()
+        ch.setLevel(logging.DEBUG)
+        ch.setFormatter(CustomFormatter())
+        self.log.addHandler(ch)
+
         if is_receiver:
             self.pixels = neopixel.NeoPixel(
                 board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
@@ -452,3 +479,4 @@ class light_strip:
             return
         self.spotify_thread = threading.Thread(target=self.spotify.update_daemon, daemon=True)
         self.spotify_thread.start()
+        self.log.info("Caught spotify thread exception, restarting")
