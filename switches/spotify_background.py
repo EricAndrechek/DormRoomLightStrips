@@ -30,6 +30,7 @@ def main(lights, brightness=False, rgb=False, spotify=False):
                 lights.smooth_transition(0, 87, last_hsv, (0, 0, 0), 0.3)
                 last_hsv = (0, 0, 0)
                 last_off = time.time()
+        lights.spotify_keep_alive()
         time.sleep(0.1)
     lights.thread_end("spotify_background")
 

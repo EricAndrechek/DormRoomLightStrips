@@ -156,8 +156,8 @@ class light_strip:
             self.immune = [server, os.getpid()]
             # if it is a server, we should start the spotify thread in the background too
             self.spotify = spotify.Spotify_helper(log=self.log)
-            spotify_thread = threading.Thread(target=self.spotify.update_daemon, daemon=True)
-            spotify_thread.start()
+            self.spotify_thread = threading.Thread(target=self.spotify.update_daemon, daemon=True)
+            self.spotify_thread.start()
             self.log.debug(
                 "server initialized with pid {}".format(os.getpid()))
 
@@ -446,3 +446,9 @@ class light_strip:
         self.homebridge_push(name, False)
         self.log.debug(name + " has stopped")
         self.thread = None
+    
+    def spotify_keep_alive(self):
+        if self.spotify_thread is not None and self.spotify_thread.is_alive():
+            return
+        self.spotify_thread = threading.Thread(target=self.spotify.update_daemon, daemon=True)
+        self.spotify_thread.start()
