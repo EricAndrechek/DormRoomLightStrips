@@ -21,7 +21,7 @@ def main(lights, brightness=False, rgb=False, spotify=False):
         new_track = spotify.get_track_id()
         if (new_track != last_track or last_hsv == (0,0,0)) and spotify.is_playing() :
             new_hsv = spotify.get_color()
-            g, b, r = lights.hsv_to_gbr(new_hsv)
+            g, r, b = lights.hsv_to_grb(new_hsv)
             g = int(g)
             b = int(b)
             r = int(r)
