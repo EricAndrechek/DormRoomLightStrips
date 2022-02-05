@@ -28,7 +28,7 @@ class CustomFormatter(logging.Formatter):
 
     FORMATS = {
         logging.DEBUG: green + format + reset,
-        logging.INFO: light_blue + format + reset,
+        logging.INFO: format,
         logging.WARNING: yellow + format + reset,
         logging.ERROR: red + format + reset,
         logging.CRITICAL: bold_red + format + reset
@@ -482,4 +482,4 @@ class light_strip:
             return
         self.spotify_thread = threading.Thread(target=self.spotify.update_daemon, daemon=True)
         self.spotify_thread.start()
-        self.log.info("Caught spotify thread exception, restarting")
+        self.log.warning("Caught spotify thread exception, restarting")
