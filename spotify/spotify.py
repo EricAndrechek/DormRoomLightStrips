@@ -52,7 +52,11 @@ class Spotify_helper:
     def general_update(self):
         # checks if music is currently playing and updates values
         # look into adding roku api to here so we can get lots of updates without rate limiting
-        ct = self.sp.current_user_playing_track()
+        try:
+            ct = self.sp.current_user_playing_track()
+        except Exception as e:
+            self.log.error(e)
+            return False
         self.real_update_time = time.time()
         if ct is not None:
             self.is_playing_bool = ct['is_playing']

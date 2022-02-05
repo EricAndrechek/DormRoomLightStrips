@@ -9,6 +9,7 @@ import sys
 sys.path.append("../")
 import leds
 import time
+from sty import fg, bg, ef, rs
 
 
 def main(lights, brightness=False, rgb=False, spotify=False):
@@ -20,7 +21,12 @@ def main(lights, brightness=False, rgb=False, spotify=False):
         new_track = spotify.get_track_id()
         if (new_track != last_track or last_hsv == (0,0,0)) and spotify.is_playing() :
             new_hsv = spotify.get_color()
-            lights.log.debug("spotify_background: {} - hsv: {}".format(spotify.get_track_title(), new_hsv))
+            g, b, r = lights.hsv_to_gbr(new_hsv)
+            g = int(g)
+            b = int(b)
+            r = int(r)
+            hsv_text_block = "HSV: " + str(new_hsv) + " - RGB: (" + str(r) + ", " + str(g) + ", " + str(b) + ") - " + bg(r, g, b) + fg.white + "  COLOR  " + bg.rs + fg.rs
+            lights.log.info("spotify_background: {} - {}".format(spotify.get_track_title(), hsv_text_block))
             lights.smooth_transition(0, 87, last_hsv, new_hsv, 0.3)
             last_hsv = new_hsv
             last_track = new_track
@@ -30,6 +36,7 @@ def main(lights, brightness=False, rgb=False, spotify=False):
                 lights.smooth_transition(0, 87, last_hsv, (0, 0, 0), 0.3)
                 last_hsv = (0, 0, 0)
                 last_off = time.time()
+        lights.spotify_keep_alive()
         time.sleep(0.1)
     lights.thread_end("spotify_background")
 

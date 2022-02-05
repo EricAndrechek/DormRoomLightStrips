@@ -14,12 +14,42 @@ import logging
 from spotify import spotify
 
 
+class CustomFormatter(logging.Formatter):
+    grey = "\x1b[38;20m"
+    yellow = "\x1b[33;20m"
+    red = "\x1b[31;20m"
+    bold_red = "\x1b[31;1m"
+    reset = "\x1b[0m"
+    blue = "\033[94m"
+    light_blue = "\x1b[1;36m"
+    green = "\033[92m"
+    format = "[%(asctime)s] [%(levelname)s]: %(message)s (%(filename)s:%(lineno)d)"
+    datefmt='%d/%b/%y %H:%M:%S'
+
+    FORMATS = {
+        logging.DEBUG: green + format + reset,
+        logging.INFO: format,
+        logging.WARNING: yellow + format + reset,
+        logging.ERROR: red + format + reset,
+        logging.CRITICAL: bold_red + format + reset
+    }
+
+    def format(self, record):
+        log_fmt = self.FORMATS.get(record.levelno)
+        formatter = logging.Formatter(log_fmt)
+        return formatter.format(record)
+
 class light_strip:
     def __init__(self, is_receiver=False, is_transmitter=False, server=None):
-        logging.basicConfig(
-            format='[%(asctime)s] [%(levelname)s]: %(message)s', datefmt='%d/%b/%y %H:%M:%S')
         self.log = logging.getLogger("lights")
         self.log.setLevel(logging.DEBUG)
+
+        # create console handler with a higher log level
+        ch = logging.StreamHandler()
+        ch.setLevel(logging.DEBUG)
+        ch.setFormatter(CustomFormatter())
+        self.log.addHandler(ch)
+
         if is_receiver:
             self.pixels = neopixel.NeoPixel(
                 board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
@@ -156,8 +186,8 @@ class light_strip:
             self.immune = [server, os.getpid()]
             # if it is a server, we should start the spotify thread in the background too
             self.spotify = spotify.Spotify_helper(log=self.log)
-            spotify_thread = threading.Thread(target=self.spotify.update_daemon, daemon=True)
-            spotify_thread.start()
+            self.spotify_thread = threading.Thread(target=self.spotify.update_daemon, daemon=True)
+            self.spotify_thread.start()
             self.log.debug(
                 "server initialized with pid {}".format(os.getpid()))
 
@@ -446,3 +476,10 @@ class light_strip:
         self.homebridge_push(name, False)
         self.log.debug(name + " has stopped")
         self.thread = None
+    
+    def spotify_keep_alive(self):
+        if self.spotify_thread is not None and self.spotify_thread.is_alive():
+            return
+        self.spotify_thread = threading.Thread(target=self.spotify.update_daemon, daemon=True)
+        self.spotify_thread.start()
+        self.log.warning("Caught spotify thread exception, restarting")
