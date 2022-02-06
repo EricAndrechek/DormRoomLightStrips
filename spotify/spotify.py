@@ -78,7 +78,7 @@ class Spotify_helper:
         # get playback position and duration
         try:
             response = requests.get(
-                "http://192.168.2.242:8060/query/media-player", timeout=3.1)
+                "http://192.168.1.45:8060/query/media-player", timeout=3.1)
             if response.status_code == 200:
                 return False  # come back to this once I have time to figure out how to get the roku to send the data
         except:
