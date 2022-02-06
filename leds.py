@@ -1,4 +1,3 @@
-from types import resolve_bases
 import board
 import neopixel
 import colorsys

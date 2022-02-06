@@ -1,9 +1,6 @@
-from email.policy import default
 import os
 import click
 import json
-
-from nbformat import write
 
 @click.group()
 @click.option('--dry-run', help='Run the code without actually executing it', is_flag=True, default=False)
