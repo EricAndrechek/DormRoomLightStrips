@@ -1,6 +1,5 @@
 flask
 click
 sty
-colorsys
 spotipy
 neopixel
