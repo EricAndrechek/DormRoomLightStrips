@@ -2,7 +2,7 @@ import board
 import neopixel
 import time
 
-pixels = neopixel.NeoPixel(board.D18, 117, auto_write=False, pixel_order=neopixel.GRB)
+pixels = neopixel.NeoPixel(board.D10, 117, auto_write=False, pixel_order=neopixel.GRB)
 
 for i in range(117):
     print("----{}----".format(i))
