@@ -2,18 +2,31 @@ import board
 import neopixel
 import time
 
-pixels = neopixel.NeoPixel(board.D10, 117, auto_write=False, pixel_order=neopixel.GRB)
+pixels = neopixel.NeoPixel(board.D12, 117, auto_write=False, pixel_order=neopixel.GRB)
 
-for i in range(117):
-    print("----{}----".format(i))
-    pixels[i] = (0, 255, 0)
+while True:
+    pixels.fill((0, 0, 0))
     pixels.show()
-    input("That was red")
-    pixels[i] = (255, 0, 0)
+    time.sleep(5)
+    pixels.fill((255, 0, 0))
     pixels.show()
-    input("That was green")
-    pixels[i] = (0, 0, 255)
+    time.sleep(5)
+    pixels.fill((0, 255, 0))
     pixels.show()
-    input("That was blue")
-    pixels[i] = (0, 0, 0)
+    time.sleep(5)
+    pixels.fill((0, 0, 255))
     pixels.show()
+    time.sleep(5)
+    pixels.fill((255, 255, 0))
+    pixels.show()
+    time.sleep(5)
+    pixels.fill((255, 0, 255))
+    pixels.show()
+    time.sleep(5)
+    pixels.fill((0, 255, 255))
+    pixels.show()
+    time.sleep(5)
+    pixels.fill((255, 255, 255))
+    pixels.show()
+    time.sleep(5)
+
