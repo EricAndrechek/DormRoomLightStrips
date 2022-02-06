@@ -2,7 +2,7 @@ import board
 import neopixel
 import time
 
-pixels = neopixel.NeoPixel(board.D12, 117, auto_write=False, pixel_order=neopixel.GRB)
+pixels = neopixel.NeoPixel(board.D21, 118, auto_write=False, pixel_order=neopixel.GRB)
 
 while True:
     pixels.fill((0, 0, 0))
