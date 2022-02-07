@@ -5,19 +5,19 @@
         "service": "Light",
         "switch": {
             "notificationID": "main",
-            "status": "http://homebridge.local:8000/status?r=main",
-            "powerOn": "http://homebridge.local:8000/on?r=main",
-            "powerOff": "http://homebridge.local:8000/off?r=main"
+            "status": "http://raspberrypi.local:8000/status?r=main",
+            "powerOn": "http://raspberrypi.local:8000/on?r=main",
+            "powerOff": "http://raspberrypi.local:8000/off?r=main"
         },
         "color": {
-            "status": "http://homebridge.local:8000/color?r=main",
-            "url": "http://homebridge.local:8000/cset/%s?r=main",
+            "status": "http://raspberrypi.local:8000/color?r=main",
+            "url": "http://raspberrypi.local:8000/cset/%s?r=main",
             "brightness": false
         },
         "brightness": {
             "max": 99,
-            "status": "http://homebridge.local:8000/bright?r=main",
-            "url": "http://homebridge.local:8000/bset/%s?r=main"
+            "status": "http://raspberrypi.local:8000/bright?r=main",
+            "url": "http://raspberrypi.local:8000/bset/%s?r=main"
         }
     },
     {
@@ -26,19 +26,19 @@
         "service": "Light",
         "switch": {
             "notificationID": "jayden_lamp",
-            "status": "http://homebridge.local:8000/status?r=jayden_lamp",
-            "powerOn": "http://homebridge.local:8000/on?r=jayden_lamp",
-            "powerOff": "http://homebridge.local:8000/off?r=jayden_lamp"
+            "status": "http://raspberrypi.local:8000/status?r=jayden_lamp",
+            "powerOn": "http://raspberrypi.local:8000/on?r=jayden_lamp",
+            "powerOff": "http://raspberrypi.local:8000/off?r=jayden_lamp"
         },
         "color": {
-            "status": "http://homebridge.local:8000/color?r=jayden_lamp",
-            "url": "http://homebridge.local:8000/cset/%s?r=jayden_lamp",
+            "status": "http://raspberrypi.local:8000/color?r=jayden_lamp",
+            "url": "http://raspberrypi.local:8000/cset/%s?r=jayden_lamp",
             "brightness": false
         },
         "brightness": {
             "max": 99,
-            "status": "http://homebridge.local:8000/bright?r=jayden_lamp",
-            "url": "http://homebridge.local:8000/bset/%s?r=jayden_lamp"
+            "status": "http://raspberrypi.local:8000/bright?r=jayden_lamp",
+            "url": "http://raspberrypi.local:8000/bset/%s?r=jayden_lamp"
         }
     },
     {
@@ -47,19 +47,19 @@
         "service": "Light",
         "switch": {
             "notificationID": "window_section",
-            "status": "http://homebridge.local:8000/status?r=window_section",
-            "powerOn": "http://homebridge.local:8000/on?r=window_section",
-            "powerOff": "http://homebridge.local:8000/off?r=window_section"
+            "status": "http://raspberrypi.local:8000/status?r=window_section",
+            "powerOn": "http://raspberrypi.local:8000/on?r=window_section",
+            "powerOff": "http://raspberrypi.local:8000/off?r=window_section"
         },
         "color": {
-            "status": "http://homebridge.local:8000/color?r=window_section",
-            "url": "http://homebridge.local:8000/cset/%s?r=window_section",
+            "status": "http://raspberrypi.local:8000/color?r=window_section",
+            "url": "http://raspberrypi.local:8000/cset/%s?r=window_section",
             "brightness": false
         },
         "brightness": {
             "max": 99,
-            "status": "http://homebridge.local:8000/bright?r=window_section",
-            "url": "http://homebridge.local:8000/bset/%s?r=window_section"
+            "status": "http://raspberrypi.local:8000/bright?r=window_section",
+            "url": "http://raspberrypi.local:8000/bset/%s?r=window_section"
         }
     },
     {
@@ -68,19 +68,19 @@
         "service": "Light",
         "switch": {
             "notificationID": "jayden_bed",
-            "status": "http://homebridge.local:8000/status?r=jayden_bed",
-            "powerOn": "http://homebridge.local:8000/on?r=jayden_bed",
-            "powerOff": "http://homebridge.local:8000/off?r=jayden_bed"
+            "status": "http://raspberrypi.local:8000/status?r=jayden_bed",
+            "powerOn": "http://raspberrypi.local:8000/on?r=jayden_bed",
+            "powerOff": "http://raspberrypi.local:8000/off?r=jayden_bed"
         },
         "color": {
-            "status": "http://homebridge.local:8000/color?r=jayden_bed",
-            "url": "http://homebridge.local:8000/cset/%s?r=jayden_bed",
+            "status": "http://raspberrypi.local:8000/color?r=jayden_bed",
+            "url": "http://raspberrypi.local:8000/cset/%s?r=jayden_bed",
             "brightness": false
         },
         "brightness": {
             "max": 99,
-            "status": "http://homebridge.local:8000/bright?r=jayden_bed",
-            "url": "http://homebridge.local:8000/bset/%s?r=jayden_bed"
+            "status": "http://raspberrypi.local:8000/bright?r=jayden_bed",
+            "url": "http://raspberrypi.local:8000/bset/%s?r=jayden_bed"
         }
     },
     {
@@ -89,19 +89,19 @@
         "service": "Light",
         "switch": {
             "notificationID": "eric_bed",
-            "status": "http://homebridge.local:8000/status?r=eric_bed",
-            "powerOn": "http://homebridge.local:8000/on?r=eric_bed",
-            "powerOff": "http://homebridge.local:8000/off?r=eric_bed"
+            "status": "http://raspberrypi.local:8000/status?r=eric_bed",
+            "powerOn": "http://raspberrypi.local:8000/on?r=eric_bed",
+            "powerOff": "http://raspberrypi.local:8000/off?r=eric_bed"
         },
         "color": {
-            "status": "http://homebridge.local:8000/color?r=eric_bed",
-            "url": "http://homebridge.local:8000/cset/%s?r=eric_bed",
+            "status": "http://raspberrypi.local:8000/color?r=eric_bed",
+            "url": "http://raspberrypi.local:8000/cset/%s?r=eric_bed",
             "brightness": false
         },
         "brightness": {
             "max": 99,
-            "status": "http://homebridge.local:8000/bright?r=eric_bed",
-            "url": "http://homebridge.local:8000/bset/%s?r=eric_bed"
+            "status": "http://raspberrypi.local:8000/bright?r=eric_bed",
+            "url": "http://raspberrypi.local:8000/bset/%s?r=eric_bed"
         }
     },
     {
@@ -110,19 +110,19 @@
         "service": "Light",
         "switch": {
             "notificationID": "door_section",
-            "status": "http://homebridge.local:8000/status?r=door_section",
-            "powerOn": "http://homebridge.local:8000/on?r=door_section",
-            "powerOff": "http://homebridge.local:8000/off?r=door_section"
+            "status": "http://raspberrypi.local:8000/status?r=door_section",
+            "powerOn": "http://raspberrypi.local:8000/on?r=door_section",
+            "powerOff": "http://raspberrypi.local:8000/off?r=door_section"
         },
         "color": {
-            "status": "http://homebridge.local:8000/color?r=door_section",
-            "url": "http://homebridge.local:8000/cset/%s?r=door_section",
+            "status": "http://raspberrypi.local:8000/color?r=door_section",
+            "url": "http://raspberrypi.local:8000/cset/%s?r=door_section",
             "brightness": false
         },
         "brightness": {
             "max": 99,
-            "status": "http://homebridge.local:8000/bright?r=door_section",
-            "url": "http://homebridge.local:8000/bset/%s?r=door_section"
+            "status": "http://raspberrypi.local:8000/bright?r=door_section",
+            "url": "http://raspberrypi.local:8000/bset/%s?r=door_section"
         }
     },
     {
@@ -131,19 +131,19 @@
         "service": "Light",
         "switch": {
             "notificationID": "eric_desk",
-            "status": "http://homebridge.local:8000/status?r=eric_desk",
-            "powerOn": "http://homebridge.local:8000/on?r=eric_desk",
-            "powerOff": "http://homebridge.local:8000/off?r=eric_desk"
+            "status": "http://raspberrypi.local:8000/status?r=eric_desk",
+            "powerOn": "http://raspberrypi.local:8000/on?r=eric_desk",
+            "powerOff": "http://raspberrypi.local:8000/off?r=eric_desk"
         },
         "color": {
-            "status": "http://homebridge.local:8000/color?r=eric_desk",
-            "url": "http://homebridge.local:8000/cset/%s?r=eric_desk",
+            "status": "http://raspberrypi.local:8000/color?r=eric_desk",
+            "url": "http://raspberrypi.local:8000/cset/%s?r=eric_desk",
             "brightness": false
         },
         "brightness": {
             "max": 99,
-            "status": "http://homebridge.local:8000/bright?r=eric_desk",
-            "url": "http://homebridge.local:8000/bset/%s?r=eric_desk"
+            "status": "http://raspberrypi.local:8000/bright?r=eric_desk",
+            "url": "http://raspberrypi.local:8000/bset/%s?r=eric_desk"
         }
     },
     {
@@ -152,19 +152,19 @@
         "service": "Light",
         "switch": {
             "notificationID": "jayden_desk",
-            "status": "http://homebridge.local:8000/status?r=jayden_desk",
-            "powerOn": "http://homebridge.local:8000/on?r=jayden_desk",
-            "powerOff": "http://homebridge.local:8000/off?r=jayden_desk"
+            "status": "http://raspberrypi.local:8000/status?r=jayden_desk",
+            "powerOn": "http://raspberrypi.local:8000/on?r=jayden_desk",
+            "powerOff": "http://raspberrypi.local:8000/off?r=jayden_desk"
         },
         "color": {
-            "status": "http://homebridge.local:8000/color?r=jayden_desk",
-            "url": "http://homebridge.local:8000/cset/%s?r=jayden_desk",
+            "status": "http://raspberrypi.local:8000/color?r=jayden_desk",
+            "url": "http://raspberrypi.local:8000/cset/%s?r=jayden_desk",
             "brightness": false
         },
         "brightness": {
             "max": 99,
-            "status": "http://homebridge.local:8000/bright?r=jayden_desk",
-            "url": "http://homebridge.local:8000/bset/%s?r=jayden_desk"
+            "status": "http://raspberrypi.local:8000/bright?r=jayden_desk",
+            "url": "http://raspberrypi.local:8000/bset/%s?r=jayden_desk"
         }
     },
     {
@@ -173,19 +173,19 @@
         "service": "Light",
         "switch": {
             "notificationID": "tv_wall",
-            "status": "http://homebridge.local:8000/status?r=tv_wall",
-            "powerOn": "http://homebridge.local:8000/on?r=tv_wall",
-            "powerOff": "http://homebridge.local:8000/off?r=tv_wall"
+            "status": "http://raspberrypi.local:8000/status?r=tv_wall",
+            "powerOn": "http://raspberrypi.local:8000/on?r=tv_wall",
+            "powerOff": "http://raspberrypi.local:8000/off?r=tv_wall"
         },
         "color": {
-            "status": "http://homebridge.local:8000/color?r=tv_wall",
-            "url": "http://homebridge.local:8000/cset/%s?r=tv_wall",
+            "status": "http://raspberrypi.local:8000/color?r=tv_wall",
+            "url": "http://raspberrypi.local:8000/cset/%s?r=tv_wall",
             "brightness": false
         },
         "brightness": {
             "max": 99,
-            "status": "http://homebridge.local:8000/bright?r=tv_wall",
-            "url": "http://homebridge.local:8000/bset/%s?r=tv_wall"
+            "status": "http://raspberrypi.local:8000/bright?r=tv_wall",
+            "url": "http://raspberrypi.local:8000/bset/%s?r=tv_wall"
         }
     },
     {
@@ -194,19 +194,19 @@
         "service": "Light",
         "switch": {
             "notificationID": "bed_wall",
-            "status": "http://homebridge.local:8000/status?r=bed_wall",
-            "powerOn": "http://homebridge.local:8000/on?r=bed_wall",
-            "powerOff": "http://homebridge.local:8000/off?r=bed_wall"
+            "status": "http://raspberrypi.local:8000/status?r=bed_wall",
+            "powerOn": "http://raspberrypi.local:8000/on?r=bed_wall",
+            "powerOff": "http://raspberrypi.local:8000/off?r=bed_wall"
         },
         "color": {
-            "status": "http://homebridge.local:8000/color?r=bed_wall",
-            "url": "http://homebridge.local:8000/cset/%s?r=bed_wall",
+            "status": "http://raspberrypi.local:8000/color?r=bed_wall",
+            "url": "http://raspberrypi.local:8000/cset/%s?r=bed_wall",
             "brightness": false
         },
         "brightness": {
             "max": 99,
-            "status": "http://homebridge.local:8000/bright?r=bed_wall",
-            "url": "http://homebridge.local:8000/bset/%s?r=bed_wall"
+            "status": "http://raspberrypi.local:8000/bright?r=bed_wall",
+            "url": "http://raspberrypi.local:8000/bset/%s?r=bed_wall"
         }
     },
     {
@@ -215,19 +215,19 @@
         "service": "Light",
         "switch": {
             "notificationID": "jayden_half",
-            "status": "http://homebridge.local:8000/status?r=jayden_half",
-            "powerOn": "http://homebridge.local:8000/on?r=jayden_half",
-            "powerOff": "http://homebridge.local:8000/off?r=jayden_half"
+            "status": "http://raspberrypi.local:8000/status?r=jayden_half",
+            "powerOn": "http://raspberrypi.local:8000/on?r=jayden_half",
+            "powerOff": "http://raspberrypi.local:8000/off?r=jayden_half"
         },
         "color": {
-            "status": "http://homebridge.local:8000/color?r=jayden_half",
-            "url": "http://homebridge.local:8000/cset/%s?r=jayden_half",
+            "status": "http://raspberrypi.local:8000/color?r=jayden_half",
+            "url": "http://raspberrypi.local:8000/cset/%s?r=jayden_half",
             "brightness": false
         },
         "brightness": {
             "max": 99,
-            "status": "http://homebridge.local:8000/bright?r=jayden_half",
-            "url": "http://homebridge.local:8000/bset/%s?r=jayden_half"
+            "status": "http://raspberrypi.local:8000/bright?r=jayden_half",
+            "url": "http://raspberrypi.local:8000/bset/%s?r=jayden_half"
         }
     },
     {
@@ -236,19 +236,19 @@
         "service": "Light",
         "switch": {
             "notificationID": "eric_half",
-            "status": "http://homebridge.local:8000/status?r=eric_half",
-            "powerOn": "http://homebridge.local:8000/on?r=eric_half",
-            "powerOff": "http://homebridge.local:8000/off?r=eric_half"
+            "status": "http://raspberrypi.local:8000/status?r=eric_half",
+            "powerOn": "http://raspberrypi.local:8000/on?r=eric_half",
+            "powerOff": "http://raspberrypi.local:8000/off?r=eric_half"
         },
         "color": {
-            "status": "http://homebridge.local:8000/color?r=eric_half",
-            "url": "http://homebridge.local:8000/cset/%s?r=eric_half",
+            "status": "http://raspberrypi.local:8000/color?r=eric_half",
+            "url": "http://raspberrypi.local:8000/cset/%s?r=eric_half",
             "brightness": false
         },
         "brightness": {
             "max": 99,
-            "status": "http://homebridge.local:8000/bright?r=eric_half",
-            "url": "http://homebridge.local:8000/bset/%s?r=eric_half"
+            "status": "http://raspberrypi.local:8000/bright?r=eric_half",
+            "url": "http://raspberrypi.local:8000/bset/%s?r=eric_half"
         }
     },
     {
@@ -257,14 +257,14 @@
         "service": "Light",
         "switch": {
             "notificationID": "color_cycle",
-            "status": "http://homebridge.local:8000/custom/color_cycle?r=status",
-            "powerOn": "http://homebridge.local:8000/custom/color_cycle?r=on",
-            "powerOff": "http://homebridge.local:8000/custom/color_cycle?r=off"
+            "status": "http://raspberrypi.local:8000/custom/color_cycle?r=status",
+            "powerOn": "http://raspberrypi.local:8000/custom/color_cycle?r=on",
+            "powerOff": "http://raspberrypi.local:8000/custom/color_cycle?r=off"
         },
         "brightness": {
             "max": 99,
-            "status": "http://homebridge.local:8000/custom/color_cycle?r=bright",
-            "url": "http://homebridge.local:8000/custom/color_cycle?r=bset&s=%s"
+            "status": "http://raspberrypi.local:8000/custom/color_cycle?r=bright",
+            "url": "http://raspberrypi.local:8000/custom/color_cycle?r=bset&s=%s"
         }
     },
     {
@@ -273,14 +273,14 @@
         "service": "Light",
         "switch": {
             "notificationID": "color_overlap",
-            "status": "http://homebridge.local:8000/custom/color_overlap?r=status",
-            "powerOn": "http://homebridge.local:8000/custom/color_overlap?r=on",
-            "powerOff": "http://homebridge.local:8000/custom/color_overlap?r=off"
+            "status": "http://raspberrypi.local:8000/custom/color_overlap?r=status",
+            "powerOn": "http://raspberrypi.local:8000/custom/color_overlap?r=on",
+            "powerOff": "http://raspberrypi.local:8000/custom/color_overlap?r=off"
         },
         "brightness": {
             "max": 99,
-            "status": "http://homebridge.local:8000/custom/color_overlap?r=bright",
-            "url": "http://homebridge.local:8000/custom/color_overlap?r=bset&s=%s"
+            "status": "http://raspberrypi.local:8000/custom/color_overlap?r=bright",
+            "url": "http://raspberrypi.local:8000/custom/color_overlap?r=bset&s=%s"
         }
     },
     {
@@ -289,9 +289,9 @@
         "service": "Light",
         "switch": {
             "notificationID": "color_strobe",
-            "status": "http://homebridge.local:8000/custom/color_strobe?r=status",
-            "powerOn": "http://homebridge.local:8000/custom/color_strobe?r=on",
-            "powerOff": "http://homebridge.local:8000/custom/color_strobe?r=off"
+            "status": "http://raspberrypi.local:8000/custom/color_strobe?r=status",
+            "powerOn": "http://raspberrypi.local:8000/custom/color_strobe?r=on",
+            "powerOff": "http://raspberrypi.local:8000/custom/color_strobe?r=off"
         }
     },
     {
@@ -300,14 +300,14 @@
         "service": "Light",
         "switch": {
             "notificationID": "random_wave",
-            "status": "http://homebridge.local:8000/custom/random_wave?r=status",
-            "powerOn": "http://homebridge.local:8000/custom/random_wave?r=on",
-            "powerOff": "http://homebridge.local:8000/custom/random_wave?r=off"
+            "status": "http://raspberrypi.local:8000/custom/random_wave?r=status",
+            "powerOn": "http://raspberrypi.local:8000/custom/random_wave?r=on",
+            "powerOff": "http://raspberrypi.local:8000/custom/random_wave?r=off"
         },
         "brightness": {
             "max": 99,
-            "status": "http://homebridge.local:8000/custom/random_wave?r=bright",
-            "url": "http://homebridge.local:8000/custom/random_wave?r=bset&s=%s"
+            "status": "http://raspberrypi.local:8000/custom/random_wave?r=bright",
+            "url": "http://raspberrypi.local:8000/custom/random_wave?r=bset&s=%s"
         }
     },
     {
@@ -316,9 +316,9 @@
         "service": "Light",
         "switch": {
             "notificationID": "umich_colors",
-            "status": "http://homebridge.local:8000/custom/umich_colors?r=status",
-            "powerOn": "http://homebridge.local:8000/custom/umich_colors?r=on",
-            "powerOff": "http://homebridge.local:8000/custom/umich_colors?r=off"
+            "status": "http://raspberrypi.local:8000/custom/umich_colors?r=status",
+            "powerOn": "http://raspberrypi.local:8000/custom/umich_colors?r=on",
+            "powerOff": "http://raspberrypi.local:8000/custom/umich_colors?r=off"
         }
     },
     {
@@ -327,9 +327,9 @@
         "service": "Light",
         "switch": {
             "notificationID": "strobe",
-            "status": "http://homebridge.local:8000/custom/strobe?r=status",
-            "powerOn": "http://homebridge.local:8000/custom/strobe?r=on",
-            "powerOff": "http://homebridge.local:8000/custom/strobe?r=off"
+            "status": "http://raspberrypi.local:8000/custom/strobe?r=status",
+            "powerOn": "http://raspberrypi.local:8000/custom/strobe?r=on",
+            "powerOff": "http://raspberrypi.local:8000/custom/strobe?r=off"
         }
     },
     {
@@ -338,14 +338,14 @@
         "service": "Light",
         "switch": {
             "notificationID": "spotify_lights_tatum",
-            "status": "http://homebridge.local:8000/custom/spotify_lights_tatum?r=status",
-            "powerOn": "http://homebridge.local:8000/custom/spotify_lights_tatum?r=on",
-            "powerOff": "http://homebridge.local:8000/custom/spotify_lights_tatum?r=off"
+            "status": "http://raspberrypi.local:8000/custom/spotify_lights_tatum?r=status",
+            "powerOn": "http://raspberrypi.local:8000/custom/spotify_lights_tatum?r=on",
+            "powerOff": "http://raspberrypi.local:8000/custom/spotify_lights_tatum?r=off"
         },
         "brightness": {
             "max": 5,
-            "status": "http://homebridge.local:8000/custom/spotify_lights_tatum?r=bright",
-            "url": "http://homebridge.local:8000/custom/spotify_lights_tatum?r=bset&s=%s"
+            "status": "http://raspberrypi.local:8000/custom/spotify_lights_tatum?r=bright",
+            "url": "http://raspberrypi.local:8000/custom/spotify_lights_tatum?r=bset&s=%s"
         }
     },
     {
@@ -354,14 +354,14 @@
         "service": "Light",
         "switch": {
             "notificationID": "color_rotate",
-            "status": "http://homebridge.local:8000/custom/color_rotate?r=status",
-            "powerOn": "http://homebridge.local:8000/custom/color_rotate?r=on",
-            "powerOff": "http://homebridge.local:8000/custom/color_rotate?r=off"
+            "status": "http://raspberrypi.local:8000/custom/color_rotate?r=status",
+            "powerOn": "http://raspberrypi.local:8000/custom/color_rotate?r=on",
+            "powerOff": "http://raspberrypi.local:8000/custom/color_rotate?r=off"
         },
         "brightness": {
             "max": 99,
-            "status": "http://homebridge.local:8000/custom/color_rotate?r=bright",
-            "url": "http://homebridge.local:8000/custom/color_rotate?r=bset&s=%s"
+            "status": "http://raspberrypi.local:8000/custom/color_rotate?r=bright",
+            "url": "http://raspberrypi.local:8000/custom/color_rotate?r=bset&s=%s"
         }
     },
     {
@@ -370,9 +370,9 @@
         "service": "Light",
         "switch": {
             "notificationID": "spotify_background",
-            "status": "http://homebridge.local:8000/custom/spotify_background?r=status",
-            "powerOn": "http://homebridge.local:8000/custom/spotify_background?r=on",
-            "powerOff": "http://homebridge.local:8000/custom/spotify_background?r=off"
+            "status": "http://raspberrypi.local:8000/custom/spotify_background?r=status",
+            "powerOn": "http://raspberrypi.local:8000/custom/spotify_background?r=on",
+            "powerOff": "http://raspberrypi.local:8000/custom/spotify_background?r=off"
         }
     },
     {
@@ -381,14 +381,14 @@
         "service": "Light",
         "switch": {
             "notificationID": "spotify_lights_beat",
-            "status": "http://homebridge.local:8000/custom/spotify_lights_beat?r=status",
-            "powerOn": "http://homebridge.local:8000/custom/spotify_lights_beat?r=on",
-            "powerOff": "http://homebridge.local:8000/custom/spotify_lights_beat?r=off"
+            "status": "http://raspberrypi.local:8000/custom/spotify_lights_beat?r=status",
+            "powerOn": "http://raspberrypi.local:8000/custom/spotify_lights_beat?r=on",
+            "powerOff": "http://raspberrypi.local:8000/custom/spotify_lights_beat?r=off"
         },
         "brightness": {
             "max": 5,
-            "status": "http://homebridge.local:8000/custom/spotify_lights_beat?r=bright",
-            "url": "http://homebridge.local:8000/custom/spotify_lights_beat?r=bset&s=%s"
+            "status": "http://raspberrypi.local:8000/custom/spotify_lights_beat?r=bright",
+            "url": "http://raspberrypi.local:8000/custom/spotify_lights_beat?r=bset&s=%s"
         }
     },
     {
@@ -397,9 +397,9 @@
         "service": "Light",
         "switch": {
             "notificationID": "snakes",
-            "status": "http://homebridge.local:8000/custom/snakes?r=status",
-            "powerOn": "http://homebridge.local:8000/custom/snakes?r=on",
-            "powerOff": "http://homebridge.local:8000/custom/snakes?r=off"
+            "status": "http://raspberrypi.local:8000/custom/snakes?r=status",
+            "powerOn": "http://raspberrypi.local:8000/custom/snakes?r=on",
+            "powerOff": "http://raspberrypi.local:8000/custom/snakes?r=off"
         }
     }
 ]

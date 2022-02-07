@@ -76,21 +76,21 @@ def build_devices(ctx, dry_run):
     for switch in switches:
         new_switch_device = {"accessory": "HttpPushRgb", "name": switch["name"], "service": "Light", "switch": {}}
         new_switch_device["switch"]["notificationID"] = switch["internal_name"]
-        new_switch_device["switch"]["status"] = "http://homebridge.local:8000/custom/" + switch["internal_name"] + "?r=status"
-        new_switch_device["switch"]["powerOn"] = "http://homebridge.local:8000/custom/" + switch["internal_name"] + "?r=on"
-        new_switch_device["switch"]["powerOff"] = "http://homebridge.local:8000/custom/" + switch["internal_name"] + "?r=off"
+        new_switch_device["switch"]["status"] = "http://raspberrypi.local:8000/custom/" + switch["internal_name"] + "?r=status"
+        new_switch_device["switch"]["powerOn"] = "http://raspberrypi.local:8000/custom/" + switch["internal_name"] + "?r=on"
+        new_switch_device["switch"]["powerOff"] = "http://raspberrypi.local:8000/custom/" + switch["internal_name"] + "?r=off"
 
         if switch["is_brightness_slider"]:
             new_switch_device["brightness"] = {}
             new_switch_device["brightness"]["max"] = switch["brightness_slider_max"]
-            new_switch_device["brightness"]["status"] = "http://homebridge.local:8000/custom/" + switch["internal_name"] + "?r=bright"
-            new_switch_device["brightness"]["url"] = "http://homebridge.local:8000/custom/" + switch["internal_name"] + "?r=bset&s=%s"
+            new_switch_device["brightness"]["status"] = "http://raspberrypi.local:8000/custom/" + switch["internal_name"] + "?r=bright"
+            new_switch_device["brightness"]["url"] = "http://raspberrypi.local:8000/custom/" + switch["internal_name"] + "?r=bset&s=%s"
         
         if switch["is_rgb"]:
             new_switch_device["color"] = {}
             new_switch_device["color"]["brightness"] = False
-            new_switch_device["color"]["status"] = "http://homebridge.local:8000/custom/" + switch["internal_name"] + "?r=color"
-            new_switch_device["color"]["url"] = "http://homebridge.local:8000/custom/" + switch["internal_name"] + "?r=cset&s=%s"
+            new_switch_device["color"]["status"] = "http://raspberrypi.local:8000/custom/" + switch["internal_name"] + "?r=color"
+            new_switch_device["color"]["url"] = "http://raspberrypi.local:8000/custom/" + switch["internal_name"] + "?r=cset&s=%s"
         
         new_devices.append(new_switch_device)
     

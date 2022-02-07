@@ -53,7 +53,7 @@ class light_strip:
             self.pixels = neopixel.NeoPixel(
                 board.D18, 118, auto_write=False, pixel_order=neopixel.GRB)
         self.homebridge_url = "http://homebridge.local:8001/"
-        self.receiver_url = "http://homebridge.local:8000/"
+        self.receiver_url = "http://raspberrypi.local:8000/"
         self.is_receiver = is_receiver
         self.is_transmitter = is_transmitter
         self.thread = None
